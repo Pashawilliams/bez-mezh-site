@@ -1,4 +1,4 @@
-/* Eurotour — theme toggle, reveal-on-scroll, back-to-top */
+/* БЕЗ МЕЖ — theme toggle, reveal-on-scroll, back-to-top */
 (function () {
   var KEY = 'et-theme';
   var link = document.getElementById('et-dark-css');

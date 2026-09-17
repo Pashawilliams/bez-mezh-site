@@ -1,7 +1,7 @@
 /* Applies data/site.json (managed by the Telegram admin bot) to the page */
 (function () {
   'use strict';
-  var RAW = 'https://raw.githubusercontent.com/Pashawilliams/site/main/data/site.json';
+  var RAW = 'https://raw.githubusercontent.com/Pashawilliams/bez-mezh-site/main/data/site.json';
   var LOCAL = 'data/site.json';
   var bust = '?v=' + Math.floor(Date.now() / 15000);
 

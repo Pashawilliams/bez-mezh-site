@@ -1,4 +1,4 @@
-/* Eurotour — menu actions: anchors, route prefill, popups, details */
+/* БЕЗ МЕЖ — menu actions: anchors, route prefill, popups, details */
 (function () {
   function openPopup(name) {
     var trig = document.createElement('button');

@@ -45,7 +45,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_PAT }}
           GH_REPO: ${{ github.repository }}
           GH_BRANCH: main
-          SITE_URL: https://eurotour.pp.ua/
+          SITE_URL: https://pashawilliams.github.io/bez-mezh-site/
           MAX_RUNTIME: "19200"
           # Optional but recommended: add repository secret STATE_SECRET to store
           # bot/state.json encrypted instead of only public-redacted runtime offsets.

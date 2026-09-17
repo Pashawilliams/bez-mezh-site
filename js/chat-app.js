@@ -105,7 +105,7 @@
       setStatus(ended ? 'Діалог завершено' : 'Менеджер Eurotour · онлайн', !ended);
     } else {
       el.title.textContent = 'Eurotour';
-      el.ava.innerHTML = '<img src="images/cropped-apple-touch-icon-192x192.png" alt=""><i class="ch__dot" id="dot"></i>'; el.dot = $('dot');
+      el.ava.innerHTML = '<img src="images/bezmezh-icon-180.png" alt=""><i class="ch__dot" id="dot"></i>'; el.dot = $('dot');
       setStatus('Онлайн-чат · менеджер на звʼязку', true);
     }
   }
@@ -190,7 +190,7 @@
     clearTimeout(typingT); typingT = setTimeout(function () { showTyping(false); }, 12000);
   }
   function notify(title, body) {
-    try { if ('Notification' in window && Notification.permission === 'granted') new Notification(title, { body: body, icon: 'images/cropped-apple-touch-icon-192x192.png' }); } catch (e) {}
+    try { if ('Notification' in window && Notification.permission === 'granted') new Notification(title, { body: body, icon: 'images/bezmezh-icon-180.png' }); } catch (e) {}
     document.title = '● ' + title + ' — нове повідомлення';
   }
   document.addEventListener('visibilitychange', function () { if (!document.hidden) document.title = 'Онлайн-чат — Eurotour'; });
