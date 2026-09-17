@@ -1,0 +1,1231 @@
+{
+  "site": {
+    "name": "БЕЗ МЕЖ",
+    "tagline": "Пасажирські перевезення Україна – Європа",
+    "maintenance": false,
+    "announcement": {
+      "enabled": true,
+      "text": "Щоденні виїзди 08:00 та 18:00 — бронюй місце просто зараз",
+      "link": "#routes"
+    }
+  },
+  "contacts": {
+    "phone": "+380966973130",
+    "phone_display": "+380 96 697 31 30",
+    "telegram": "https://t.me/pereviznyk001",
+    "whatsapp": "https://wa.me/380966973130",
+    "support_note": "Цілодобова підтримка"
+  },
+  "hero": {
+    "title": "БЕЗ МЕЖ — поїздки Україна – Європа",
+    "subtitle": "Щоденні пасажирські перевезення з України до Німеччини, Чехії, Бельгії, Нідерландів, Польщі та інших країн Європи. Сучасні мікроавтобуси на 7 місць, Wi-Fi, розетки, два водії. Забираємо та довозимо за адресою."
+  },
+  "advantages": [
+    "7 пасажирських місць",
+    "Wi-Fi",
+    "Зарядки для телефонів",
+    "Клімат-контроль",
+    "2 водії в рейсі",
+    "Чай / кава",
+    "Прямий рейс без пересадок",
+    "Пледи / подушки",
+    "Адреса → адреса",
+    "Без доплат",
+    "Крісла-реклайнери (Lux)",
+    "Щоденні виїзди 08:00 / 18:00"
+  ],
+  "routes": [
+    {
+      "from": "Київ",
+      "to": "Варшава",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-varshava",
+      "visible": true
+    },
+    {
+      "from": "Варшава",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/varshava-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Львів",
+      "to": "Варшава",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/lviv-varshava",
+      "visible": true
+    },
+    {
+      "from": "Варшава",
+      "to": "Львів",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/varshava-lviv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Краків",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-krakiv",
+      "visible": true
+    },
+    {
+      "from": "Краків",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/krakiv-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Львів",
+      "to": "Краків",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/lviv-krakiv",
+      "visible": true
+    },
+    {
+      "from": "Краків",
+      "to": "Львів",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/krakiv-lviv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Вроцлав",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-vrotslav",
+      "visible": true
+    },
+    {
+      "from": "Вроцлав",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/vrotslav-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Львів",
+      "to": "Вроцлав",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/lviv-vrotslav",
+      "visible": true
+    },
+    {
+      "from": "Вроцлав",
+      "to": "Львів",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/vrotslav-lviv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Берлін",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-berlin",
+      "visible": true
+    },
+    {
+      "from": "Берлін",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/berlin-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Львів",
+      "to": "Берлін",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/lviv-berlin",
+      "visible": true
+    },
+    {
+      "from": "Берлін",
+      "to": "Львів",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/berlin-lviv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Дрезден",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-drezden",
+      "visible": true
+    },
+    {
+      "from": "Дрезден",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/drezden-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Прага",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-praha",
+      "visible": true
+    },
+    {
+      "from": "Прага",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/praha-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Львів",
+      "to": "Прага",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/lviv-praha",
+      "visible": true
+    },
+    {
+      "from": "Прага",
+      "to": "Львів",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/praha-lviv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Братислава",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-bratyslava",
+      "visible": true
+    },
+    {
+      "from": "Братислава",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/bratyslava-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Львів",
+      "to": "Братислава",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/lviv-bratyslava",
+      "visible": true
+    },
+    {
+      "from": "Братислава",
+      "to": "Львів",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/bratyslava-lviv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Будапешт",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-budapesht",
+      "visible": true
+    },
+    {
+      "from": "Будапешт",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/budapesht-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Львів",
+      "to": "Будапешт",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/lviv-budapesht",
+      "visible": true
+    },
+    {
+      "from": "Будапешт",
+      "to": "Львів",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/budapesht-lviv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Відень",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-viden",
+      "visible": true
+    },
+    {
+      "from": "Відень",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/viden-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Львів",
+      "to": "Відень",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/lviv-viden",
+      "visible": true
+    },
+    {
+      "from": "Відень",
+      "to": "Львів",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/viden-lviv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Бухарест",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-buharest",
+      "visible": true
+    },
+    {
+      "from": "Бухарест",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/buharest-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Одеса",
+      "to": "Бухарест",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/odesa-buharest",
+      "visible": true
+    },
+    {
+      "from": "Бухарест",
+      "to": "Одеса",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/buharest-odesa",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Кишинів",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-kyshyniv",
+      "visible": true
+    },
+    {
+      "from": "Кишинів",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyshyniv-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Одеса",
+      "to": "Кишинів",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/odesa-kyshyniv",
+      "visible": true
+    },
+    {
+      "from": "Кишинів",
+      "to": "Одеса",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyshyniv-odesa",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Мілан",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-milan",
+      "visible": true
+    },
+    {
+      "from": "Мілан",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/milan-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Львів",
+      "to": "Мілан",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/lviv-milan",
+      "visible": true
+    },
+    {
+      "from": "Мілан",
+      "to": "Львів",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/milan-lviv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Париж",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-paryzh",
+      "visible": true
+    },
+    {
+      "from": "Париж",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/paryzh-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Львів",
+      "to": "Амстердам",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/lviv-amsterdam",
+      "visible": true
+    },
+    {
+      "from": "Амстердам",
+      "to": "Львів",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/amsterdam-lviv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Мадрид",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-madryd",
+      "visible": true
+    },
+    {
+      "from": "Мадрид",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/madryd-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Львів",
+      "to": "Мадрид",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/lviv-madryd",
+      "visible": true
+    },
+    {
+      "from": "Мадрид",
+      "to": "Львів",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/madryd-lviv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Мюнхен",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-myankhen",
+      "visible": true
+    },
+    {
+      "from": "Мюнхен",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/myankhen-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Франкфурт-на-Майні",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-frankfurt-na-mayni",
+      "visible": true
+    },
+    {
+      "from": "Франкфурт-на-Майні",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/frankfurt-na-mayni-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Штутгарт",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-shtuthart",
+      "visible": true
+    },
+    {
+      "from": "Штутгарт",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/shtuthart-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Кельн",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-kelyun",
+      "visible": true
+    },
+    {
+      "from": "Кельн",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kelyun-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Ульм",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-ulyum",
+      "visible": true
+    },
+    {
+      "from": "Ульм",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/ulyum-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Дніпро",
+      "to": "Берлін",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/dnipro-berlin",
+      "visible": true
+    },
+    {
+      "from": "Берлін",
+      "to": "Дніпро",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/berlin-dnipro",
+      "visible": true
+    },
+    {
+      "from": "Полтава",
+      "to": "Прага",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/poltava-praha",
+      "visible": true
+    },
+    {
+      "from": "Прага",
+      "to": "Полтава",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/praha-poltava",
+      "visible": true
+    },
+    {
+      "from": "Запоріжжя",
+      "to": "Вюрцбург",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/zaporizhzh-vyartsburh",
+      "visible": true
+    },
+    {
+      "from": "Вюрцбург",
+      "to": "Запоріжжя",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/vyartsburh-zaporizhzh",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Брюссель",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-bryasselyu",
+      "visible": true
+    },
+    {
+      "from": "Брюссель",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/bryasselyu-kyyiv",
+      "visible": true
+    },
+    {
+      "from": "Київ",
+      "to": "Роттердам",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/kyyiv-rotterdam",
+      "visible": true
+    },
+    {
+      "from": "Роттердам",
+      "to": "Київ",
+      "price": null,
+      "old_price": null,
+      "slug": "ads/rotterdam-kyyiv",
+      "visible": true
+    }
+  ],
+  "reviews": [
+    {
+      "name": "Наталія",
+      "date": "19.02.2026",
+      "text": "Хочу подякувати компанії за відмінний сервіс! Їхала з Берліна до Києва. Водії висококваліфіковані, не дивлячись на складні погодні умови, доїхали чудово! «Без меж» — найкраща серед компаній-перевізників!",
+      "stars": 5
+    },
+    {
+      "name": "Ірина",
+      "date": "10.11.2025",
+      "text": "Їздила Київ–Прага й Прага–Київ. Комфортно, зручно, тепло, ноги не набрякли, не втомилась, ще й підвезли під дім. Дуже дякую!",
+      "stars": 5
+    },
+    {
+      "name": "Оксана",
+      "date": "01.08.2025",
+      "text": "Думала, дорога до Німеччини буде дуже важкою. Але швидко, а головне — комфортно. Рекомендую цього перевізника!",
+      "stars": 5
+    },
+    {
+      "name": "Арсеній",
+      "date": "02.03.2025",
+      "text": "Замовляли мікроавтобус для всієї родини — всі речі помістились легко! Доїхали швидко, зовсім не втомились. Сервіс на висоті!",
+      "stars": 5
+    },
+    {
+      "name": "Володимир",
+      "date": "09.03.2025",
+      "text": "У справах бізнесу багато подорожую — цей сервіс ніколи не підводить. Менеджери самі все спланують. Для зайнятих людей це справжній порятунок.",
+      "stars": 5
+    },
+    {
+      "name": "Олександр",
+      "date": "15.03.2025",
+      "text": "Їхали групою в Європу — все врахували, нарікань взагалі немає. Довгий маршрут пройшов непомітно та з комфортом.",
+      "stars": 5
+    }
+  ],
+  "faq": [
+    {
+      "q": "Яким автобусом буде поїздка?",
+      "a": "Усі рейси виконуються сучасними мікроавтобусами Mercedes-Benz Sprinter на 7 пасажирських місць. Клас Comfort — зручні м'які сидіння, клімат-контроль, Wi-Fi, TV. Клас Lux — крісла-реклайнери з підставками для ніг, швидкісний Starlink, пледи та вода."
+    },
+    {
+      "q": "Коли виїзд?",
+      "a": "Рейси щоденні: клас Comfort виїжджає о 08:00, клас Lux — о 18:00."
+    },
+    {
+      "q": "Скільки багажу можна взяти?",
+      "a": "Безкоштовно: або 2 місця 60×40×25 см загальною вагою до 40 кг, або 1 велике місце до 30 кг + ручна поклажа 5–8 кг у салон. Додатковий багаж — за погодженням з диспетчером."
+    },
+    {
+      "q": "Які документи потрібні для виїзду за кордон?",
+      "a": "Дійсний закордонний паспорт (бажано біометричний) та документи, що дають право на перетин кордону: віза, посвідка на проживання тощо."
+    },
+    {
+      "q": "Як вивезти дитину за кордон?",
+      "a": "Треба мати документи дитини (свідоцтво про народження, паспорт), закордонний паспорт. Якщо дитина їде лише з одним з батьків — нотаріальний дозвіл другого з батьків."
+    },
+    {
+      "q": "Чи можна їхати з тваринами?",
+      "a": "Так, тварини вагою до 10 кг — з переноскою та повним пакетом документів (чіп, ветпаспорт, щеплення від сказу, довідки). Перевезення оплачується додатково. Важчі за 10 кг — лише індивідуальним трансфером."
+    },
+    {
+      "q": "Які продукти можна перевозити?",
+      "a": "У кожної країни свій список: зазвичай діють обмеження на алкоголь і тютюн та заборона на м'ясо, рибу, молочні продукти. Відповідальність за митні правила — на пасажирі."
+    },
+    {
+      "q": "Як довго триває перетин кордону?",
+      "a": "Залежить від пункту пропуску та завантаженості. Наші менеджери обирають оптимальний час, щоб пройти перевірку якнайшвидше. Час прибуття завжди орієнтовний."
+    },
+    {
+      "q": "Які є знижки?",
+      "a": "Пенсіонерам −10%, дітям −15%. Повідомте менеджеру під час бронювання."
+    },
+    {
+      "q": "Як забронювати квиток?",
+      "a": "Залиште заявку на сайті, напишіть у Telegram/WhatsApp або зателефонуйте. Менеджер підтвердить бронювання та уточнить деталі поїздки."
+    }
+  ],
+  "updated_at": "2026-09-17T22:40:44Z",
+  "bridge": {
+    "inbox": "bm-inbox-ylNBf4ICgHYTecEARQrDFQu8mdDE9DWi"
+  },
+  "managers": [
+    {
+      "name": "Дмитро",
+      "phone": "+380683175335",
+      "role": "Менеджер з перевезень",
+      "telegram": "https://t.me/+380683175335",
+      "whatsapp": "https://wa.me/380683175335"
+    },
+    {
+      "name": "Олексій",
+      "phone": "+380966973130",
+      "role": "Менеджер з перевезень",
+      "telegram": "https://t.me/+380966973130",
+      "whatsapp": "https://wa.me/380966973130"
+    },
+    {
+      "name": "Андрій",
+      "phone": "+380973452025",
+      "role": "Менеджер з перевезень",
+      "telegram": "https://t.me/+380973452025",
+      "whatsapp": "https://wa.me/380973452025"
+    }
+  ],
+  "durations": {
+    "Амстердам|Львів": {
+      "hours": 18.8,
+      "km": 1547,
+      "src": "osrm"
+    },
+    "Берлін|Київ": {
+      "hours": 19.5,
+      "km": 1344,
+      "src": "osrm"
+    },
+    "Берлін|Львів": {
+      "hours": 12.6,
+      "km": 922,
+      "src": "osrm"
+    },
+    "Братислава|Київ": {
+      "hours": 18.9,
+      "km": 1317,
+      "src": "osrm"
+    },
+    "Братислава|Львів": {
+      "hours": 11.1,
+      "km": 779,
+      "src": "osrm"
+    },
+    "Будапешт|Київ": {
+      "hours": 18.9,
+      "km": 1119,
+      "src": "osrm"
+    },
+    "Будапешт|Львів": {
+      "hours": 11.2,
+      "km": 577,
+      "src": "osrm"
+    },
+    "Бухарест|Київ": {
+      "hours": 16.5,
+      "km": 1000,
+      "src": "osrm"
+    },
+    "Бухарест|Одеса": {
+      "hours": 11.0,
+      "km": 542,
+      "src": "osrm"
+    },
+    "Варшава|Київ": {
+      "hours": 14.1,
+      "km": 777,
+      "src": "osrm"
+    },
+    "Варшава|Львів": {
+      "hours": 8.7,
+      "km": 395,
+      "src": "osrm"
+    },
+    "Вроцлав|Київ": {
+      "hours": 17.1,
+      "km": 1137,
+      "src": "osrm"
+    },
+    "Вроцлав|Львів": {
+      "hours": 9.3,
+      "km": 599,
+      "src": "osrm"
+    },
+    "Відень|Київ": {
+      "hours": 19.4,
+      "km": 1327,
+      "src": "osrm"
+    },
+    "Відень|Львів": {
+      "hours": 11.6,
+      "km": 790,
+      "src": "osrm"
+    },
+    "Дрезден|Київ": {
+      "hours": 19.7,
+      "km": 1386,
+      "src": "osrm"
+    },
+    "Кишинів|Київ": {
+      "hours": 11.8,
+      "km": 520,
+      "src": "osrm"
+    },
+    "Кишинів|Одеса": {
+      "hours": 6.4,
+      "km": 196,
+      "src": "osrm"
+    },
+    "Київ|Берлін": {
+      "hours": 19.5,
+      "km": 1344,
+      "src": "osrm"
+    },
+    "Київ|Братислава": {
+      "hours": 19.0,
+      "km": 1318,
+      "src": "osrm"
+    },
+    "Київ|Будапешт": {
+      "hours": 19.0,
+      "km": 1120,
+      "src": "osrm"
+    },
+    "Київ|Бухарест": {
+      "hours": 16.5,
+      "km": 999,
+      "src": "osrm"
+    },
+    "Київ|Варшава": {
+      "hours": 14.1,
+      "km": 775,
+      "src": "osrm"
+    },
+    "Київ|Вроцлав": {
+      "hours": 17.1,
+      "km": 1136,
+      "src": "osrm"
+    },
+    "Київ|Відень": {
+      "hours": 19.3,
+      "km": 1326,
+      "src": "osrm"
+    },
+    "Київ|Дрезден": {
+      "hours": 19.8,
+      "km": 1387,
+      "src": "osrm"
+    },
+    "Київ|Кишинів": {
+      "hours": 11.8,
+      "km": 520,
+      "src": "osrm"
+    },
+    "Київ|Краків": {
+      "hours": 14.6,
+      "km": 864,
+      "src": "osrm"
+    },
+    "Київ|Мадрид": {
+      "hours": 42.5,
+      "km": 3635,
+      "src": "osrm"
+    },
+    "Київ|Мілан": {
+      "hours": 28.2,
+      "km": 2153,
+      "src": "osrm"
+    },
+    "Київ|Париж": {
+      "hours": 29.4,
+      "km": 2364,
+      "src": "osrm"
+    },
+    "Київ|Прага": {
+      "hours": 19.7,
+      "km": 1397,
+      "src": "osrm"
+    },
+    "Краків|Київ": {
+      "hours": 14.6,
+      "km": 864,
+      "src": "osrm"
+    },
+    "Краків|Львів": {
+      "hours": 6.8,
+      "km": 326,
+      "src": "osrm"
+    },
+    "Львів|Амстердам": {
+      "hours": 18.8,
+      "km": 1546,
+      "src": "osrm"
+    },
+    "Львів|Берлін": {
+      "hours": 12.7,
+      "km": 921,
+      "src": "osrm"
+    },
+    "Львів|Братислава": {
+      "hours": 11.2,
+      "km": 779,
+      "src": "osrm"
+    },
+    "Львів|Будапешт": {
+      "hours": 11.2,
+      "km": 577,
+      "src": "osrm"
+    },
+    "Львів|Варшава": {
+      "hours": 8.7,
+      "km": 391,
+      "src": "osrm"
+    },
+    "Львів|Вроцлав": {
+      "hours": 9.3,
+      "km": 597,
+      "src": "osrm"
+    },
+    "Львів|Відень": {
+      "hours": 11.5,
+      "km": 787,
+      "src": "osrm"
+    },
+    "Львів|Краків": {
+      "hours": 6.8,
+      "km": 325,
+      "src": "osrm"
+    },
+    "Львів|Мадрид": {
+      "hours": 34.6,
+      "km": 3096,
+      "src": "osrm"
+    },
+    "Львів|Мілан": {
+      "hours": 20.4,
+      "km": 1615,
+      "src": "osrm"
+    },
+    "Львів|Прага": {
+      "hours": 11.9,
+      "km": 858,
+      "src": "osrm"
+    },
+    "Мадрид|Київ": {
+      "hours": 42.4,
+      "km": 3631,
+      "src": "osrm"
+    },
+    "Мадрид|Львів": {
+      "hours": 34.6,
+      "km": 3093,
+      "src": "osrm"
+    },
+    "Мілан|Київ": {
+      "hours": 28.3,
+      "km": 2153,
+      "src": "osrm"
+    },
+    "Мілан|Львів": {
+      "hours": 20.5,
+      "km": 1616,
+      "src": "osrm"
+    },
+    "Одеса|Бухарест": {
+      "hours": 11.1,
+      "km": 542,
+      "src": "osrm"
+    },
+    "Одеса|Кишинів": {
+      "hours": 6.4,
+      "km": 196,
+      "src": "osrm"
+    },
+    "Париж|Київ": {
+      "hours": 29.5,
+      "km": 2361,
+      "src": "osrm"
+    },
+    "Прага|Київ": {
+      "hours": 19.7,
+      "km": 1397,
+      "src": "osrm"
+    },
+    "Прага|Львів": {
+      "hours": 11.9,
+      "km": 860,
+      "src": "osrm"
+    },
+    "Київ|Мюнхен": {
+      "hours": 23.4,
+      "km": 1729,
+      "src": "osrm"
+    },
+    "Мюнхен|Київ": {
+      "hours": 23.4,
+      "km": 1697,
+      "src": "osrm"
+    },
+    "Київ|Франкфурт-на-Майні": {
+      "hours": 24.0,
+      "km": 1840,
+      "src": "osrm"
+    },
+    "Франкфурт-на-Майні|Київ": {
+      "hours": 24.2,
+      "km": 1842,
+      "src": "osrm"
+    },
+    "Київ|Штутгарт": {
+      "hours": 24.5,
+      "km": 1880,
+      "src": "osrm"
+    },
+    "Штутгарт|Київ": {
+      "hours": 24.4,
+      "km": 1876,
+      "src": "osrm"
+    },
+    "Київ|Кельн": {
+      "hours": 24.4,
+      "km": 1886,
+      "src": "osrm"
+    },
+    "Кельн|Київ": {
+      "hours": 24.5,
+      "km": 1884,
+      "src": "osrm"
+    },
+    "Київ|Ульм": {
+      "hours": 24.2,
+      "km": 1865,
+      "src": "osrm"
+    },
+    "Ульм|Київ": {
+      "hours": 24.1,
+      "km": 1864,
+      "src": "osrm"
+    },
+    "Дніпро|Берлін": {
+      "hours": 26.0,
+      "km": 1825,
+      "src": "osrm"
+    },
+    "Берлін|Дніпро": {
+      "hours": 26.0,
+      "km": 1827,
+      "src": "osrm"
+    },
+    "Полтава|Прага": {
+      "hours": 24.1,
+      "km": 1738,
+      "src": "osrm"
+    },
+    "Прага|Полтава": {
+      "hours": 24.1,
+      "km": 1738,
+      "src": "osrm"
+    },
+    "Запоріжжя|Вюрцбург": {
+      "hours": 30.5,
+      "km": 2302,
+      "src": "osrm"
+    },
+    "Вюрцбург|Запоріжжя": {
+      "hours": 30.5,
+      "km": 2297,
+      "src": "osrm"
+    },
+    "Київ|Брюссель": {
+      "hours": 26.5,
+      "km": 2069,
+      "src": "osrm"
+    },
+    "Брюссель|Київ": {
+      "hours": 26.6,
+      "km": 2069,
+      "src": "osrm"
+    },
+    "Київ|Роттердам": {
+      "hours": 26.1,
+      "km": 2007,
+      "src": "osrm"
+    },
+    "Роттердам|Київ": {
+      "hours": 26.2,
+      "km": 2003,
+      "src": "osrm"
+    }
+  },
+  "pricing": {
+    "currency": "UAH",
+    "eur_rate": 51.79,
+    "rate_auto": true,
+    "rate_updated": "2026-09-07",
+    "extra_hours": 3.0,
+    "tiers": [
+      [
+        6,
+        8,
+        90,
+        120
+      ],
+      [
+        8,
+        10,
+        100,
+        140
+      ],
+      [
+        10,
+        12,
+        130,
+        170
+      ],
+      [
+        12,
+        14,
+        140,
+        180
+      ],
+      [
+        14,
+        16,
+        150,
+        190
+      ],
+      [
+        16,
+        18,
+        160,
+        200
+      ],
+      [
+        18,
+        20,
+        160,
+        200
+      ],
+      [
+        20,
+        22,
+        170,
+        210
+      ],
+      [
+        22,
+        24,
+        180,
+        220
+      ],
+      [
+        24,
+        27,
+        190,
+        230
+      ],
+      [
+        27,
+        30,
+        200,
+        240
+      ],
+      [
+        30,
+        33,
+        210,
+        250
+      ],
+      [
+        33,
+        36,
+        210,
+        250
+      ],
+      [
+        36,
+        39,
+        220,
+        260
+      ],
+      [
+        39,
+        42,
+        230,
+        270
+      ],
+      [
+        42,
+        45,
+        240,
+        280
+      ],
+      [
+        45,
+        999,
+        250,
+        290
+      ]
+    ],
+    "discounts": [
+      {
+        "label": "Пенсіонерам",
+        "pct": 10
+      },
+      {
+        "label": "Дітям",
+        "pct": 15
+      }
+    ]
+  }
+}
