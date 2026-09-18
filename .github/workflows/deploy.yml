@@ -29,9 +29,8 @@ jobs:
       - name: Prepare public site artifact
         run: |
           rm -rf _site
-          mkdir -p _site
-          cp -a . _site/
-          rm -rf _site/.git _site/.github _site/bot _site/docs _site/src _site/_site
+          cp -a . _site
+          rm -rf _site/.git _site/.github _site/bot _site/docs _site/src
           ls _site/ | head -30
 
       - uses: actions/configure-pages@v5
