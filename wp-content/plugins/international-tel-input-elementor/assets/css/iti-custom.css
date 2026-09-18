@@ -1,0 +1,149 @@
+/**
+ * International Tel Input Custom Styles
+ *
+ * @package International_Tel_Input_Elementor
+ * 
+ * Стили загружаются с высоким приоритетом (priority 999),
+ * поэтому имеют больший вес в каскаде CSS без использования !important
+ */
+
+/* Минимальные стили для корректного отображения */
+body .iti {
+	width: 100%;
+}
+
+
+.iti--container {
+	z-index: 9999;
+}
+
+body .iti__flag-container {
+	position: relative;
+}
+
+body .iti input[type="tel"],
+body .iti input[type="text"] {
+	width: 100%;
+}
+
+/* Контейнер для поля телефона с сообщением об ошибке */
+body .iti-wrapper,
+body form .iti {
+	position: relative;
+	margin-bottom: 0;
+}
+
+
+
+button.iti__selected-country {
+	background-color: #fff;
+	border:none;
+	padding: 5px !important;
+	align-items: baseline;
+}
+
+button.iti__selected-country:hover,
+button.iti__selected-country:focus{
+	background-color: #e5e5e5 !important;
+}
+
+.iti .iti__selected-dial-code {
+	color:#333 !important;
+}
+
+/* Стили для валидации */
+body .iti input.iti-error {
+	border-color: #dc3545;
+	box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+body .iti input.iti-valid {
+	border-color: #28a745;
+	box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+body .iti-error-msg {
+	display: block;
+	color: #dc3545;
+	font-size: 0.875rem;
+	margin: 0;
+	padding: 0;
+	line-height: 1.4;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	margin-top: 0.25rem;
+	z-index: 1;
+}
+
+body .iti-error-msg.hide {
+	display: none;
+}
+
+/* Стили для сообщения о валидном номере */
+body .iti-valid-msg {
+	display: block;
+	color: #28a745;
+	font-size: 0.875rem;
+	margin: 0;
+	padding: 0;
+	line-height: 1.4;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	margin-top: 0.25rem;
+	z-index: 1;
+}
+
+body .iti-valid-msg.hide {
+	display: none;
+}
+
+/* Стили для заблокированной кнопки отправки */
+.elementor-button:disabled,
+.jet-form-builder__submit:disabled,
+button[type="submit"]:disabled {
+	cursor: not-allowed !important;
+	opacity: 0.6 !important;
+}
+
+.iti--allow-dropdown .iti__country-container:not(:has(+ input[disabled])):not(:has(+ input[readonly])) .iti__selected-country-primary:hover, .iti--allow-dropdown .iti__country-container:not(:has(+ input[disabled])):not(:has(+ input[readonly])) .iti__selected-country:has(+ .iti__dropdown-content:hover) .iti__selected-country-primary {
+    background-color: transparent !important;
+}
+
+/* Пока позиционируем выпадающий список — скрыт, чтобы не было видимого скачка */
+body.iti-dropdown-positioning .iti__dropdown-content {
+	opacity: 0 !important;
+	visibility: hidden !important;
+	transition: none !important;
+}
+
+/* Выпадающий список стран: поверх попапа Elementor (z-index выше модалки) */
+body > .iti__dropdown-content,
+body .iti__dropdown-content.iti__dropdown-content--dropup,
+body .iti__dropdown-content,
+.iti .iti__dropdown-content,
+.iti__dropdown-content {
+	z-index: 2147483647 !important; /* выше любого попапа/модалки */
+	max-height: 280px !important;
+	min-width: 260px !important;
+	max-width: 320px !important;
+	width: auto !important;
+	overflow-y: auto !important;
+	overflow-x: hidden !important;
+	/* position задаётся в JS под полем ввода; fixed — чтобы координаты top/left были относительно viewport */
+	position: fixed !important;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+	border-radius: 4px !important;
+}
+/* Список стран внутри контейнера — скролл по контенту */
+body .iti__dropdown-content .iti__country-list,
+body .iti__country-list,
+.iti__dropdown-content .iti__country-list,
+.iti__country-list {
+	max-height: 240px !important;
+	overflow-y: auto !important;
+	z-index: inherit !important;
+}

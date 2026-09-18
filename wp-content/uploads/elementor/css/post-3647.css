@@ -1,0 +1,36 @@
+.elementor-kit-3647{--e-global-color-primary:#9C9C9C;--e-global-color-secondary:#B2B2B2;--e-global-color-text:#1F2021;--e-global-color-accent:#040404;--e-global-color-be541bb:#00000080;--e-global-color-4ea5318:#666360;--e-global-color-7a6d259:#FFFFFF;--e-global-color-ddc0a4c:#18130C;--e-global-color-d6ee920:#F4F6F8;--e-global-color-518c8f1:#444444;--e-global-color-45a63b5:#F4F6F8;color:var( --e-global-color-text );font-family:"Manrope", Sans-serif;font-size:14px;line-height:20px;}.elementor-kit-3647 button,.elementor-kit-3647 input[type="button"],.elementor-kit-3647 input[type="submit"],.elementor-kit-3647 .elementor-button{background-color:var( --e-global-color-text );font-size:16px;line-height:26px;color:var( --e-global-color-7a6d259 );border-style:solid;border-width:0px 0px 0px 0px;border-radius:35px 35px 35px 35px;padding:15px 35px 15px 35px;}.elementor-kit-3647 button:hover,.elementor-kit-3647 button:focus,.elementor-kit-3647 input[type="button"]:hover,.elementor-kit-3647 input[type="button"]:focus,.elementor-kit-3647 input[type="submit"]:hover,.elementor-kit-3647 input[type="submit"]:focus,.elementor-kit-3647 .elementor-button:hover,.elementor-kit-3647 .elementor-button:focus{background-color:var( --e-global-color-7a6d259 );color:var( --e-global-color-text );}.elementor-kit-3647 e-page-transition{background-color:#FFBC7D;}.elementor-kit-3647 a{color:var( --e-global-color-accent );}.elementor-kit-3647 a:hover{color:var( --e-global-color-primary );}.elementor-kit-3647 h1{font-family:"Manrope", Sans-serif;font-size:42px;font-weight:700;line-height:52px;}.elementor-kit-3647 h2{color:var( --e-global-color-text );font-family:"Manrope", Sans-serif;font-size:28px;font-weight:700;line-height:34px;}.elementor-kit-3647 h3{font-size:1.5rem;font-weight:600;}.elementor-kit-3647 input:not([type="button"]):not([type="submit"]),.elementor-kit-3647 textarea,.elementor-kit-3647 .elementor-field-textual{font-size:16px;line-height:32px;color:#535353;background-color:var( --e-global-color-7a6d259 );border-style:solid;border-width:1px 1px 1px 1px;border-color:var( --e-global-color-primary );border-radius:3px 3px 3px 3px;padding:10px 10px 10px 45px;}.elementor-section.elementor-section-boxed > .elementor-container{max-width:1280px;}.e-con{--container-max-width:1280px;--container-default-padding-top:0px;--container-default-padding-right:10px;--container-default-padding-bottom:0px;--container-default-padding-left:10px;}.elementor-widget:not(:last-child){margin-block-end:20px;}.elementor-element{--widgets-spacing:20px 20px;--widgets-spacing-row:20px;--widgets-spacing-column:20px;}{}h1.entry-title{display:var(--page-title-display);}@media(max-width:1024px){.elementor-kit-3647 h1{font-size:35px;line-height:42px;}.elementor-kit-3647 h2{line-height:22px;}.elementor-kit-3647 input:not([type="button"]):not([type="submit"]),.elementor-kit-3647 textarea,.elementor-kit-3647 .elementor-field-textual{padding:8px 10px 8px 45px;}.elementor-section.elementor-section-boxed > .elementor-container{max-width:1024px;}.e-con{--container-max-width:1024px;}}@media(max-width:767px){.elementor-kit-3647 h1{font-size:25px;line-height:33px;}.elementor-kit-3647 h2{font-size:20px;line-height:24px;}.elementor-kit-3647 h3{font-size:1.2rem;}.elementor-section.elementor-section-boxed > .elementor-container{max-width:767px;}.e-con{--container-max-width:767px;}}/* Start Custom Fonts CSS */@font-face {
+	font-family: 'Manrope';
+	font-style: normal;
+	font-weight: 300;
+	font-display: swap;
+	src: url('../../2022/10/Manrope-Light.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Manrope';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('../../2022/10/Manrope-Regular.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Manrope';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url('../../2022/10/Manrope-Medium.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Manrope';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url('../../2022/10/Manrope-Semibold.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Manrope';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('../../2022/10/Manrope-Bold.woff2') format('woff2');
+}
+/* End Custom Fonts CSS */

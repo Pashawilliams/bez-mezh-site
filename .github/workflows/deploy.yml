@@ -30,8 +30,9 @@ jobs:
         run: |
           rm -rf _site
           mkdir -p _site
-          cp -a index.html chat.html robots.txt sitemap.xml css data fonts images js _site/
-          [ ! -f .nojekyll ] || cp -a .nojekyll _site/
+          cp -a . _site/
+          rm -rf _site/.git _site/.github _site/bot _site/docs _site/src _site/_site
+          ls _site/ | head -30
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

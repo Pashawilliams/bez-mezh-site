@@ -1,6 +1,3 @@
 User-agent: *
-Disallow: /bot/
-Disallow: /.github/
-Disallow: /_archive/
 Allow: /
 Sitemap: https://pashawilliams.github.io/bez-mezh-site/sitemap.xml

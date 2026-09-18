@@ -1,0 +1,290 @@
+/*Временно*/
+.iti__selected-country {
+    margin-top: 0 !important;
+}
+
+.no-reys .iti__selected-country {
+    margin-top: 0 !important;
+}
+
+.no-reys .iti__country-container {
+    padding-bottom: 5px !important;
+}
+
+button.iti__selected-country {
+    align-items: center !important;
+}
+
+button.iti__selected-country,
+button.iti__selected-country:hover,
+button.iti__selected-country:focus {
+    border-radius: 0 !important;
+}
+
+
+
+@media (min-width:1024px) {
+    .no-reys {
+        width: 350px !important;
+    }
+}
+
+
+/* Базовое состояние */
+.phone-widget {
+  opacity: 0;
+  transform: translateX(25px);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  display: flex !important; /* важно для Elementor */
+  flex-direction: column;
+}
+
+/* Открыто */
+.phone-widget.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* Закрытие */
+.phone-widget.closing {
+  opacity: 0;
+  transform: translateX(25px);
+  pointer-events: none;
+}
+
+.badges {
+	height:fit-content!important;
+}
+
+.reys-dates li {
+    background: #000;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    justify-content: center;
+}
+
+.shadow-block {
+    box-shadow: -4px -2px 16px rgba(255, 255, 255, 0.7), 4px 2px 16px rgba(136, 165, 191, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.15);
+}
+
+body,
+html {
+    overflow-x: hidden;
+}
+
+.elementor-widget-text-editor ul,
+.elementor-widget-text-editor ol,
+.elementor-widget-theme-post-content ul,
+.elementor-widget-theme-post-content ol {
+    margin-bottom: 15px;
+}
+
+.mb p {
+    margin-bottom: 0;
+}
+.elementor-message.elementor-message-success {
+    text-align: center;
+}
+textarea {
+  resize: none;
+}
+
+.pt {
+    padding-top: 100px;
+}
+
+.pb {
+    padding-bottom: 80px;
+}
+
+:focus {
+    outline-style: none;
+    outline-width: 0px !important;
+    outline-color: none !important;
+}
+/*Цветные иконки соц сетей*/
+.contact-color i.icon.icon-viber-3-1{
+    color: #8E24AA;
+}
+.contact-color i.icon.icon-telegram-4-1{
+    color: #039BE5;
+}
+.contact-color i.icon.icon-whatsapp-3-1{
+    color: #7AD06D;
+}
+/*Хлебные крошки*/
+.bez-bread nav {
+    font-size: 13px;
+    font-weight: 300;
+}
+.bez-bread a{
+    color: var(--e-global-color-primary);
+}
+.bez-bread a:hover{
+    color: var(--e-global-color-text);
+}
+
+/*Тень у листингов*/
+.list-reys{
+    box-shadow: -4px -2px 16px rgba(255, 255, 255, 0.7), 4px 2px 16px rgba(136, 165, 191, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all .5s ease;
+}
+.list-reys:hover{
+    box-shadow: -5px 0px 18px rgba(255, 255, 255, 0.9), 4px 2px 16px rgba(136, 165, 191, 0.45), 0px 4px 15px rgba(0, 0, 0, 0.07);
+}
+ /*Отступ для первого экрана, кроме главной*/
+ .pt-all{
+     padding-top:165px;
+ }
+/*Для кол-ва просмотров записей*/
+span.post-views-icon.dashicons.dashicons-chart-bar,
+span.post-views-label{
+    display: none !important;
+}
+/*Формы бронирования*/
+.online-bron .elementor-field.elementor-select-wrapper.remove-before {
+    min-height: 54px;
+}
+
+
+.online-bron input#form-field-datetravel{
+    background-image: url(../../uploads/2022/10/calendar-2-1-1.svg);
+}
+
+
+.online-bron input#form-field-name{
+    background-image: url(../../uploads/2022/10/user-8-1-1.svg);
+}
+
+
+.online-bron input#form-field-phone{
+    background-image: url(../../uploads/2022/10/phone-call-3-1.svg);
+}
+
+.online-bron input#form-field-tickets{
+    background-image: url(../../uploads/2026/03/bilet.svg);
+}
+
+.online-bron select#form-field-cityfrom{
+     background-image: url(../../uploads/2022/10/otpravlenie.svg);
+}
+.online-bron select#form-field-citywhere{
+     background-image: url(../../uploads/2022/10/pribytie.svg);
+}
+.online-bron textarea#form-field-messagetalk{
+     background-image: url(../../uploads/2022/10/speech-bubbles-1-1.svg);
+     background-repeat: no-repeat;
+       background-position: 2% 11%;
+}
+
+.online-bron input#form-field-name,
+.online-bron select#form-field-cityfrom,
+.online-bron input#form-field-phone,
+.online-bron select#form-field-citywhere,
+.online-bron input#form-field-datetravel, 
+.online-bron #form-field-reys_class {
+
+    background-repeat: no-repeat;
+       background-position: 4% 47%;
+}
+
+.online-bron input#form-field-tickets{
+
+    background-repeat: no-repeat;
+       background-position: 2% 47%;
+}
+
+.online-bron #form-field-reys_class {
+	font-size:16px;
+	background-image: url(../../uploads/2026/03/bus_class.svg);
+	background-size: 24px;
+}
+
+/*Контейнер для формы бронирования*/
+.cont-online::before {
+    /*--background-overlay: '';*/
+  background-image:  url("../../uploads/2022/10/righr-bg-min.png"), url("../../uploads/2022/10/left-bg-min.png");  
+    background-position: bottom 10px right 10px , top 10px left 10px;
+    background-repeat: no-repeat;
+}
+
+
+/*Цвет Placcegolder и select*/
+.online-bron  input.elementor-field.elementor-size-sm.elementor-field-textual,
+.online-bron select.elementor-field-textual.elementor-size-sm,
+.online-bron .elementor-field-type-textarea textarea
+
+{
+	color:#535353;
+
+}
+
+.online-bron  input.elementor-field.elementor-size-sm.elementor-field-textual::placeholder,
+.online-bron .elementor-field-type-textarea textarea::placeholder{
+    opacity: 1;
+}
+
+
+
+.breadcrumb {
+    padding-left: 0;
+}
+
+
+@media screen and (max-width:1024px) {
+     .pt-all{
+     padding-top:110px;
+ }
+     .online-bron .elementor-field.elementor-select-wrapper.remove-before {
+    min-height: 50px;
+}
+
+}
+@media screen and (max-width:767px) {
+.pt {
+    padding-top: 50px;
+}
+
+.pb {
+    padding-bottom: 40px;
+}
+  .pt-all{
+     padding-top:100px;
+ }
+}
+/*Полоса прокрутки*/
+::-webkit-scrollbar {
+    width: 12px;
+    height: 3px;
+}
+
+::-webkit-scrollbar-button {
+    height: 0;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--e-global-color-secondary);
+}
+
+::-webkit-scrollbar-track-piece {
+    background: var(--e-global-color-secondary);
+    border-radius:25px;
+}
+
+::-webkit-scrollbar-thumb {
+    height: 30px;
+    background: var(--e-global-color-accent);
+box-shadow: -1px 2px 2px rgba(24, 55, 91, 0.1), inset 0px -2px 1px rgba(39, 81, 126, 0.12), inset 0px 0px 4px rgba(46, 68, 87, 0.02);
+border-radius: 8px;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: var(--e-global-color-accent);
+}
+
+::-webkit-resizer {
+    background-color: var(--e-global-color-accent);
+}

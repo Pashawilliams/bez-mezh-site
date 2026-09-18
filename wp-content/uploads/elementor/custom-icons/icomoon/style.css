@@ -1,0 +1,129 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot');
+  src:  url('fonts/icomoon.eot') format('embedded-opentype'),
+    url('fonts/icomoon.ttf') format('truetype'),
+    url('fonts/icomoon.woff') format('woff'),
+    url('fonts/icomoon.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-mail-5-1:before {
+  content: "\e900";
+}
+.icon-time-left-1:before {
+  content: "\e901";
+}
+.icon-phone-call-2:before {
+  content: "\e902";
+}
+.icon-location-3-1:before {
+  content: "\e903";
+}
+.icon-track-2:before {
+  content: "\e904";
+}
+.icon-schedule:before {
+  content: "\e905";
+}
+.icon-minibus-2:before {
+  content: "\e906";
+}
+.icon-Polygon-4-1:before {
+  content: "\e907";
+}
+.icon-speech-bubbles-1:before {
+  content: "\e908";
+}
+.icon-Line-14:before {
+  content: "\e909";
+}
+.icon-arrow-point-to-right-1:before {
+  content: "\e90a";
+}
+.icon-arrow-point-to-right-2:before {
+  content: "\e90b";
+}
+.icon-Ellipse-6:before {
+  content: "\e90c";
+}
+.icon-noun-comfort-3857055-1:before {
+  content: "\e90d";
+}
+.icon-noun-plane-1595397-1:before {
+  content: "\e90e";
+}
+.icon-baggage-1:before {
+  content: "\e90f";
+}
+.icon-parking-1:before {
+  content: "\e910";
+}
+.icon-clock-11:before {
+  content: "\e911";
+}
+.icon-directions:before {
+  content: "\e912";
+}
+.icon-calendar-2-1:before {
+  content: "\e913";
+}
+.icon-whatsapp-3-1:before {
+  content: "\e914";
+}
+.icon-telegram-4-1:before {
+  content: "\e915";
+}
+.icon-viber-3-1:before {
+  content: "\e916";
+}
+.icon-noun-eye-5118859-1:before {
+  content: "\e917";
+}
+.icon-Vector-1:before {
+  content: "\e918";
+}
+.icon-Vector:before {
+  content: "\e919";
+}
+.icon-search-interface-symbol-1-1:before {
+  content: "\e91a";
+}
+.icon-pin-3-1:before {
+  content: "\e91b";
+}
+.icon-pin-3-2:before {
+  content: "\e91c";
+}
+.icon-user-8-1:before {
+  content: "\e91d";
+}
+.icon-Polygon-4:before {
+  content: "\e91e";
+}
+.icon-phone_icon-1:before {
+  content: "\e91f";
+}
+.icon-close:before {
+  content: "\e920";
+}
+.icon-menu:before {
+  content: "\e921";
+}
