@@ -1,3 +1,14 @@
+// One-page mode: old static WordPress-export pages redirect to the new homepage.
+(function () {
+    var marker = '/bez-mezh-site/';
+    var path = window.location.pathname;
+    var base = '/';
+    var i = path.indexOf(marker);
+    if (i !== -1) base = path.slice(0, i) + marker;
+    var isHome = path === base || path === base + 'index.html';
+    if (!isHome) window.location.replace(base + (window.location.hash || ''));
+})();
+
 document.addEventListener('DOMContentLoaded', function () {
     const wrapper = document.getElementById('search-reys-btn');
     const target = document.getElementById('reyses-popular');

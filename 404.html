@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Перенаправлення | БЕЗ МЕЖ</title>
+  <meta http-equiv="refresh" content="0; url=/bez-mezh-site/">
+  <script>
+    (function () {
+      var marker = '/bez-mezh-site/';
+      var path = window.location.pathname;
+      var index = path.indexOf(marker);
+      var base = index === -1 ? '/' : path.slice(0, index) + marker;
+      window.location.replace(base);
+    })();
+  </script>
+</head>
+<body>
+  <p>Перенаправлення на головну сторінку БЕЗ МЕЖ.</p>
+</body>
+</html>

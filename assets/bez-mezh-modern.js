@@ -1,29 +1,32 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260918a';
+  var VERSION = '20260918b';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
   var state = {
-    data: null,
-    cls: 'comfort',
+    data: {},
+    routes: [],
+    currentClass: 'comfort',
+    visible: 18,
+    query: '',
+    selectedRoute: null,
     adults: 1,
     children: 0,
-    pensioners: 0,
-    visible: 18,
-    filter: 'all',
-    query: '',
-    selectedRoute: null
+    pensioners: 0
   };
 
-  function scriptBase() {
-    var current = document.currentScript || document.querySelector('script[src*="bez-mezh-modern.js"]');
-    try { return new URL('../', current ? current.src : location.href); } catch (e) { return new URL('./', location.href); }
+  function currentScriptBase() {
+    var script = document.currentScript || document.querySelector('script[src*="bez-mezh-modern.js"]');
+    try { return new URL('../', script ? script.src : location.href); }
+    catch (error) { return new URL('./', location.href); }
   }
 
+  var BASE_URL = currentScriptBase();
+
   function dataUrl() {
-    return new URL('data/site.json?v=' + VERSION, scriptBase()).toString();
+    return new URL('data/site.json?v=' + VERSION, BASE_URL).toString();
   }
 
   function esc(value) {
@@ -32,25 +35,36 @@
     });
   }
 
-  function digits(value) {
-    return String(value || '').replace(/\D+/g, '');
-  }
-
   function normalize(value) {
     return String(value || '').replace(/\s+/g, ' ').trim();
   }
 
-  function fmt(n) {
-    var x = Math.round(Number(n) || 0);
-    return String(x).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  function lower(value) {
+    return normalize(value).toLowerCase();
   }
 
-  function money(n) {
-    return fmt(n) + ' грн';
+  function digits(value) {
+    return String(value || '').replace(/\D+/g, '');
   }
 
-  function roundUah(n) {
-    return Math.round((Number(n) || 0) / 50) * 50;
+  function formatNumber(value) {
+    return String(Math.round(Number(value) || 0)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  }
+
+  function money(value) {
+    return formatNumber(value) + ' грн';
+  }
+
+  function roundUah(value) {
+    return Math.round((Number(value) || 0) / 50) * 50;
+  }
+
+  function formatHours(value) {
+    var raw = Number(value) || 0;
+    var hours = Math.floor(raw);
+    var minutes = Math.round((raw - hours) * 60);
+    if (minutes === 60) { hours += 1; minutes = 0; }
+    return minutes ? hours + ' год ' + minutes + ' хв' : hours + ' год';
   }
 
   function routeKey(from, to) {
@@ -58,182 +72,200 @@
   }
 
   function durationFor(from, to) {
-    var d = state.data && state.data.durations;
-    if (!d) return null;
-    return d[routeKey(from, to)] || d[routeKey(to, from)] || null;
+    var durations = state.data.durations || {};
+    return durations[routeKey(from, to)] || durations[routeKey(to, from)] || null;
   }
 
   function tierFor(hours) {
-    var tiers = state.data && state.data.pricing && state.data.pricing.tiers;
-    if (!tiers || !tiers.length || hours == null) return null;
-    if (hours < tiers[0][0]) return tiers[0];
-    for (var i = 0; i < tiers.length; i++) {
-      if (hours >= tiers[i][0] && hours < tiers[i][1]) return tiers[i];
+    var tiers = state.data.pricing && state.data.pricing.tiers || [];
+    if (!tiers.length) return null;
+    for (var i = 0; i < tiers.length; i += 1) {
+      if (hours >= Number(tiers[i][0]) && hours < Number(tiers[i][1])) return tiers[i];
     }
     return tiers[tiers.length - 1];
   }
 
-  function quote(from, to, cls) {
-    cls = cls === 'lux' ? 'lux' : 'comfort';
-    var dur = durationFor(from, to);
-    if (!dur || dur.hours == null) return null;
-    var tier = tierFor(Number(dur.hours));
+  function quote(from, to, className) {
+    className = className === 'lux' ? 'lux' : 'comfort';
+    var duration = durationFor(from, to);
+    if (!duration || duration.hours == null) return null;
+    var hours = Number(duration.hours);
+    var tier = tierFor(hours);
     if (!tier) return null;
-    var eur = cls === 'lux' ? tier[3] : tier[2];
+    var eur = className === 'lux' ? Number(tier[3]) : Number(tier[2]);
     var rate = Number(state.data.pricing && state.data.pricing.eur_rate) || 51.449;
     var amount = roundUah(eur * rate);
     return {
       from: normalize(from),
       to: normalize(to),
-      cls: cls,
-      className: cls === 'lux' ? 'Lux' : 'Comfort',
-      hours: Number(dur.hours),
-      km: dur.km,
-      src: dur.src || 'estimate',
+      className: className,
+      classLabel: className === 'lux' ? 'Lux' : 'Comfort',
+      hours: hours,
+      km: duration.km,
       eur: eur,
-      amount: amount,
-      tier: tier[1] >= 999 ? tier[0] + '+ год' : tier[0] + '–' + tier[1] + ' год'
+      amount: amount
     };
-  }
-
-  function fmtHours(h) {
-    h = Number(h) || 0;
-    var hours = Math.floor(h);
-    var min = Math.round((h - hours) * 60);
-    if (min === 60) { hours += 1; min = 0; }
-    return min ? hours + ' год ' + min + ' хв' : hours + ' год';
   }
 
   function passengerTotal(q) {
     if (!q) return null;
+    normalizePassengers();
     var base = roundUah(q.amount);
     var child = roundUah(base * (1 - CHILD_DISCOUNT));
     var pensioner = roundUah(base * (1 - PENSIONER_DISCOUNT));
-    var totalSeats = state.adults + state.children + state.pensioners;
-    var full = totalSeats * base;
+    var seats = state.adults + state.children + state.pensioners;
+    var full = seats * base;
     var total = state.adults * base + state.children * child + state.pensioners * pensioner;
     return {
+      seats: seats,
       base: base,
       child: child,
       pensioner: pensioner,
-      seats: totalSeats,
-      full: full,
       total: total,
       discount: Math.max(0, full - total)
     };
   }
 
   function contacts() {
-    return (state.data && state.data.contacts) || {
+    return state.data.contacts || {
       phone: '+380966973130',
       phone_display: '+380 96 697 31 30',
       telegram: 'https://t.me/pereviznyk001',
-      whatsapp: 'https://wa.me/380966973130',
-      support_note: 'Цілодобова підтримка'
+      whatsapp: 'https://wa.me/380966973130'
     };
   }
 
-  function isBackendUrl(url) {
-    return /(?:admin-ajax\.php|\/wp-json\/|\/ru\/wp-json\/)/.test(String(url || ''));
+  function preferredRoute() {
+    return state.routes.find(function (r) { return r.from === 'Київ' && r.to === 'Прага'; }) ||
+      state.routes.find(function (r) { return r.from === 'Київ' && r.to === 'Берлін'; }) ||
+      state.routes.find(function (r) { return r.from === 'Київ'; }) ||
+      state.routes[0] || { from: 'Київ', to: 'Прага' };
   }
 
-  function emptyBackendResponse() {
-    var payload = JSON.stringify({ success: true, data: {}, static_mode: true });
-    if (typeof Response === 'function') {
-      return Promise.resolve(new Response(payload, { status: 200, headers: { 'Content-Type': 'application/json' } }));
-    }
-    return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(JSON.parse(payload)); }, text: function () { return Promise.resolve(payload); } });
+  function origins() {
+    var map = {};
+    state.routes.forEach(function (route) { if (route.from) map[route.from] = true; });
+    return sortCities(Object.keys(map));
   }
 
-  function installStaticGuards() {
-    if (!window.__bezMezhStaticGuards && typeof window.fetch === 'function') {
-      var originalFetch = window.fetch.bind(window);
-      window.fetch = function (input, init) {
-        var url = typeof input === 'string' ? input : (input && input.url);
-        if (isBackendUrl(url)) return emptyBackendResponse();
-        return originalFetch(input, init);
-      };
-      window.__bezMezhStaticGuards = true;
-    }
-    var $ = window.jQuery;
-    if ($ && $.ajax && !$.ajax.__bezMezhStaticGuard) {
-      var originalAjax = $.ajax;
-      var guardedAjax = function (options) {
-        var url = typeof options === 'string' ? options : options && options.url;
-        if (isBackendUrl(url)) {
-          var data = { success: true, data: {}, static_mode: true };
-          var deferred = $.Deferred ? $.Deferred() : null;
-          setTimeout(function () {
-            if (options && typeof options.success === 'function') options.success(data, 'success', null);
-            if (deferred) deferred.resolve(data, 'success', null);
-          }, 0);
-          return deferred ? deferred.promise() : { done: function (cb) { if (cb) setTimeout(function () { cb(data); }, 0); return this; }, fail: function () { return this; }, always: function (cb) { if (cb) setTimeout(cb, 0); return this; } };
-        }
-        return originalAjax.apply(this, arguments);
-      };
-      guardedAjax.__bezMezhStaticGuard = true;
-      $.ajax = guardedAjax;
-    }
-  }
-
-  function isHomePage() {
-    return !!(document.getElementById('search-reys-btn') || document.getElementById('reyses-popular') || document.body.classList.contains('home'));
-  }
-
-  function allRoutes() {
-    return (state.data && state.data.routes || []).filter(function (route) {
-      return route && route.from && route.to;
+  function destinationsFor(from) {
+    var map = {};
+    state.routes.forEach(function (route) {
+      if (!from || route.from === from) map[route.to] = true;
     });
+    return sortCities(Object.keys(map));
   }
 
-  function citiesFromRoutes() {
-    var seen = {};
-    allRoutes().forEach(function (r) { seen[r.from] = 1; seen[r.to] = 1; });
-    var uaOrder = ['Київ', 'Львів', 'Одеса', 'Дніпро', 'Харків', 'Запоріжжя', 'Полтава', 'Кременчук', 'Житомир'];
-    return Object.keys(seen).sort(function (a, b) {
-      var ia = uaOrder.indexOf(a), ib = uaOrder.indexOf(b);
-      if (ia !== -1 || ib !== -1) return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+  function sortCities(list) {
+    var top = ['Київ', 'Львів', 'Житомир', 'Кременчук', 'Полтава', 'Дніпро', 'Запоріжжя', 'Прага', 'Берлін', 'Варшава'];
+    return list.sort(function (a, b) {
+      var ai = top.indexOf(a);
+      var bi = top.indexOf(b);
+      if (ai !== -1 || bi !== -1) return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
       return a.localeCompare(b, 'uk');
     });
   }
 
-  function makeOptions(selected) {
-    return citiesFromRoutes().map(function (name) {
-      return '<option value="' + esc(name) + '"' + (name === selected ? ' selected' : '') + '>' + esc(name) + '</option>';
+  function fillSelect(select, list, selected) {
+    if (!select) return;
+    var current = selected || select.value || list[0] || '';
+    if (list.indexOf(current) === -1) current = list[0] || '';
+    select.innerHTML = list.map(function (name) {
+      return '<option value="' + esc(name) + '"' + (name === current ? ' selected' : '') + '>' + esc(name) + '</option>';
     }).join('');
   }
 
-  function firstRoute() {
-    return allRoutes()[0] || { from: 'Київ', to: 'Берлін', source: 'eurotour' };
+  function syncDestinationSelect(scope, selectedTo) {
+    var from = scope.querySelector('[data-field="from"], [data-booking="from"]');
+    var to = scope.querySelector('[data-field="to"], [data-booking="to"]');
+    if (!from || !to) return;
+    fillSelect(to, destinationsFor(from.value), selectedTo);
   }
 
-  function selectedRouteFromForm(root) {
-    var from = root.querySelector('[data-bm-field="from"]');
-    var to = root.querySelector('[data-bm-field="to"]');
-    var fallback = state.selectedRoute || firstRoute();
+  function fillAllSelects(route) {
+    route = route || preferredRoute();
+    document.querySelectorAll('[data-field="from"], [data-booking="from"]').forEach(function (select) {
+      fillSelect(select, origins(), route.from);
+      syncDestinationSelect(select.closest('form') || document, route.to);
+    });
+  }
+
+  function setRouteInScope(scope, route) {
+    if (!scope || !route) return;
+    var from = scope.querySelector('[data-field="from"], [data-booking="from"]');
+    var to = scope.querySelector('[data-field="to"], [data-booking="to"]');
+    if (from) fillSelect(from, origins(), route.from);
+    syncDestinationSelect(scope, route.to);
+    if (to) to.value = route.to;
+  }
+
+  function selectedFromScope(scope, booking) {
+    var from = scope.querySelector(booking ? '[data-booking="from"]' : '[data-field="from"]');
+    var to = scope.querySelector(booking ? '[data-booking="to"]' : '[data-field="to"]');
     return {
-      from: from && from.value ? from.value : fallback.from,
-      to: to && to.value ? to.value : fallback.to,
-      source: fallback.source || 'all'
+      from: from && from.value || preferredRoute().from,
+      to: to && to.value || preferredRoute().to
     };
   }
 
-  function passengerRows() {
-    return '' +
-      passengerRow('adults', 'Дорослі', 'повний тариф', 1) +
-      passengerRow('children', 'Діти до 16 років', 'знижка 15%', 0) +
-      passengerRow('pensioners', 'Пенсіонери', 'знижка 10%', 0);
+  function renderQuickPrice() {
+    var form = document.querySelector('[data-quick-form]');
+    var host = document.querySelector('[data-quick-price]');
+    if (!form || !host) return;
+    var route = selectedFromScope(form, false);
+    var cls = form.querySelector('[data-field="class"]') && form.querySelector('[data-field="class"]').value || state.currentClass;
+    var q = quote(route.from, route.to, cls);
+    state.selectedRoute = route;
+    if (!q) {
+      host.innerHTML = '<span>Ціну уточнить менеджер</span><strong>—</strong><small>' + esc(route.from) + ' → ' + esc(route.to) + '</small>';
+      return;
+    }
+    host.innerHTML = '<span>' + esc(q.classLabel) + ' за 1 пасажира</span><strong>' + money(q.amount) + '</strong><small>' + esc(q.from) + ' → ' + esc(q.to) + ' · приблизно ' + formatHours(q.hours) + '</small>';
   }
 
-  function passengerRow(key, title, note, min) {
-    var val = state[key];
-    return '<div class="bm-passenger-row" data-bm-passenger-row="' + key + '">' +
-      '<div><strong>' + title + '</strong><span>' + note + '</span></div>' +
-      '<div class="bm-counter" role="group" aria-label="' + title + '">' +
-      '<button type="button" data-bm-step="-1" data-bm-passenger="' + key + '">−</button>' +
-      '<input type="number" min="' + min + '" max="' + MAX_PASSENGERS + '" value="' + val + '" data-bm-count="' + key + '" inputmode="numeric" aria-label="' + title + '">' +
-      '<button type="button" data-bm-step="1" data-bm-passenger="' + key + '">+</button>' +
-      '</div></div>';
+  function filteredRoutes() {
+    var query = lower(state.query);
+    if (!query) return state.routes.slice();
+    return state.routes.filter(function (route) {
+      return lower(route.from + ' ' + route.to).indexOf(query) !== -1;
+    });
+  }
+
+  function routeCard(route, index) {
+    var q = quote(route.from, route.to, state.currentClass);
+    var price = q ? money(q.amount) : 'за запитом';
+    var duration = q ? formatHours(q.hours) : 'уточнення';
+    var km = q && q.km ? formatNumber(q.km) + ' км' : 'адресно';
+    return '<article class="bm-route-card" style="animation-delay:' + Math.min(index * 18, 220) + 'ms" data-route-card data-from="' + esc(route.from) + '" data-to="' + esc(route.to) + '">' +
+      '<h3>' + esc(route.from) + ' → ' + esc(route.to) + '</h3>' +
+      '<p>Адресна посадка та висадка за погодженням з менеджером.</p>' +
+      '<div class="bm-route-meta"><span class="bm-tag">' + esc(state.currentClass === 'lux' ? 'Lux' : 'Comfort') + '</span><span class="bm-tag">' + esc(duration) + '</span><span class="bm-tag">' + esc(km) + '</span></div>' +
+      '<div class="bm-route-price"><span>ціна від</span><strong>' + esc(price) + '</strong></div>' +
+      '<div class="bm-route-actions"><button type="button" class="bm-btn bm-btn--gold" data-card-book>Забронювати</button><button type="button" class="bm-btn bm-btn--outline" data-card-calc>Розрахувати</button></div>' +
+      '</article>';
+  }
+
+  function renderRoutes() {
+    var grid = document.querySelector('[data-routes-grid]');
+    var count = document.querySelector('[data-route-count]');
+    var more = document.querySelector('[data-load-more]');
+    if (!grid) return;
+    var list = filteredRoutes();
+    var shown = list.slice(0, state.visible);
+    grid.innerHTML = shown.length ? shown.map(routeCard).join('') : '<div class="bm-empty">Напрямок не знайдено. Спробуйте інше місто або натисніть “Забронювати”, щоб менеджер уточнив варіант.</div>';
+    if (count) count.textContent = 'Знайдено напрямків: ' + list.length;
+    if (more) more.hidden = list.length <= shown.length;
+    var total = document.querySelector('[data-routes-total]');
+    if (total) total.textContent = String(state.routes.length);
+  }
+
+  function renderFaq() {
+    var host = document.querySelector('[data-faq]');
+    if (!host) return;
+    var items = state.data.faq || [];
+    host.innerHTML = items.slice(0, 10).map(function (item, index) {
+      return '<details' + (index === 0 ? ' open' : '') + '><summary>' + esc(item.q || '') + '</summary><div class="bm-faq__answer">' + esc(item.a || '') + '</div></details>';
+    }).join('');
   }
 
   function normalizePassengers(changed) {
@@ -243,458 +275,340 @@
     var total = state.adults + state.children + state.pensioners;
     var over = total - MAX_PASSENGERS;
     if (over > 0) {
-      var order = [];
-      if (changed) order.push(changed);
-      ['children', 'pensioners', 'adults'].forEach(function (x) { if (order.indexOf(x) === -1) order.push(x); });
-      order.forEach(function (key) {
-        if (over <= 0) return;
+      ['children', 'pensioners', 'adults'].forEach(function (key) {
+        if (key === changed || over <= 0) return;
         var min = key === 'adults' ? 1 : 0;
-        var can = Math.max(0, state[key] - min);
-        var take = Math.min(can, over);
-        state[key] -= take;
-        over -= take;
+        var canRemove = Math.max(0, state[key] - min);
+        var remove = Math.min(canRemove, over);
+        state[key] -= remove;
+        over -= remove;
       });
+      if (over > 0 && changed) state[changed] = Math.max(changed === 'adults' ? 1 : 0, state[changed] - over);
     }
   }
 
-  function updatePassengerInputs(root) {
+  function syncPassengerInputs() {
     normalizePassengers();
-    root.querySelectorAll('[data-bm-count]').forEach(function (input) {
-      input.value = String(state[input.getAttribute('data-bm-count')] || 0);
+    document.querySelectorAll('[data-passenger-input]').forEach(function (input) {
+      var key = input.getAttribute('data-passenger-input');
+      input.value = String(state[key] || 0);
     });
     var total = state.adults + state.children + state.pensioners;
-    root.querySelectorAll('[data-bm-step]').forEach(function (btn) {
-      var key = btn.getAttribute('data-bm-passenger');
-      var step = parseInt(btn.getAttribute('data-bm-step'), 10) || 0;
+    document.querySelectorAll('[data-step]').forEach(function (button) {
+      var key = button.getAttribute('data-passenger');
+      var step = Number(button.getAttribute('data-step')) || 0;
       var min = key === 'adults' ? 1 : 0;
-      btn.disabled = step < 0 ? state[key] <= min : total >= MAX_PASSENGERS;
+      button.disabled = step > 0 ? total >= MAX_PASSENGERS : state[key] <= min;
     });
   }
 
-  function priceHtml(q, total) {
-    if (!q || !total) {
-      return '<div class="bm-price-box"><div class="bm-price-box__sum"><span>Оберіть напрямок</span><strong>—</strong></div><p class="bm-price-note">Після вибору маршруту система покаже тариф і суму зі знижками.</p></div>';
-    }
-    return '<div class="bm-price-box">' +
-      '<div class="bm-price-box__top"><div><div class="bm-price-box__route">' + esc(q.from) + ' → ' + esc(q.to) + '</div><strong>' + q.className + ' · €' + q.eur + '</strong></div><span class="bm-badge bm-badge--warm">' + esc(q.tier) + '</span></div>' +
-      '<div class="bm-price-breakdown"><div><span>Повний</span><b>' + money(total.base) + '</b></div><div><span>Дитячий</span><b>' + money(total.child) + '</b></div><div><span>Пенсійний</span><b>' + money(total.pensioner) + '</b></div></div>' +
-      '<div class="bm-price-box__sum"><span>Разом за ' + total.seats + ' пас.</span><strong>' + money(total.total) + '</strong></div>' +
-      '<p class="bm-price-note">У дорозі приблизно ' + fmtHours(q.hours) + (q.km ? ' · ' + fmt(q.km) + ' км' : '') + '. Загальна знижка: ' + money(total.discount) + '. Ціна розрахована за тарифом Eurotour.</p>' +
-      '</div>';
+  function defaultDate() {
+    var d = new Date(Date.now() + 24 * 60 * 60 * 1000);
+    return d.toISOString().slice(0, 10);
   }
 
-  function bookingPanelHtml(route) {
-    route = route || firstRoute();
-    state.selectedRoute = route;
-    var tomorrow = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
-    return '<div class="bm-booking-panel" data-bm-booking-panel>' +
-      '<div class="bm-booking-panel__main">' +
-      '<div class="bm-form-grid">' +
-      '<label class="bm-field"><span class="bm-label">Звідки</span><select class="bm-select" data-bm-field="from">' + makeOptions(route.from) + '</select></label>' +
-      '<label class="bm-field"><span class="bm-label">Куди</span><select class="bm-select" data-bm-field="to">' + makeOptions(route.to) + '</select></label>' +
-      '<label class="bm-field"><span class="bm-label">Дата</span><input class="bm-input" type="date" data-bm-field="date" value="' + tomorrow + '"></label>' +
-      '<label class="bm-field"><span class="bm-label">Час</span><select class="bm-select" data-bm-field="time"><option value="08:00"' + (state.cls !== 'lux' ? ' selected' : '') + '>08:00</option><option value="18:00"' + (state.cls === 'lux' ? ' selected' : '') + '>18:00</option><option value="Узгодити з менеджером">Узгодити з менеджером</option></select></label>' +
-      '<div class="bm-field bm-field--wide"><span class="bm-label">Клас</span><div class="bm-class-switch"><button type="button" class="bm-class-btn" data-bm-class="comfort">Comfort<small>стандартний тариф</small></button><button type="button" class="bm-class-btn" data-bm-class="lux">Lux<small>підвищений комфорт</small></button></div></div>' +
-      '</div>' +
-      '<div class="bm-passengers">' + passengerRows() + '</div>' +
-      '</div>' +
-      '<div class="bm-booking-panel__aside" data-bm-price-host></div>' +
-      '</div>';
+  function setBookingClass(cls) {
+    state.currentClass = cls === 'lux' ? 'lux' : 'comfort';
+    document.querySelectorAll('[data-class], [data-booking-class]').forEach(function (button) {
+      var attr = button.hasAttribute('data-class') ? 'data-class' : 'data-booking-class';
+      button.classList.toggle('is-active', button.getAttribute(attr) === state.currentClass);
+    });
+    document.querySelectorAll('[data-field="class"]').forEach(function (select) { select.value = state.currentClass; });
+    document.querySelectorAll('[data-booking="time"]').forEach(function (select) { select.value = state.currentClass === 'lux' ? '18:00' : '08:00'; });
+    renderRoutes();
+    renderQuickPrice();
+    renderBookingPrice();
   }
 
-  function renderPrice(root) {
-    var panel = root.querySelector('[data-bm-booking-panel]') || root;
-    var route = selectedRouteFromForm(panel);
-    state.selectedRoute = route;
-    var q = quote(route.from, route.to, state.cls);
+  function renderBookingPrice() {
+    var modal = document.querySelector('[data-modal]');
+    var host = document.querySelector('[data-booking-price]');
+    if (!modal || !host) return;
+    var route = selectedFromScope(modal, true);
+    var q = quote(route.from, route.to, state.currentClass);
     var total = passengerTotal(q);
-    var host = panel.querySelector('[data-bm-price-host]');
-    if (host) {
-      host.innerHTML = priceHtml(q, total) + '<div class="bm-actions" style="margin-top:12px"><button type="button" class="bm-btn bm-btn--warm" data-bm-open-booking>Забронювати поїздку</button><a class="bm-btn bm-btn--ghost" href="' + esc(contacts().telegram || '#') + '" target="_blank" rel="noopener">Написати менеджеру</a></div>';
+    syncPassengerInputs();
+    if (!q || !total) {
+      host.innerHTML = '<span>Ціну уточнить менеджер</span><strong>—</strong><small>' + esc(route.from) + ' → ' + esc(route.to) + '</small>';
+      return;
     }
-    updatePassengerInputs(panel);
-    syncClassButtons(root);
+    host.innerHTML = '<span>Разом за ' + total.seats + ' пасажира</span><strong>' + money(total.total) + '</strong><small>' + esc(q.classLabel) + ' · ' + money(total.base) + ' за 1 дорослого · знижка ' + money(total.discount) + ' · приблизно ' + formatHours(q.hours) + '</small>';
   }
 
-  function syncClassButtons(root) {
-    root.querySelectorAll('[data-bm-class]').forEach(function (btn) {
-      btn.classList.toggle('is-active', btn.getAttribute('data-bm-class') === state.cls);
-    });
-  }
-
-  function filteredRoutes() {
-    var routes = allRoutes();
-    if (state.filter !== 'all') {
-      routes = routes.filter(function (r) { return (r.source || '').indexOf(state.filter) !== -1; });
-    }
-    var q = normalize(state.query).toLowerCase();
-    if (q) {
-      routes = routes.filter(function (r) { return (r.from + ' ' + r.to).toLowerCase().indexOf(q) !== -1; });
-    }
-    return routes;
-  }
-
-  function routeCard(route) {
-    var q = quote(route.from, route.to, state.cls);
-    var label = route.source === 'eurotour' ? 'Eurotour' : route.source === 'bez-mezh' ? 'БЕЗ МЕЖ' : 'Маршрут';
-    return '<article class="bm-card" data-bm-route-card data-from="' + esc(route.from) + '" data-to="' + esc(route.to) + '">' +
-      '<div class="bm-card__route"><strong>' + esc(route.from) + ' → ' + esc(route.to) + '</strong><span>Адресна посадка та висадка за погодженням з менеджером</span></div>' +
-      '<div class="bm-card__meta"><span class="bm-badge">' + esc(label) + '</span>' + (q ? '<span class="bm-badge bm-badge--green">~' + fmtHours(q.hours) + '</span><span class="bm-badge bm-badge--warm">' + q.className + '</span>' : '') + '</div>' +
-      '<div class="bm-card__price"><span>ціна від</span><strong>' + (q ? money(q.amount) : '—') + '</strong></div>' +
-      '<div class="bm-card__actions"><button type="button" class="bm-btn bm-btn--warm" data-bm-card-book>Забронювати</button><button type="button" class="bm-btn bm-btn--ghost" data-bm-card-select>Розрахувати</button></div>' +
-      '</article>';
-  }
-
-  function renderRoutesList() {
-    var grid = document.querySelector('[data-bm-routes-grid]');
-    var count = document.querySelector('[data-bm-routes-count]');
-    var more = document.querySelector('[data-bm-load-more]');
-    if (!grid) return;
-    var routes = filteredRoutes();
-    if (count) count.textContent = 'Знайдено напрямків: ' + routes.length;
-    var shown = routes.slice(0, state.visible);
-    grid.innerHTML = shown.length ? shown.map(routeCard).join('') : '<div class="bm-empty">За цим запитом напрямків не знайдено. Спробуйте інше місто або напишіть менеджеру.</div>';
-    if (more) more.hidden = routes.length <= shown.length;
-  }
-
-  function routesSectionHtml() {
-    var total = allRoutes().length;
-    return '<section id="bm-routes" class="bm-section bm-section--routes">' +
-      '<div class="bm-shell">' +
-      '<div class="bm-section__head"><div><span class="bm-eyebrow">Тарифи Eurotour</span><h2>Усі напрямки БЕЗ МЕЖ</h2></div><p>Обʼєднано маршрути Eurotour і напрямки з bez-mezh.com.ua. Система одразу рахує Comfort, Lux, дитячу та пенсійну знижку. У каталозі зараз ' + total + ' напрямків.</p></div>' +
-      bookingPanelHtml(firstRoute()) +
-      '<div class="bm-toolbar"><input class="bm-input" type="search" data-bm-route-search placeholder="Пошук напрямку: Київ, Берлін, Барселона..."><div class="bm-chip-row"><button type="button" class="bm-chip is-active" data-bm-filter="all">Усі</button><button type="button" class="bm-chip" data-bm-filter="eurotour">Eurotour</button><button type="button" class="bm-chip" data-bm-filter="bez-mezh">БЕЗ МЕЖ</button></div><div class="bm-routes-count" data-bm-routes-count></div></div>' +
-      '<div class="bm-routes-grid" data-bm-routes-grid></div><div class="bm-load-more-wrap"><button type="button" class="bm-btn bm-btn--ghost" data-bm-load-more>Показати ще напрямки</button></div>' +
-      '</div></section>';
-  }
-
-  function contactsSectionHtml() {
-    var c = contacts();
-    var managers = state.data.managers || [];
-    var managerHtml = managers.map(function (m) {
-      return '<div class="bm-manager"><div><strong>' + esc(m.name || 'Менеджер') + '</strong><span>' + esc(m.role || 'Менеджер з перевезень') + ' · ' + esc(m.phone || '') + '</span></div><div class="bm-manager__actions"><a href="' + esc(m.telegram || c.telegram || '#') + '" target="_blank" rel="noopener">Telegram</a><a href="' + esc(m.whatsapp || c.whatsapp || '#') + '" target="_blank" rel="noopener">WhatsApp</a></div></div>';
-    }).join('');
-    return '<section id="bm-contacts" class="bm-section bm-section--contacts"><div class="bm-shell">' +
-      '<div class="bm-section__head"><div><span class="bm-eyebrow">Контакти</span><h2>Менеджер на звʼязку 24/7</h2></div><p>Контактні дані перенесені з Eurotour. Оберіть зручний спосіб звʼязку або залиште бронювання у фронтенд-формі.</p></div>' +
-      '<div class="bm-contact-grid"><div class="bm-contact-card bm-contact-card--dark"><h3>' + esc(c.phone_display || c.phone) + '</h3><p>' + esc(c.support_note || 'Цілодобова підтримка') + '</p><div class="bm-contact-list"><a class="bm-contact-link" href="tel:' + esc(c.phone || '') + '"><span>Телефон</span><b>Подзвонити</b></a><a class="bm-contact-link" href="' + esc(c.telegram || '#') + '" target="_blank" rel="noopener"><span>Telegram</span><b>Написати</b></a><a class="bm-contact-link" href="' + esc(c.whatsapp || '#') + '" target="_blank" rel="noopener"><span>WhatsApp</span><b>Написати</b></a></div></div>' +
-      '<div class="bm-contact-card"><h3>Команда бронювання</h3><p>Менеджери підтверджують маршрут, дату, клас поїздки, багаж і адресну посадку.</p><div class="bm-manager-grid">' + managerHtml + '</div></div></div>' +
-      '</div></section>';
-  }
-
-  function faqSectionHtml() {
-    var faq = state.data.faq || [];
-    return '<section id="bm-faq" class="bm-section bm-section--faq"><div class="bm-shell">' +
-      '<div class="bm-section__head"><div><span class="bm-eyebrow">FAQ</span><h2>Часті питання</h2></div><p>Оновлений блок відповідей: документи, багаж, тварини, знижки, класи Comfort і Lux.</p></div>' +
-      '<div class="bm-faq">' + faq.map(function (item, index) {
-        return '<details' + (index === 0 ? ' open' : '') + '><summary>' + esc(item.q) + '</summary><div class="bm-faq__answer">' + esc(item.a) + '</div></details>';
-      }).join('') + '</div></div></section>';
-  }
-
-  function modalHtml() {
-    return '<div class="bm-modal" data-bm-modal aria-hidden="true"><div class="bm-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="bm-booking-title">' +
-      '<div class="bm-modal__head"><div><h3 id="bm-booking-title">Бронювання поїздки</h3><p>Форма рахує тариф і знижки. Реальна відправка вимкнена за вашим вибором.</p></div><button type="button" class="bm-modal__close" data-bm-close aria-label="Закрити">×</button></div>' +
-      '<form class="bm-booking-form" data-bm-modal-form novalidate>' +
-      '<div class="bm-form-errors" data-bm-errors></div>' +
-      '<div data-bm-modal-panel>' + bookingPanelHtml(firstRoute()) + '</div>' +
-      '<div class="bm-form-grid" style="margin-top:14px">' +
-      '<label class="bm-field"><span class="bm-label">ПІБ</span><input class="bm-input" type="text" name="name" data-bm-user="name" placeholder="Ваше імʼя та прізвище" autocomplete="name" required></label>' +
-      '<label class="bm-field"><span class="bm-label">Телефон</span><input class="bm-input" type="tel" name="phone" data-bm-user="phone" placeholder="+380..." autocomplete="tel" required></label>' +
-      '<label class="bm-field bm-field--wide"><span class="bm-label">Коментар</span><textarea class="bm-textarea" name="comment" data-bm-user="comment" placeholder="Адреса посадки, багаж, побажання щодо місця"></textarea></label>' +
-      '</div><p class="bm-front-note">Фронтенд-режим: заявка не відправляється на сервер і не потрапляє в Telegram. Після підключення каналу цей самий інтерфейс буде готовий до реальної відправки.</p>' +
-      '<div class="bm-actions" style="margin-top:16px"><button type="submit" class="bm-btn bm-btn--warm">Підтвердити бронювання</button><button type="button" class="bm-btn bm-btn--ghost" data-bm-close>Скасувати</button></div>' +
-      '</form></div></div>';
-  }
-
-  function mountSections() {
-    if (!isHomePage() || document.getElementById('bm-routes')) return;
-    var target = document.getElementById('reyses-popular');
-    var parentSection = target;
-    while (parentSection && parentSection.parentElement && parentSection.getAttribute('data-id') !== 'cb83d77') parentSection = parentSection.parentElement;
-    var html = routesSectionHtml() + contactsSectionHtml() + faqSectionHtml();
-    if (parentSection && parentSection.parentNode) parentSection.insertAdjacentHTML('beforebegin', html);
-    else (document.querySelector('main') || document.body).insertAdjacentHTML('beforeend', html);
-    renderRoutesList();
-    renderPrice(document);
-  }
-
-  function mountModal() {
-    if (!document.querySelector('[data-bm-modal]')) document.body.insertAdjacentHTML('beforeend', modalHtml());
-    renderPrice(document.querySelector('[data-bm-modal]'));
-  }
-
-  function mountStickyContacts() {
-    if (document.querySelector('.bm-sticky-contacts')) return;
-    var c = contacts();
-    document.body.insertAdjacentHTML('beforeend', '<div class="bm-sticky-contacts"><a href="' + esc(c.telegram || '#') + '" target="_blank" rel="noopener" title="Telegram"><img src="assets/icons/telegram.png" alt="Telegram"></a><a href="' + esc(c.whatsapp || '#') + '" target="_blank" rel="noopener" title="WhatsApp"><img src="assets/icons/whatsapp.png" alt="WhatsApp"></a><a href="tel:' + esc(c.phone || '') + '" title="Телефон"><img src="assets/icons/phone.png" alt="Телефон"></a></div>');
-  }
-
-  function updateContactsInDom() {
-    var c = contacts();
-    document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
-      a.href = 'tel:' + (c.phone || '').replace(/\s+/g, '');
-      if (/\+?\d[\d\s().-]{7,}/.test(a.textContent || '')) a.textContent = c.phone_display || c.phone;
-    });
-    document.querySelectorAll('a[href*="t.me"], a[href*="telegram"]').forEach(function (a) {
-      if (c.telegram) a.href = c.telegram;
-    });
-    document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp"]').forEach(function (a) {
-      if (c.whatsapp) a.href = c.whatsapp;
-    });
-  }
-
-  function setRouteInPanel(panel, route) {
-    state.selectedRoute = route;
-    var from = panel.querySelector('[data-bm-field="from"]');
-    var to = panel.querySelector('[data-bm-field="to"]');
-    if (from) from.value = route.from;
-    if (to) to.value = route.to;
-    renderPrice(panel);
-  }
-
-  function openModal(route) {
-    mountModal();
-    var modal = document.querySelector('[data-bm-modal]');
+  function openBooking(route) {
+    var modal = document.querySelector('[data-modal]');
     if (!modal) return;
-    if (route) {
-      modal.querySelectorAll('[data-bm-booking-panel]').forEach(function (panel) { setRouteInPanel(panel, route); });
-    }
+    state.selectedRoute = route || state.selectedRoute || preferredRoute();
+    setRouteInScope(modal, state.selectedRoute);
+    var date = modal.querySelector('[data-booking="date"]');
+    if (date && !date.value) date.value = defaultDate();
+    renderBookingPrice();
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('bm-modal-open');
+    document.body.classList.add('modal-open');
     setTimeout(function () {
-      var name = modal.querySelector('[data-bm-user="name"]');
-      if (name) name.focus();
-    }, 60);
+      var name = modal.querySelector('[data-booking="name"]');
+      if (name) name.focus({ preventScroll: true });
+    }, 80);
   }
 
-  function closeModal() {
-    var modal = document.querySelector('[data-bm-modal]');
+  function closeBooking() {
+    var modal = document.querySelector('[data-modal]');
     if (!modal) return;
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('bm-modal-open');
+    document.body.classList.remove('modal-open');
   }
 
-  function showToast(message) {
-    var toast = document.querySelector('[data-bm-toast]');
-    if (!toast) {
-      document.body.insertAdjacentHTML('beforeend', '<div class="bm-toast" data-bm-toast></div>');
-      toast = document.querySelector('[data-bm-toast]');
-    }
-    toast.textContent = message;
+  function formatPhone(value) {
+    var d = digits(value);
+    if (d.indexOf('380') === 0) d = d.slice(3);
+    else if (d.indexOf('80') === 0) d = d.slice(2);
+    else if (d.indexOf('0') === 0) d = d.slice(1);
+    d = d.slice(0, 9);
+    var parts = [];
+    if (d.slice(0, 2)) parts.push(d.slice(0, 2));
+    if (d.slice(2, 5)) parts.push(d.slice(2, 5));
+    if (d.slice(5, 7)) parts.push(d.slice(5, 7));
+    if (d.slice(7, 9)) parts.push(d.slice(7, 9));
+    return '+380' + (parts.length ? ' ' + parts.join(' ') : '');
+  }
+
+  function showToast(text) {
+    var toast = document.querySelector('[data-toast]');
+    if (!toast) return;
+    toast.textContent = text;
     toast.classList.add('is-visible');
-    clearTimeout(showToast._timer);
-    showToast._timer = setTimeout(function () { toast.classList.remove('is-visible'); }, 4300);
+    clearTimeout(showToast.timer);
+    showToast.timer = setTimeout(function () { toast.classList.remove('is-visible'); }, 3200);
   }
 
-  function collectLead(form) {
-    var panel = form.querySelector('[data-bm-booking-panel]') || document;
-    var r = selectedRouteFromForm(panel);
-    var q = quote(r.from, r.to, state.cls);
+  function collectBooking(form) {
+    var route = selectedFromScope(form, true);
+    var q = quote(route.from, route.to, state.currentClass);
     var total = passengerTotal(q);
     return {
       created_at: new Date().toISOString(),
       mode: 'frontend_only',
-      name: normalize((form.querySelector('[data-bm-user="name"]') || {}).value),
-      phone: normalize((form.querySelector('[data-bm-user="phone"]') || {}).value),
-      comment: normalize((form.querySelector('[data-bm-user="comment"]') || {}).value),
-      route: r.from + ' → ' + r.to,
-      class: q ? q.className : (state.cls === 'lux' ? 'Lux' : 'Comfort'),
-      date: normalize((panel.querySelector('[data-bm-field="date"]') || {}).value),
-      time: normalize((panel.querySelector('[data-bm-field="time"]') || {}).value),
+      name: normalize((form.querySelector('[data-booking="name"]') || {}).value),
+      phone: normalize((form.querySelector('[data-booking="phone"]') || {}).value),
+      route: route.from + ' → ' + route.to,
+      date: normalize((form.querySelector('[data-booking="date"]') || {}).value),
+      time: normalize((form.querySelector('[data-booking="time"]') || {}).value),
+      class: state.currentClass === 'lux' ? 'Lux' : 'Comfort',
       adults: state.adults,
       children_under_16: state.children,
       pensioners: state.pensioners,
       passengers_total: state.adults + state.children + state.pensioners,
-      ticket_price: q ? money(q.amount) : '',
       total_price: total ? money(total.total) : '',
-      discount: total ? money(total.discount) : '',
-      hours: q ? fmtHours(q.hours) : ''
+      ticket_price: q ? money(q.amount) : '',
+      discount: total ? money(total.discount) : ''
     };
   }
 
-  function saveFrontendLead(lead) {
-    try {
-      var list = JSON.parse(localStorage.getItem('bm_frontend_leads') || '[]');
-      list.push(lead);
-      localStorage.setItem('bm_frontend_leads', JSON.stringify(list.slice(-20)));
-    } catch (e) {}
-    try { console.info('БЕЗ МЕЖ frontend booking lead', lead); } catch (err) {}
-  }
-
-  function validateLead(lead) {
+  function validateBooking(lead) {
     var errors = [];
     if (!lead.name || lead.name.length < 2) errors.push('Вкажіть ПІБ пасажира.');
-    if (!lead.phone || digits(lead.phone).length < 10) errors.push('Вкажіть коректний номер телефону.');
-    if (!lead.date) errors.push('Оберіть дату поїздки.');
-    if (!lead.time) errors.push('Оберіть час поїздки.');
-    if (!lead.route || lead.route.indexOf('→') === -1) errors.push('Оберіть напрямок поїздки.');
+    if (!lead.phone || digits(lead.phone).length < 12) errors.push('Вкажіть номер телефону у форматі +380 XX XXX XX XX.');
+    if (!lead.route || lead.route.indexOf('→') === -1) errors.push('Оберіть напрямок.');
+    if (!lead.date) errors.push('Оберіть дату.');
+    if (!lead.time) errors.push('Оберіть час.');
     return errors;
   }
 
-  function updateModalSummary() {
-    var modal = document.querySelector('[data-bm-modal]');
-    if (!modal || !modal.classList.contains('is-open')) return;
-    renderPrice(modal);
-  }
-
-  function handleClick(e) {
-    var classBtn = e.target.closest('[data-bm-class]');
-    if (classBtn) {
-      e.preventDefault();
-      state.cls = classBtn.getAttribute('data-bm-class') === 'lux' ? 'lux' : 'comfort';
-      document.querySelectorAll('[data-bm-field="time"]').forEach(function (select) { select.value = state.cls === 'lux' ? '18:00' : '08:00'; });
-      document.querySelectorAll('[data-bm-booking-panel]').forEach(function (panel) { renderPrice(panel); });
-      renderRoutesList();
-      return;
-    }
-    var step = e.target.closest('[data-bm-step]');
-    if (step) {
-      e.preventDefault();
-      var key = step.getAttribute('data-bm-passenger');
-      var delta = parseInt(step.getAttribute('data-bm-step'), 10) || 0;
-      state[key] = (parseInt(state[key], 10) || (key === 'adults' ? 1 : 0)) + delta;
-      normalizePassengers(key);
-      document.querySelectorAll('[data-bm-booking-panel]').forEach(function (panel) { renderPrice(panel); });
-      return;
-    }
-    var filter = e.target.closest('[data-bm-filter]');
-    if (filter) {
-      e.preventDefault();
-      state.filter = filter.getAttribute('data-bm-filter') || 'all';
-      state.visible = 18;
-      document.querySelectorAll('[data-bm-filter]').forEach(function (b) { b.classList.toggle('is-active', b === filter); });
-      renderRoutesList();
-      return;
-    }
-    if (e.target.closest('[data-bm-load-more]')) {
-      e.preventDefault();
-      state.visible += 18;
-      renderRoutesList();
-      return;
-    }
-    var cardBook = e.target.closest('[data-bm-card-book], [data-bm-card-select]');
-    if (cardBook) {
-      e.preventDefault();
-      var card = cardBook.closest('[data-bm-route-card]');
-      var route = { from: card.getAttribute('data-from'), to: card.getAttribute('data-to') };
-      document.querySelectorAll('#bm-routes [data-bm-booking-panel]').forEach(function (panel) { setRouteInPanel(panel, route); });
-      document.getElementById('bm-routes').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if (cardBook.hasAttribute('data-bm-card-book')) openModal(route);
-      return;
-    }
-    if (e.target.closest('[data-bm-open-booking]')) {
-      e.preventDefault();
-      openModal(state.selectedRoute || firstRoute());
-      return;
-    }
-    if (e.target.closest('[data-bm-close]')) {
-      e.preventDefault();
-      closeModal();
-      return;
-    }
-    var modal = e.target.closest('[data-bm-modal]');
-    if (modal && e.target === modal) closeModal();
-  }
-
-  function handleInput(e) {
-    var count = e.target.closest('[data-bm-count]');
-    if (count) {
-      var key = count.getAttribute('data-bm-count');
-      state[key] = parseInt(count.value, 10) || (key === 'adults' ? 1 : 0);
-      normalizePassengers(key);
-      document.querySelectorAll('[data-bm-booking-panel]').forEach(function (panel) { renderPrice(panel); });
-      return;
-    }
-    if (e.target.matches('[data-bm-route-search]')) {
-      state.query = e.target.value || '';
-      state.visible = 18;
-      renderRoutesList();
-    }
-  }
-
-  function handleChange(e) {
-    if (e.target.matches('[data-bm-field="from"], [data-bm-field="to"], [data-bm-field="date"], [data-bm-field="time"]')) {
-      var panel = e.target.closest('[data-bm-booking-panel]');
-      if (panel) renderPrice(panel);
-    }
-  }
-
-  function handleSubmit(e) {
-    var form = e.target;
-    if (!form) return;
-    if (form.matches('[data-bm-modal-form]')) {
-      e.preventDefault();
-      e.stopPropagation();
-      if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-      var lead = collectLead(form);
-      var errors = validateLead(lead);
-      var box = form.querySelector('[data-bm-errors]');
-      if (errors.length) {
-        if (box) { box.innerHTML = errors.map(esc).join('<br>'); box.classList.add('is-visible'); }
-        return false;
-      }
-      if (box) { box.textContent = ''; box.classList.remove('is-visible'); }
-      saveFrontendLead(lead);
-      showToast('Бронювання перевірено у фронтенд-режимі. Сума: ' + lead.total_price + '. Для реальної заявки підключіть канал відправки.');
-      closeModal();
-      form.reset();
-      state.adults = 1; state.children = 0; state.pensioners = 0;
-      document.querySelectorAll('[data-bm-booking-panel]').forEach(function (panel) { renderPrice(panel); });
-      return false;
-    }
-    if (form.classList && (form.classList.contains('elementor-form') || form.classList.contains('online-bron'))) {
-      e.preventDefault();
-      e.stopPropagation();
-      if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-      showToast('Форма працює у фронтенд-режимі: дані перевірені, реальна відправка вимкнена. Скористайтесь новим блоком бронювання для точного розрахунку.');
-      return false;
-    }
+  function saveLead(lead) {
+    try {
+      var list = JSON.parse(localStorage.getItem('bez_mezh_booking_leads') || '[]');
+      list.push(lead);
+      localStorage.setItem('bez_mezh_booking_leads', JSON.stringify(list.slice(-30)));
+    } catch (error) {}
   }
 
   function bindEvents() {
-    document.addEventListener('click', handleClick, true);
-    document.addEventListener('input', handleInput, true);
-    document.addEventListener('change', handleChange, true);
-    document.addEventListener('submit', handleSubmit, true);
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeModal();
+    document.addEventListener('click', function (event) {
+      var menuBtn = event.target.closest('[data-menu-toggle]');
+      if (menuBtn) {
+        var nav = document.querySelector('[data-nav]');
+        var open = nav && nav.classList.toggle('is-open');
+        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        return;
+      }
+
+      if (event.target.closest('[data-open-booking]')) {
+        event.preventDefault();
+        openBooking(state.selectedRoute || preferredRoute());
+        return;
+      }
+
+      var cls = event.target.closest('[data-class]');
+      if (cls) {
+        event.preventDefault();
+        setBookingClass(cls.getAttribute('data-class'));
+        return;
+      }
+
+      var bookingCls = event.target.closest('[data-booking-class]');
+      if (bookingCls) {
+        event.preventDefault();
+        setBookingClass(bookingCls.getAttribute('data-booking-class'));
+        return;
+      }
+
+      var step = event.target.closest('[data-step]');
+      if (step) {
+        event.preventDefault();
+        var key = step.getAttribute('data-passenger');
+        var delta = Number(step.getAttribute('data-step')) || 0;
+        state[key] = (Number(state[key]) || (key === 'adults' ? 1 : 0)) + delta;
+        normalizePassengers(key);
+        renderBookingPrice();
+        return;
+      }
+
+      var cardAction = event.target.closest('[data-card-book], [data-card-calc]');
+      if (cardAction) {
+        event.preventDefault();
+        var card = cardAction.closest('[data-route-card]');
+        var route = { from: card.getAttribute('data-from'), to: card.getAttribute('data-to') };
+        state.selectedRoute = route;
+        var quick = document.querySelector('[data-quick-form]');
+        if (quick) setRouteInScope(quick, route);
+        renderQuickPrice();
+        if (cardAction.hasAttribute('data-card-book')) openBooking(route);
+        else document.querySelector('.bm-hero__panel').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      if (event.target.closest('[data-close-modal]')) {
+        event.preventDefault();
+        closeBooking();
+        return;
+      }
+
+      var modal = event.target.closest('[data-modal]');
+      if (modal && event.target === modal) closeBooking();
     }, true);
+
+    document.addEventListener('input', function (event) {
+      if (event.target.matches('[data-route-search]')) {
+        state.query = event.target.value || '';
+        state.visible = 18;
+        renderRoutes();
+        return;
+      }
+
+      if (event.target.matches('[data-passenger-input]')) {
+        var key = event.target.getAttribute('data-passenger-input');
+        state[key] = Number(event.target.value) || (key === 'adults' ? 1 : 0);
+        normalizePassengers(key);
+        renderBookingPrice();
+        return;
+      }
+
+      if (event.target.matches('[data-booking="phone"]')) {
+        event.target.value = formatPhone(event.target.value);
+      }
+    }, true);
+
+    document.addEventListener('change', function (event) {
+      var quickScope = event.target.closest('[data-quick-form]');
+      var bookingScope = event.target.closest('[data-booking-form]');
+      if (event.target.matches('[data-field="from"], [data-booking="from"]')) {
+        syncDestinationSelect(quickScope || bookingScope || document);
+      }
+      if (quickScope && event.target.matches('[data-field]')) {
+        if (event.target.matches('[data-field="class"]')) setBookingClass(event.target.value);
+        else {
+          renderQuickPrice();
+          renderRoutes();
+        }
+      }
+      if (bookingScope && event.target.matches('[data-booking]')) renderBookingPrice();
+    }, true);
+
+    document.addEventListener('submit', function (event) {
+      var quick = event.target.closest('[data-quick-form]');
+      if (quick) {
+        event.preventDefault();
+        var route = selectedFromScope(quick, false);
+        state.selectedRoute = route;
+        renderQuickPrice();
+        openBooking(route);
+        return;
+      }
+
+      var form = event.target.closest('[data-booking-form]');
+      if (form) {
+        event.preventDefault();
+        var lead = collectBooking(form);
+        var errors = validateBooking(lead);
+        var box = form.querySelector('[data-form-error]');
+        if (errors.length) {
+          box.innerHTML = errors.map(esc).join('<br>');
+          box.classList.add('is-visible');
+          return;
+        }
+        box.textContent = '';
+        box.classList.remove('is-visible');
+        saveLead(lead);
+        closeBooking();
+        showToast('Дані збережено локально. Реальну відправку можна підключити наступним етапом.');
+      }
+    }, true);
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') closeBooking();
+    }, true);
+
+    document.querySelectorAll('[data-load-more]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        state.visible += 18;
+        renderRoutes();
+      });
+    });
   }
 
-  function initWithData(data) {
+  function updateContactLinks() {
+    var c = contacts();
+    document.querySelectorAll('a[href^="tel:"]').forEach(function (link) {
+      if ((link.textContent || '').indexOf('+380 96') !== -1) link.href = 'tel:' + (c.phone || '+380966973130');
+    });
+    document.querySelectorAll('a[href*="t.me"]').forEach(function (link) {
+      if (c.telegram) link.href = c.telegram;
+    });
+    document.querySelectorAll('a[href*="wa.me"]').forEach(function (link) {
+      if (c.whatsapp) link.href = c.whatsapp;
+    });
+  }
+
+  function init(data) {
     state.data = data || {};
-    installStaticGuards();
-    document.body.classList.add('bm-modern-ready');
-    mountSections();
-    mountModal();
-    mountStickyContacts();
-    updateContactsInDom();
+    state.routes = (state.data.routes || []).filter(function (route) { return route && route.from && route.to; });
+    state.selectedRoute = preferredRoute();
+    fillAllSelects(state.selectedRoute);
+    document.querySelectorAll('[data-booking="date"]').forEach(function (input) { input.value = defaultDate(); });
+    setBookingClass('comfort');
+    renderFaq();
+    renderQuickPrice();
+    updateContactLinks();
     bindEvents();
-    window.__bezMezhModern = {
+    window.__bezMezh = {
       version: VERSION,
+      routes: function () { return state.routes.slice(); },
       quote: quote,
-      routes: allRoutes,
-      state: state,
-      renderRoutesList: renderRoutesList,
-      openBooking: openModal
+      openBooking: openBooking,
+      state: state
     };
   }
 
-  function boot() {
-    installStaticGuards();
-    fetch(dataUrl(), { cache: 'no-store' })
-      .then(function (response) {
-        if (!response.ok) throw new Error('site.json ' + response.status);
-        return response.json();
-      })
-      .then(initWithData)
-      .catch(function (err) {
-        console.warn('БЕЗ МЕЖ modern layer: data load failed', err);
-        initWithData({ routes: [], durations: {}, pricing: { eur_rate: 51.449, tiers: [[6, 999, 250, 290]] } });
-      });
-  }
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
+  fetch(dataUrl(), { cache: 'no-store' })
+    .then(function (response) {
+      if (!response.ok) throw new Error('data load ' + response.status);
+      return response.json();
+    })
+    .then(init)
+    .catch(function (error) {
+      console.error('Не вдалося завантажити дані сайту', error);
+      init({ routes: [], durations: {}, pricing: { eur_rate: 51.449, tiers: [[6, 999, 250, 290]] }, faq: [] });
+    });
 })();
