@@ -7,7 +7,7 @@
 import json, time, urllib.request, secrets, datetime, os
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE_SRC = "/home/user/site-readonly/data/site.json"
+SITE_SRC = os.environ.get("EUROTOUR_SITE_JSON") or os.path.abspath(os.path.join(BASE, "..", "site", "data", "site.json"))
 
 # ---------- Города Украины: 55 из site + Хорол (есть у БЕЗ МЕЖ) ----------
 UA = {
@@ -130,7 +130,10 @@ def main():
         json.dump(durations, f, ensure_ascii=False, indent=1)
     print(f"OK data/durations_new.json ({len(durations)} пар)")
 
-    # 3) site.json на базі site
+    # 3) site.json на базі Eurotour.
+    # Шлях можна перевизначити змінною EUROTOUR_SITE_JSON.
+    if not os.path.exists(SITE_SRC):
+        raise SystemExit(f"Eurotour source data not found: {SITE_SRC}")
     with open(SITE_SRC, encoding="utf-8") as f:
         d = json.load(f)
 

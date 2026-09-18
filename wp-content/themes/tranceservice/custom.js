@@ -163,18 +163,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if(!postId) return; // если ни один селектор не сработал, выходим
 
-        // --- AJAX запрос ---
-        fetch('/wp-admin/admin-ajax.php', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: 'action=reys_track_click&post_id=' + postId
-})
-.then(response => response.json())
-.then(data => {
-    if(data.success){
-        console.log('Клик по рейсу', postId, 'Всего кликов:', data.data.views);
-    }
-});
+        // GitHub Pages/static mode: do not call WordPress admin-ajax.
+        // Keep lightweight local analytics only, so clicks do not create 404 errors.
+        try {
+            const key = 'bez_mezh_route_clicks';
+            const stats = JSON.parse(localStorage.getItem(key) || '{}');
+            stats[postId] = (stats[postId] || 0) + 1;
+            localStorage.setItem(key, JSON.stringify(stats));
+        } catch (error) {}
     });
 
 });
@@ -248,11 +244,11 @@ document.addEventListener("DOMContentLoaded", function() {
     $(document).ready(function () {
 
         $('#btn-comfort').on('click', function () {
-            window.selectedReysClass = "Комфорт";
+            window.selectedReysClass = "Comfort";
         });
 
-        $('#btn-comfort-plus').on('click', function () {
-            window.selectedReysClass = "Комфорт+ (реклайнер)";
+        $('#btn-comfort-plus, #btn-lux').on('click', function () {
+            window.selectedReysClass = "Lux";
         });
 
     });
