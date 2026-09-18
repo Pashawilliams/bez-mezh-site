@@ -28,8 +28,8 @@ jobs:
 
       - name: Prepare public site artifact
         run: |
-          rm -rf _site
-          cp -a . _site
+          rm -rf _site && mkdir -p _site
+          tar cf - --exclude=./_site . | (cd _site && tar xf -)
           rm -rf _site/.git _site/.github _site/bot _site/docs _site/src
           ls _site/ | head -30
 
