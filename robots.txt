@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+
 Sitemap: https://pashawilliams.github.io/bez-mezh-site/sitemap.xml

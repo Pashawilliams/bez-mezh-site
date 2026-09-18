@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260918b';
+  var VERSION = '20260918c';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
@@ -424,6 +424,32 @@
     } catch (error) {}
   }
 
+  function bookingMessage(lead) {
+    return [
+      'Бронювання БЕЗ МЕЖ',
+      'ПІБ: ' + lead.name,
+      'Телефон: ' + lead.phone,
+      'Маршрут: ' + lead.route,
+      'Дата: ' + lead.date,
+      'Час: ' + lead.time,
+      'Клас: ' + lead.class,
+      'Пасажири: ' + lead.passengers_total + ' (дорослі ' + lead.adults + ', діти ' + lead.children_under_16 + ', пенсіонери ' + lead.pensioners + ')',
+      'Орієнтовна сума: ' + (lead.total_price || 'уточнити')
+    ].join('\n');
+  }
+
+  function messengerUrl(lead) {
+    var c = contacts();
+    var base = c.whatsapp || 'https://wa.me/380966973130';
+    try {
+      var url = new URL(base, location.href);
+      url.searchParams.set('text', bookingMessage(lead));
+      return url.toString();
+    } catch (error) {
+      return 'https://wa.me/380966973130?text=' + encodeURIComponent(bookingMessage(lead));
+    }
+  }
+
   function bindEvents() {
     document.addEventListener('click', function (event) {
       var menuBtn = event.target.closest('[data-menu-toggle]');
@@ -451,6 +477,17 @@
       if (bookingCls) {
         event.preventDefault();
         setBookingClass(bookingCls.getAttribute('data-booking-class'));
+        return;
+      }
+
+      var preset = event.target.closest('[data-route-preset]');
+      if (preset) {
+        event.preventDefault();
+        state.query = preset.getAttribute('data-route-preset') || '';
+        document.querySelectorAll('[data-route-search]').forEach(function (input) { input.value = state.query; });
+        state.visible = 18;
+        renderRoutes();
+        document.querySelector('[data-route-search]').focus({ preventScroll: true });
         return;
       }
 
@@ -551,8 +588,9 @@
         box.textContent = '';
         box.classList.remove('is-visible');
         saveLead(lead);
+        try { window.open(messengerUrl(lead), '_blank', 'noopener'); } catch (error) {}
         closeBooking();
-        showToast('Дані збережено локально. Реальну відправку можна підключити наступним етапом.');
+        showToast('Дякуємо. Деталі бронювання підготовлено для менеджера.');
       }
     }, true);
 

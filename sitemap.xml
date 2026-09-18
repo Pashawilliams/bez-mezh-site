@@ -1,28 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/avtopark-2/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/bizhentsi-v-nimechchyni-iak-otrymaty-status/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/chasti-pytannia/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/diakuiemo/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/informatsiia-dlia-liudej-z-ukrainy-iaki-potrebuiut-zakhystu/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/karta-sajta/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/kategorіja_rejsu/do-belhii/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/kategorіja_rejsu/do-niderlandiv/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/kategorіja_rejsu/u-nimechchenu/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/kategorіja_rejsu/v-chekhiiu/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/kategorіja_rejsu/v-ukrainu/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/klientam/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/kontakty/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/novyny/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/o-nas/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/politika-konfidencialnosti/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/porady-turystam-u-nimechchyni/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/pravila-vvezennya-domashnih-tvarin-u-nimechchinu/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/prybuttia-vazhlyva-informatsiia-dlia-bizhentsiv-z-ukrainy/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/reys/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/reys/kyiv-dortmund/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/reys/kyiv-miunkhen/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/reys/miunkhen-kyiv/</loc><changefreq>weekly</changefreq></url>
-  <url><loc>https://pashawilliams.github.io/bez-mezh-site/transfer/</loc><changefreq>weekly</changefreq></url>
+  <url>
+    <loc>https://pashawilliams.github.io/bez-mezh-site/</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
 </urlset>
