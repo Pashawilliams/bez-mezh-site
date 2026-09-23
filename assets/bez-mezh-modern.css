@@ -2198,3 +2198,85 @@ body::after {
     background-size: auto 100vh;
   }
 }
+
+/* Direction and booking cards texture */
+:root {
+  --bm-card-texture: url('media/bez-mezh-card-texture.jpeg');
+}
+
+.bm-route-card,
+.bm-booking-cta__card,
+.bm-hero__panel,
+.bm-contact-main,
+.bm-modal__panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.bm-route-card::after,
+.bm-booking-cta__card::after,
+.bm-hero__panel::after,
+.bm-contact-main::after,
+.bm-modal__panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.88), rgba(255,255,255,.78)),
+    var(--bm-card-texture) center / cover no-repeat;
+  opacity: .64;
+  mix-blend-mode: normal;
+}
+
+.bm-route-card > *,
+.bm-booking-cta__card > *,
+.bm-hero__panel > *,
+.bm-contact-main > *,
+.bm-modal__panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.bm-route-card {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.90), rgba(255,255,255,.82)),
+    var(--bm-card-texture) center / cover no-repeat !important;
+}
+
+.bm-route-card:hover::after,
+.bm-booking-cta__card:hover::after,
+.bm-hero__panel:hover::after,
+.bm-contact-main:hover::after {
+  opacity: .78;
+}
+
+.bm-route-card::before {
+  z-index: 2;
+}
+
+.bm-price-card,
+.bm-mini-price {
+  background:
+    linear-gradient(135deg, rgba(11, 20, 56, .88), rgba(18, 32, 85, .84)),
+    var(--bm-card-texture) center / cover no-repeat !important;
+  border: 1px solid rgba(255,255,255,.14);
+}
+
+.bm-manager-choice__grid article,
+.bm-managers article {
+  background:
+    linear-gradient(135deg, rgba(11, 20, 56, .90), rgba(18, 32, 85, .86)),
+    var(--bm-card-texture) center / cover no-repeat !important;
+}
+
+@media (max-width: 820px) {
+  .bm-route-card::after,
+  .bm-booking-cta__card::after,
+  .bm-hero__panel::after,
+  .bm-contact-main::after,
+  .bm-modal__panel::after {
+    opacity: .58;
+  }
+}
