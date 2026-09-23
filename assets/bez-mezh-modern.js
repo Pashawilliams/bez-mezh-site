@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260918d';
+  var VERSION = '20260923a';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
@@ -440,14 +440,35 @@
 
   function messengerUrl(lead) {
     var c = contacts();
-    var base = c.whatsapp || 'https://wa.me/380966973130';
+    var base = c.whatsapp || 'https://wa.me/380971030454';
     try {
       var url = new URL(base, location.href);
       url.searchParams.set('text', bookingMessage(lead));
       return url.toString();
     } catch (error) {
-      return 'https://wa.me/380966973130?text=' + encodeURIComponent(bookingMessage(lead));
+      return 'https://wa.me/380971030454?text=' + encodeURIComponent(bookingMessage(lead));
     }
+  }
+
+  function openManagerSheet(channel) {
+    var sheet = document.querySelector('[data-manager-sheet]');
+    if (!sheet) return;
+    var preferred = channel || 'whatsapp';
+    sheet.setAttribute('data-preferred', preferred);
+    sheet.querySelectorAll('[data-channel]').forEach(function (link) {
+      link.classList.toggle('is-preferred', link.getAttribute('data-channel') === preferred);
+    });
+    sheet.classList.add('is-open');
+    sheet.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('manager-sheet-open');
+  }
+
+  function closeManagerSheet() {
+    var sheet = document.querySelector('[data-manager-sheet]');
+    if (!sheet) return;
+    sheet.classList.remove('is-open');
+    sheet.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('manager-sheet-open');
   }
 
   function bindEvents() {
@@ -457,6 +478,19 @@
         var nav = document.querySelector('[data-nav]');
         var open = nav && nav.classList.toggle('is-open');
         menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        return;
+      }
+
+      var managerChoice = event.target.closest('[data-manager-choice]');
+      if (managerChoice) {
+        event.preventDefault();
+        openManagerSheet(managerChoice.getAttribute('data-manager-choice'));
+        return;
+      }
+
+      if (event.target.closest('[data-close-manager-sheet]')) {
+        event.preventDefault();
+        closeManagerSheet();
         return;
       }
 
@@ -595,7 +629,10 @@
     }, true);
 
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') closeBooking();
+      if (event.key === 'Escape') {
+        closeBooking();
+        closeManagerSheet();
+      }
     }, true);
 
     document.querySelectorAll('[data-load-more]').forEach(function (button) {
@@ -660,6 +697,7 @@
       routes: function () { return state.routes.slice(); },
       quote: quote,
       openBooking: openBooking,
+      openManagerSheet: openManagerSheet,
       state: state
     };
   }
