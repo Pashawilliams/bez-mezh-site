@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260918c';
+  var VERSION = '20260918d';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
@@ -612,11 +612,35 @@
       if ((link.textContent || '').indexOf('+380 96') !== -1) link.href = 'tel:' + (c.phone || '+380966973130');
     });
     document.querySelectorAll('a[href*="t.me"]').forEach(function (link) {
-      if (c.telegram) link.href = c.telegram;
+      if (c.telegram && link.href.indexOf('pereviznyk001') !== -1) link.href = c.telegram;
     });
     document.querySelectorAll('a[href*="wa.me"]').forEach(function (link) {
-      if (c.whatsapp) link.href = c.whatsapp;
+      if (c.whatsapp && link.href.indexOf('380966973130') !== -1) link.href = c.whatsapp;
     });
+  }
+
+  function initRevealAnimations() {
+    var selectors = [
+      '.bm-benefits article', '.bm-story__grid', '.bm-road-strip__card',
+      '.bm-section-head', '.bm-route-card', '.bm-booking-cta__card',
+      '.bm-fleet-grid figure', '.bm-faq details', '.bm-contact-main', '.bm-managers article'
+    ];
+    var items = Array.prototype.slice.call(document.querySelectorAll(selectors.join(',')));
+    if (!items.length) return;
+    items.forEach(function (el) { el.classList.add('bm-reveal'); });
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    items.forEach(function (el) { observer.observe(el); });
   }
 
   function init(data) {
@@ -629,6 +653,7 @@
     renderFaq();
     renderQuickPrice();
     updateContactLinks();
+    initRevealAnimations();
     bindEvents();
     window.__bezMezh = {
       version: VERSION,

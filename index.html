@@ -17,8 +17,9 @@
   <meta property="og:image" content="https://pashawilliams.github.io/bez-mezh-site/wp-content/uploads/2026/04/novyj-bus-4-768x1024.jpg">
   <link rel="icon" href="wp-content/uploads/2022/10/Logo.svg" sizes="32x32">
   <link rel="apple-touch-icon" href="wp-content/uploads/2022/10/Logo.svg">
-  <link rel="preload" as="image" href="wp-content/uploads/2026/04/novyj-bus-4-768x1024.jpg" imagesrcset="wp-content/uploads/2026/04/novyj-bus-4-768x1024.jpg 768w">
-  <link rel="stylesheet" href="assets/bez-mezh-modern.css?v=20260918c">
+  <link rel="preload" as="image" href="assets/media/bez-mezh-road.jpeg">
+  <link rel="preload" as="image" href="assets/media/bez-mezh-minibus.jpeg">
+  <link rel="stylesheet" href="assets/bez-mezh-modern.css?v=20260918d">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@graph":[{"@type":"TravelAgency","@id":"https://pashawilliams.github.io/bez-mezh-site/#organization","name":"БЕЗ МЕЖ","url":"https://pashawilliams.github.io/bez-mezh-site/","telephone":"+380966973130","areaServed":["Україна","Польща","Німеччина","Чехія","Бельгія","Нідерланди","Франція","Іспанія","Італія","Португалія"],"description":"Пасажирські перевезення Україна – Європа на комфортабельних мікроавтобусах з адресною посадкою та висадкою.","openingHours":"Mo-Su 00:00-23:59","sameAs":["https://t.me/pereviznyk001","https://wa.me/380966973130"]},{"@type":"WebSite","@id":"https://pashawilliams.github.io/bez-mezh-site/#website","url":"https://pashawilliams.github.io/bez-mezh-site/","name":"БЕЗ МЕЖ","inLanguage":"uk-UA","publisher":{"@id":"https://pashawilliams.github.io/bez-mezh-site/#organization"}},{"@type":"WebPage","@id":"https://pashawilliams.github.io/bez-mezh-site/#webpage","url":"https://pashawilliams.github.io/bez-mezh-site/","name":"Пасажирські перевезення Україна – Європа | БЕЗ МЕЖ","isPartOf":{"@id":"https://pashawilliams.github.io/bez-mezh-site/#website"},"about":{"@id":"https://pashawilliams.github.io/bez-mezh-site/#organization"},"inLanguage":"uk-UA"},{"@type":"FAQPage","@id":"https://pashawilliams.github.io/bez-mezh-site/#faq-schema","mainEntity":[{"@type":"Question","name":"Як забронювати поїздку?","acceptedAnswer":{"@type":"Answer","text":"Оберіть напрямок, дату, клас поїздки та кількість пасажирів. Менеджер уточнить деталі маршруту, посадки та висадки."}},{"@type":"Question","name":"Які є знижки?","acceptedAnswer":{"@type":"Answer","text":"Дітям до 16 років надається знижка 15%, пенсіонерам — 10%."}},{"@type":"Question","name":"Чи довозите за адресою?","acceptedAnswer":{"@type":"Answer","text":"Так, формат адреса до адреси доступний для більшості напрямків."}}]},{"@type":"ItemList","@id":"https://pashawilliams.github.io/bez-mezh-site/#popular-routes","name":"Популярні напрямки Україна – Європа","itemListElement":[{"@type":"ListItem","position":1,"name":"Київ – Прага"},{"@type":"ListItem","position":2,"name":"Київ – Берлін"},{"@type":"ListItem","position":3,"name":"Львів – Варшава"},{"@type":"ListItem","position":4,"name":"Дніпро – Мюнхен"},{"@type":"ListItem","position":5,"name":"Житомир – Франкфурт-на-Майні"}]}]}
   </script>
@@ -68,32 +69,42 @@
           </div>
         </div>
 
-        <div class="bm-hero__panel" aria-label="Швидкий пошук напрямку">
-          <div class="bm-panel-head">
-            <span>Знайдіть рейс</span>
-            <b>Comfort / Lux</b>
-          </div>
-          <form class="bm-quick-form" data-quick-form>
-            <label>
-              <span>Звідки</span>
-              <select data-field="from" aria-label="Звідки"></select>
-            </label>
-            <label>
-              <span>Куди</span>
-              <select data-field="to" aria-label="Куди"></select>
-            </label>
-            <label>
-              <span>Клас</span>
-              <select data-field="class" aria-label="Клас поїздки">
-                <option value="comfort">Comfort</option>
-                <option value="lux">Lux</option>
-              </select>
-            </label>
-            <button class="bm-btn bm-btn--gold" type="submit">Розрахувати</button>
-          </form>
-          <div class="bm-mini-price" data-quick-price>
-            <span>Оберіть напрямок</span>
-            <strong>—</strong>
+        <div class="bm-hero__side">
+          <figure class="bm-hero__vehicle">
+            <img src="assets/media/bez-mezh-minibus.jpeg" alt="Мікроавтобус БЕЗ МЕЖ для поїздок Україна Європа" width="631" height="496">
+            <figcaption>
+              <b>Mercedes-Benz Sprinter</b>
+              <span>Комфортна дорога Україна – Європа</span>
+            </figcaption>
+          </figure>
+
+          <div class="bm-hero__panel" aria-label="Швидкий пошук напрямку">
+            <div class="bm-panel-head">
+              <span>Знайдіть рейс</span>
+              <b>Comfort / Lux</b>
+            </div>
+            <form class="bm-quick-form" data-quick-form>
+              <label>
+                <span>Звідки</span>
+                <select data-field="from" aria-label="Звідки"></select>
+              </label>
+              <label>
+                <span>Куди</span>
+                <select data-field="to" aria-label="Куди"></select>
+              </label>
+              <label>
+                <span>Клас</span>
+                <select data-field="class" aria-label="Клас поїздки">
+                  <option value="comfort">Comfort</option>
+                  <option value="lux">Lux</option>
+                </select>
+              </label>
+              <button class="bm-btn bm-btn--gold" type="submit">Розрахувати</button>
+            </form>
+            <div class="bm-mini-price" data-quick-price>
+              <span>Оберіть напрямок</span>
+              <strong>—</strong>
+            </div>
           </div>
         </div>
       </div>
@@ -105,6 +116,18 @@
         <article><b>Без пересадок</b><span>Прямі поїздки між Україною та містами Європи.</span></article>
         <article><b>Comfort і Lux</b><span>Два класи поїздки для різного бюджету та рівня комфорту.</span></article>
         <article><b>Знижки</b><span>Дітям до 16 років і пенсіонерам доступні окремі тарифи.</span></article>
+      </div>
+    </section>
+
+    <section class="bm-road-strip" aria-label="Дорога Україна Європа">
+      <div class="bm-container">
+        <div class="bm-road-strip__card">
+          <img src="assets/media/bez-mezh-road.jpeg" alt="Нічна дорога для міжнародних перевезень Україна Європа" width="1440" height="400" loading="lazy">
+          <div>
+            <span>Міжнародний маршрут</span>
+            <b>Спокійна дорога, зрозумілий сервіс, підтримка менеджера</b>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -175,9 +198,9 @@
           <p>Mercedes-Benz Sprinter, 7 пасажирських місць, клімат-контроль, Wi‑Fi, зручна посадка і місце для багажу.</p>
         </div>
         <div class="bm-fleet-grid">
-          <figure><img src="wp-content/uploads/2026/04/novyj-bus-4-768x1024.jpg" alt="Мікроавтобус БЕЗ МЕЖ для поїздок Україна Європа" loading="lazy"><figcaption>Охайний транспорт</figcaption></figure>
+          <figure><img src="assets/media/bez-mezh-minibus.jpeg" alt="Мікроавтобус БЕЗ МЕЖ для поїздок Україна Європа" loading="lazy"><figcaption>Охайний транспорт</figcaption></figure>
           <figure><img src="wp-content/uploads/2025/05/red-sprinter-4-min-768x1024.jpg" alt="Mercedes-Benz Sprinter для пасажирських перевезень" loading="lazy"><figcaption>7 пасажирських місць</figcaption></figure>
-          <figure><img src="wp-content/uploads/2025/05/white-sprinter-5.jpg" alt="Адресні перевезення мікроавтобусом БЕЗ МЕЖ" loading="lazy"><figcaption>Адресний формат</figcaption></figure>
+          <figure><img src="assets/media/bez-mezh-road.jpeg" alt="Маршрут Україна Європа нічною дорогою" loading="lazy"><figcaption>Міжнародний маршрут</figcaption></figure>
         </div>
       </div>
     </section>
@@ -196,7 +219,35 @@
     </section>
   </main>
 
-  <footer id="contacts" class="bm-footer">
+  <section id="contacts" class="bm-section bm-contacts" aria-labelledby="contacts-title">
+    <div class="bm-container bm-contacts__grid">
+      <div class="bm-contact-main">
+        <span class="bm-kicker">Контакти</span>
+        <h2 id="contacts-title">Менеджери БЕЗ МЕЖ на звʼязку</h2>
+        <p>Підкажемо актуальний напрямок, вартість, час виїзду, умови багажу та деталі адресної посадки.</p>
+        <div class="bm-contact-actions">
+          <a class="bm-btn bm-btn--gold" href="tel:+380971030454">Подзвонити Вікторії</a>
+          <a class="bm-btn bm-btn--light" href="tel:+380680813450">Подзвонити Сергію</a>
+        </div>
+      </div>
+      <div class="bm-managers">
+        <article>
+          <b>Вікторія</b>
+          <span>Менеджер з бронювання</span>
+          <a href="tel:+380971030454">+380 97 103 04 54</a>
+          <div><a href="https://wa.me/380971030454" target="_blank" rel="noopener">WhatsApp</a><a href="https://t.me/+380971030454" target="_blank" rel="noopener">Telegram</a></div>
+        </article>
+        <article>
+          <b>Сергій</b>
+          <span>Менеджер з перевезень</span>
+          <a href="tel:+380680813450">+380 68 081 34 50</a>
+          <div><a href="https://wa.me/380680813450" target="_blank" rel="noopener">WhatsApp</a><a href="https://t.me/+380680813450" target="_blank" rel="noopener">Telegram</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bm-footer">
     <div class="bm-container bm-footer__inner">
       <a class="bm-brand bm-brand--footer" href="#top">
         <img src="wp-content/uploads/2022/10/Logo.svg" alt="БЕЗ МЕЖ" width="42" height="42">
@@ -205,6 +256,8 @@
       <div class="bm-footer__links">
         <a href="tel:+380966973130">+380 96 697 31 30</a>
         <a href="tel:+380683175335">+380 68 317 53 35</a>
+        <a href="tel:+380971030454">Вікторія</a>
+        <a href="tel:+380680813450">Сергій</a>
         <a href="https://t.me/pereviznyk001" target="_blank" rel="noopener">Telegram</a>
         <a href="https://wa.me/380966973130" target="_blank" rel="noopener">WhatsApp</a>
       </div>
@@ -259,6 +312,6 @@
   </div>
 
   <div class="bm-toast" data-toast aria-live="polite"></div>
-  <script src="assets/bez-mezh-modern.js?v=20260918c" defer></script>
+  <script src="assets/bez-mezh-modern.js?v=20260918d" defer></script>
 </body>
 </html>
