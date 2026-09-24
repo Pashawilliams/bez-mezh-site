@@ -1105,7 +1105,7 @@ button {
   position: fixed;
   left: 50%;
   bottom: 20px;
-  z-index: 1100;
+  z-index: 1300;
   width: min(460px, calc(100vw - 32px));
   padding: 13px 15px;
   border-radius: 18px;
@@ -1869,9 +1869,7 @@ body {
   background-attachment: fixed;
 }
 
-body.manager-sheet-open {
-  overflow: hidden;
-}
+
 
 .bm-manager-choice {
   position: fixed;
@@ -2282,9 +2280,6 @@ body::after {
 }
 
 /* Compact manager selector: messenger icons open a small popover, not a fullscreen sheet */
-body.manager-sheet-open {
-  overflow: auto !important;
-}
 
 .bm-manager-choice {
   inset: auto 82px 18px auto !important;
@@ -2382,5 +2377,140 @@ body.manager-sheet-open {
 
   .bm-manager-choice__grid article div {
     grid-template-columns: 1fr !important;
+  }
+}
+
+/* Announcement bar (data/site.json -> site.announcement) */
+.bm-announce {
+  width: var(--container);
+  margin: 14px auto 0;
+}
+.bm-announce[hidden] {
+  display: none;
+}
+.bm-announce a {
+  display: block;
+  padding: 12px 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--navy), #1c2763);
+  color: #f6d992;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 800;
+}
+.bm-announce a:hover {
+  color: #fff;
+}
+
+/* No-JS notice */
+.bm-noscript {
+  margin: 12px auto 0;
+  width: var(--container);
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: #fff1f0;
+  color: #b42318;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+}
+.bm-noscript a {
+  color: inherit;
+}
+
+/* Advantage chips (data/site.json -> advantages) */
+.bm-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 18px;
+}
+.bm-chips:empty {
+  display: none;
+}
+.bm-chips span {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .8);
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* Reviews (data/site.json -> reviews) */
+.bm-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.bm-review {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+.bm-review__stars {
+  color: var(--gold);
+  font-size: 17px;
+  letter-spacing: 2px;
+}
+.bm-review p {
+  margin: 0;
+  flex: 1;
+  color: #2b3852;
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+.bm-review footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.bm-review footer b {
+  color: var(--navy);
+  font-size: 15px;
+}
+.bm-review footer span {
+  color: var(--muted);
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+/* Privacy note under booking submit */
+.bm-privacy-note {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.5;
+  text-align: center;
+}
+.bm-privacy-note a {
+  color: var(--navy);
+  font-weight: 800;
+}
+
+@media (max-width: 1060px) {
+  .bm-reviews-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 820px) {
+  .bm-reviews-grid {
+    grid-template-columns: 1fr;
+  }
+  .bm-announce a {
+    font-size: 13px;
   }
 }

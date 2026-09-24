@@ -48,7 +48,7 @@
       "to": "Варшава",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-varshava",
+      "slug": "ads/kyiv-varshava",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -57,7 +57,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/varshava-kyyiv",
+      "slug": "ads/varshava-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -84,7 +84,7 @@
       "to": "Краків",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-krakiv",
+      "slug": "ads/kyiv-krakiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -93,7 +93,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/krakiv-kyyiv",
+      "slug": "ads/krakiv-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -120,7 +120,7 @@
       "to": "Вроцлав",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-vrotslav",
+      "slug": "ads/kyiv-vrotslav",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -129,7 +129,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/vrotslav-kyyiv",
+      "slug": "ads/vrotslav-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -156,7 +156,7 @@
       "to": "Берлін",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-berlin",
+      "slug": "ads/kyiv-berlin",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -165,7 +165,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/berlin-kyyiv",
+      "slug": "ads/berlin-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -192,7 +192,7 @@
       "to": "Дрезден",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-drezden",
+      "slug": "ads/kyiv-drezden",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -201,7 +201,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/drezden-kyyiv",
+      "slug": "ads/drezden-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -210,7 +210,7 @@
       "to": "Прага",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-praha",
+      "slug": "ads/kyiv-praha",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -219,7 +219,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/praha-kyyiv",
+      "slug": "ads/praha-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -246,7 +246,7 @@
       "to": "Братислава",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-bratyslava",
+      "slug": "ads/kyiv-bratyslava",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -255,7 +255,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/bratyslava-kyyiv",
+      "slug": "ads/bratyslava-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -282,7 +282,7 @@
       "to": "Будапешт",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-budapesht",
+      "slug": "ads/kyiv-budapesht",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -291,7 +291,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/budapesht-kyyiv",
+      "slug": "ads/budapesht-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -318,7 +318,7 @@
       "to": "Відень",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-viden",
+      "slug": "ads/kyiv-viden",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -327,7 +327,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/viden-kyyiv",
+      "slug": "ads/viden-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -354,7 +354,7 @@
       "to": "Бухарест",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-buharest",
+      "slug": "ads/kyiv-bukharest",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -363,7 +363,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/buharest-kyyiv",
+      "slug": "ads/bukharest-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -372,7 +372,7 @@
       "to": "Бухарест",
       "price": null,
       "old_price": null,
-      "slug": "ads/odesa-buharest",
+      "slug": "ads/odesa-bukharest",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -381,7 +381,7 @@
       "to": "Одеса",
       "price": null,
       "old_price": null,
-      "slug": "ads/buharest-odesa",
+      "slug": "ads/bukharest-odesa",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -390,7 +390,7 @@
       "to": "Кишинів",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-kyshyniv",
+      "slug": "ads/kyiv-kyshyniv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -399,7 +399,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyshyniv-kyyiv",
+      "slug": "ads/kyshyniv-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -426,7 +426,7 @@
       "to": "Мілан",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-milan",
+      "slug": "ads/kyiv-milan",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -435,7 +435,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/milan-kyyiv",
+      "slug": "ads/milan-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -462,7 +462,7 @@
       "to": "Париж",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-paryzh",
+      "slug": "ads/kyiv-paryzh",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -471,7 +471,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/paryzh-kyyiv",
+      "slug": "ads/paryzh-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -498,7 +498,7 @@
       "to": "Мадрид",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-madryd",
+      "slug": "ads/kyiv-madryd",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -507,7 +507,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/madryd-kyyiv",
+      "slug": "ads/madryd-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -534,7 +534,7 @@
       "to": "Барселона",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-barselona",
+      "slug": "ads/kyiv-barselona",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -543,7 +543,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/barselona-kyyiv",
+      "slug": "ads/barselona-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -552,7 +552,7 @@
       "to": "Валенсія",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-valensiya",
+      "slug": "ads/kyiv-valensiya",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -561,7 +561,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/valensiya-kyyiv",
+      "slug": "ads/valensiya-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -570,7 +570,7 @@
       "to": "Аліканте",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-alikante",
+      "slug": "ads/kyiv-alikante",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -579,7 +579,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/alikante-kyyiv",
+      "slug": "ads/alikante-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -588,7 +588,7 @@
       "to": "Ліон",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-lion",
+      "slug": "ads/kyiv-lion",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -597,7 +597,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/lion-kyyiv",
+      "slug": "ads/lion-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -606,7 +606,7 @@
       "to": "Марсель",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-marsel",
+      "slug": "ads/kyiv-marsel",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -615,7 +615,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/marsel-kyyiv",
+      "slug": "ads/marsel-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -624,7 +624,7 @@
       "to": "Ніцца",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-nitstsa",
+      "slug": "ads/kyiv-nitstsa",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -633,7 +633,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/nitstsa-kyyiv",
+      "slug": "ads/nitstsa-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -642,7 +642,7 @@
       "to": "Страсбург",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-strasburh",
+      "slug": "ads/kyiv-strasburh",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -651,7 +651,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/strasburh-kyyiv",
+      "slug": "ads/strasburh-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -660,7 +660,7 @@
       "to": "Лісабон",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-lisabon",
+      "slug": "ads/kyiv-lisabon",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -669,7 +669,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/lisabon-kyyiv",
+      "slug": "ads/lisabon-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -678,7 +678,7 @@
       "to": "Порту",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-portu",
+      "slug": "ads/kyiv-portu",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -687,7 +687,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/portu-kyyiv",
+      "slug": "ads/portu-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -696,7 +696,7 @@
       "to": "Рим",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-rym",
+      "slug": "ads/kyiv-rym",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -705,7 +705,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/rym-kyyiv",
+      "slug": "ads/rym-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -714,7 +714,7 @@
       "to": "Венеція",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-venetsiya",
+      "slug": "ads/kyiv-venetsiya",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -723,7 +723,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/venetsiya-kyyiv",
+      "slug": "ads/venetsiya-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -732,7 +732,7 @@
       "to": "Болонья",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-bolonya",
+      "slug": "ads/kyiv-bolonya",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -741,7 +741,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/bolonya-kyyiv",
+      "slug": "ads/bolonya-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -750,7 +750,7 @@
       "to": "Турин",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-turyn",
+      "slug": "ads/kyiv-turyn",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -759,7 +759,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/turyn-kyyiv",
+      "slug": "ads/turyn-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -768,7 +768,7 @@
       "to": "Неаполь",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-neapol",
+      "slug": "ads/kyiv-neapol",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -777,7 +777,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/neapol-kyyiv",
+      "slug": "ads/neapol-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1065,7 +1065,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/inholshtadt-kamyanske",
+      "slug": "ads/inholshtadt-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1074,7 +1074,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/inholshtadt-kyyiv",
+      "slug": "ads/inholshtadt-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1119,7 +1119,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/almere-kyyiv",
+      "slug": "ads/almere-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1128,7 +1128,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/amsterdam-kyyiv",
+      "slug": "ads/amsterdam-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1137,7 +1137,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/antverpen-kyyiv",
+      "slug": "ads/antverpen-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1173,7 +1173,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/berlin-kamyanske",
+      "slug": "ads/berlin-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1245,7 +1245,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/bonn-kamyanske",
+      "slug": "ads/bonn-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1254,7 +1254,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/bonn-kyyiv",
+      "slug": "ads/bonn-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1299,7 +1299,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/breda-kyyiv",
+      "slug": "ads/breda-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1344,7 +1344,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/brno-kamyanske",
+      "slug": "ads/brno-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1353,7 +1353,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/brno-kyyiv",
+      "slug": "ads/brno-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1398,7 +1398,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/bryuhhe-kyyiv",
+      "slug": "ads/bryuhhe-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1407,7 +1407,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/bryasselyu-kyyiv",
+      "slug": "ads/bryussel-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1443,7 +1443,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/bilefeld-kamyanske",
+      "slug": "ads/bilefeld-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1452,7 +1452,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/bilefeld-kyyiv",
+      "slug": "ads/bilefeld-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1515,7 +1515,7 @@
       "to": "Запоріжжя",
       "price": null,
       "old_price": null,
-      "slug": "ads/vyartsburh-zaporizhzh",
+      "slug": "ads/vyurtsburh-zaporizhzhya",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1524,7 +1524,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/vyurtsburh-kamyanske",
+      "slug": "ads/vyurtsburh-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1533,7 +1533,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/vyurtsburh-kyyiv",
+      "slug": "ads/vyurtsburh-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1578,7 +1578,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/haaha-kyyiv",
+      "slug": "ads/haaha-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1614,7 +1614,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/hannover-kamyanske",
+      "slug": "ads/hannover-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1623,7 +1623,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/hannover-kyyiv",
+      "slug": "ads/hannover-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1668,7 +1668,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/hent-kyyiv",
+      "slug": "ads/hent-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1713,7 +1713,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/hradets-kralove-kamyanske",
+      "slug": "ads/hradets-kralove-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -1722,7 +1722,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/hradets-kralove-kyyiv",
+      "slug": "ads/hradets-kralove-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -2082,7 +2082,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/dortmund-kamyanske",
+      "slug": "ads/dortmund-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -2091,7 +2091,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/dortmund-kyyiv",
+      "slug": "ads/dortmund-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -2163,7 +2163,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/drezden-kamyanske",
+      "slug": "ads/drezden-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -2235,7 +2235,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/dyusseldorf-kamyanske",
+      "slug": "ads/dyusseldorf-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -2244,7 +2244,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/dyusseldorf-kyyiv",
+      "slug": "ads/dyusseldorf-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -2289,7 +2289,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/eyndhoven-kyyiv",
+      "slug": "ads/eyndhoven-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -2325,7 +2325,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/erfurt-kamyanske",
+      "slug": "ads/erfurt-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -2334,7 +2334,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/erfurt-kyyiv",
+      "slug": "ads/erfurt-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -2406,7 +2406,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/essen-kamyanske",
+      "slug": "ads/essen-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -2415,7 +2415,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/essen-kyyiv",
+      "slug": "ads/essen-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -2793,7 +2793,7 @@
       "to": "Вюрцбург",
       "price": null,
       "old_price": null,
-      "slug": "ads/zaporizhzh-vyartsburh",
+      "slug": "ads/zaporizhzhya-vyurtsburh",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3126,7 +3126,7 @@
       "to": "Інгольштадт",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-inholshtadt",
+      "slug": "ads/kam-yanske-inholshtadt",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3135,7 +3135,7 @@
       "to": "Берлін",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-berlin",
+      "slug": "ads/kam-yanske-berlin",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3144,7 +3144,7 @@
       "to": "Бонн",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-bonn",
+      "slug": "ads/kam-yanske-bonn",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3153,7 +3153,7 @@
       "to": "Брно",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-brno",
+      "slug": "ads/kam-yanske-brno",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3162,7 +3162,7 @@
       "to": "Білефельд",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-bilefeld",
+      "slug": "ads/kam-yanske-bilefeld",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3171,7 +3171,7 @@
       "to": "Вюрцбург",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-vyurtsburh",
+      "slug": "ads/kam-yanske-vyurtsburh",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3180,7 +3180,7 @@
       "to": "Ганновер",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-hannover",
+      "slug": "ads/kam-yanske-hannover",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3189,7 +3189,7 @@
       "to": "Градець-Кралове",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-hradets-kralove",
+      "slug": "ads/kam-yanske-hradets-kralove",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3198,7 +3198,7 @@
       "to": "Дортмунд",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-dortmund",
+      "slug": "ads/kam-yanske-dortmund",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3207,7 +3207,7 @@
       "to": "Дрезден",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-drezden",
+      "slug": "ads/kam-yanske-drezden",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3216,7 +3216,7 @@
       "to": "Дюссельдорф",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-dyusseldorf",
+      "slug": "ads/kam-yanske-dyusseldorf",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3225,7 +3225,7 @@
       "to": "Ерфурт",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-erfurt",
+      "slug": "ads/kam-yanske-erfurt",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3234,7 +3234,7 @@
       "to": "Ессен",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-essen",
+      "slug": "ads/kam-yanske-essen",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3243,7 +3243,7 @@
       "to": "Карлові Вари",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-karlovi-vary",
+      "slug": "ads/kam-yanske-karlovi-vary",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3252,7 +3252,7 @@
       "to": "Кассель",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-kassel",
+      "slug": "ads/kam-yanske-kassel",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3261,7 +3261,7 @@
       "to": "Кельн",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-keln",
+      "slug": "ads/kam-yanske-keln",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3270,7 +3270,7 @@
       "to": "Лейпциг",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-leyptsyh",
+      "slug": "ads/kam-yanske-leyptsyh",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3279,7 +3279,7 @@
       "to": "Мюнстер",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-myunster",
+      "slug": "ads/kam-yanske-myunster",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3288,7 +3288,7 @@
       "to": "Мюнхен",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-myunkhen",
+      "slug": "ads/kam-yanske-myunkhen",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3297,7 +3297,7 @@
       "to": "Нюрнберг",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-nyurnberh",
+      "slug": "ads/kam-yanske-nyurnberh",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3306,7 +3306,7 @@
       "to": "Оломоуц",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-olomouts",
+      "slug": "ads/kam-yanske-olomouts",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3315,7 +3315,7 @@
       "to": "Острава",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-ostrava",
+      "slug": "ads/kam-yanske-ostrava",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3324,7 +3324,7 @@
       "to": "Пардубице",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-pardubytse",
+      "slug": "ads/kam-yanske-pardubytse",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3333,7 +3333,7 @@
       "to": "Пассау",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-passau",
+      "slug": "ads/kam-yanske-passau",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3342,7 +3342,7 @@
       "to": "Пльзень",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-plzen",
+      "slug": "ads/kam-yanske-plzen",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3351,7 +3351,7 @@
       "to": "Прага",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-praha",
+      "slug": "ads/kam-yanske-praha",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3360,7 +3360,7 @@
       "to": "Теплиці",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-teplytsi",
+      "slug": "ads/kam-yanske-teplytsi",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3369,7 +3369,7 @@
       "to": "Ульм",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-ulm",
+      "slug": "ads/kam-yanske-ulm",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3378,7 +3378,7 @@
       "to": "Франкфурт-на-Майні",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-frankfurt-na-mayni",
+      "slug": "ads/kam-yanske-frankfurt-na-mayni",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3387,7 +3387,7 @@
       "to": "Хемніц",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-khemnits",
+      "slug": "ads/kam-yanske-khemnits",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3396,7 +3396,7 @@
       "to": "Чеське-Будейовіце",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-cheske-budeyovitse",
+      "slug": "ads/kam-yanske-cheske-budeyovitse",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3405,7 +3405,7 @@
       "to": "Штутгарт",
       "price": null,
       "old_price": null,
-      "slug": "ads/kamyanske-shtuthart",
+      "slug": "ads/kam-yanske-shtuthart",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3450,7 +3450,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/karlovi-vary-kamyanske",
+      "slug": "ads/karlovi-vary-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3459,7 +3459,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/karlovi-vary-kyyiv",
+      "slug": "ads/karlovi-vary-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3531,7 +3531,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/kassel-kamyanske",
+      "slug": "ads/kassel-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3540,7 +3540,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/kassel-kyyiv",
+      "slug": "ads/kassel-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3612,7 +3612,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/keln-kamyanske",
+      "slug": "ads/keln-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3621,7 +3621,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/kelyun-kyyiv",
+      "slug": "ads/keln-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3666,7 +3666,7 @@
       "to": "Інгольштадт",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-inholshtadt",
+      "slug": "ads/kyiv-inholshtadt",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3675,7 +3675,7 @@
       "to": "Алмере",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-almere",
+      "slug": "ads/kyiv-almere",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3684,7 +3684,7 @@
       "to": "Амстердам",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-amsterdam",
+      "slug": "ads/kyiv-amsterdam",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3693,7 +3693,7 @@
       "to": "Антверпен",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-antverpen",
+      "slug": "ads/kyiv-antverpen",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3702,7 +3702,7 @@
       "to": "Бонн",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-bonn",
+      "slug": "ads/kyiv-bonn",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3711,7 +3711,7 @@
       "to": "Бреда",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-breda",
+      "slug": "ads/kyiv-breda",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3720,7 +3720,7 @@
       "to": "Брно",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-brno",
+      "slug": "ads/kyiv-brno",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3729,7 +3729,7 @@
       "to": "Брюгге",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-bryuhhe",
+      "slug": "ads/kyiv-bryuhhe",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3738,7 +3738,7 @@
       "to": "Брюссель",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-bryasselyu",
+      "slug": "ads/kyiv-bryussel",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3747,7 +3747,7 @@
       "to": "Білефельд",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-bilefeld",
+      "slug": "ads/kyiv-bilefeld",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3756,7 +3756,7 @@
       "to": "Вюрцбург",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-vyurtsburh",
+      "slug": "ads/kyiv-vyurtsburh",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3765,7 +3765,7 @@
       "to": "Гаага",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-haaha",
+      "slug": "ads/kyiv-haaha",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3774,7 +3774,7 @@
       "to": "Ганновер",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-hannover",
+      "slug": "ads/kyiv-hannover",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3783,7 +3783,7 @@
       "to": "Гент",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-hent",
+      "slug": "ads/kyiv-hent",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3792,7 +3792,7 @@
       "to": "Градець-Кралове",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-hradets-kralove",
+      "slug": "ads/kyiv-hradets-kralove",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3801,7 +3801,7 @@
       "to": "Дортмунд",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-dortmund",
+      "slug": "ads/kyiv-dortmund",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3810,7 +3810,7 @@
       "to": "Дюссельдорф",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-dyusseldorf",
+      "slug": "ads/kyiv-dyusseldorf",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3819,7 +3819,7 @@
       "to": "Ейндговен",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-eyndhoven",
+      "slug": "ads/kyiv-eyndhoven",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3828,7 +3828,7 @@
       "to": "Ерфурт",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-erfurt",
+      "slug": "ads/kyiv-erfurt",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3837,7 +3837,7 @@
       "to": "Ессен",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-essen",
+      "slug": "ads/kyiv-essen",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3846,7 +3846,7 @@
       "to": "Карлові Вари",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-karlovi-vary",
+      "slug": "ads/kyiv-karlovi-vary",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3855,7 +3855,7 @@
       "to": "Кассель",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-kassel",
+      "slug": "ads/kyiv-kassel",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3864,7 +3864,7 @@
       "to": "Кельн",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-kelyun",
+      "slug": "ads/kyiv-keln",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3873,7 +3873,7 @@
       "to": "Лейпциг",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-leyptsyh",
+      "slug": "ads/kyiv-leyptsyh",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3882,7 +3882,7 @@
       "to": "Льовен",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-loven",
+      "slug": "ads/kyiv-loven",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3891,7 +3891,7 @@
       "to": "Льєж",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-lyezh",
+      "slug": "ads/kyiv-lyezh",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3900,7 +3900,7 @@
       "to": "Монс",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-mons",
+      "slug": "ads/kyiv-mons",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3909,7 +3909,7 @@
       "to": "Мюнстер",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-myunster",
+      "slug": "ads/kyiv-myunster",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3918,7 +3918,7 @@
       "to": "Мюнхен",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-myankhen",
+      "slug": "ads/kyiv-myunkhen",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3927,7 +3927,7 @@
       "to": "Намюр",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-namyur",
+      "slug": "ads/kyiv-namyur",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3936,7 +3936,7 @@
       "to": "Неймеген",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-neymehen",
+      "slug": "ads/kyiv-neymehen",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3945,7 +3945,7 @@
       "to": "Нюрнберг",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-nyurnberh",
+      "slug": "ads/kyiv-nyurnberh",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3954,7 +3954,7 @@
       "to": "Оломоуц",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-olomouts",
+      "slug": "ads/kyiv-olomouts",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3963,7 +3963,7 @@
       "to": "Острава",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-ostrava",
+      "slug": "ads/kyiv-ostrava",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3972,7 +3972,7 @@
       "to": "Пардубице",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-pardubytse",
+      "slug": "ads/kyiv-pardubytse",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3981,7 +3981,7 @@
       "to": "Пассау",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-passau",
+      "slug": "ads/kyiv-passau",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3990,7 +3990,7 @@
       "to": "Пльзень",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-plzen",
+      "slug": "ads/kyiv-plzen",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -3999,7 +3999,7 @@
       "to": "Роттердам",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-rotterdam",
+      "slug": "ads/kyiv-rotterdam",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4008,7 +4008,7 @@
       "to": "Теплиці",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-teplytsi",
+      "slug": "ads/kyiv-teplytsi",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4017,7 +4017,7 @@
       "to": "Тілбург",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-tilburh",
+      "slug": "ads/kyiv-tilburh",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4026,7 +4026,7 @@
       "to": "Ульм",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-ulyum",
+      "slug": "ads/kyiv-ulm",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4035,7 +4035,7 @@
       "to": "Утрехт",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-utrekht",
+      "slug": "ads/kyiv-utrekht",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4044,7 +4044,7 @@
       "to": "Франкфурт-на-Майні",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-frankfurt-na-mayni",
+      "slug": "ads/kyiv-frankfurt-na-mayni",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4053,7 +4053,7 @@
       "to": "Хемніц",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-khemnits",
+      "slug": "ads/kyiv-khemnits",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4062,7 +4062,7 @@
       "to": "Чеське-Будейовіце",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-cheske-budeyovitse",
+      "slug": "ads/kyiv-cheske-budeyovitse",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4071,7 +4071,7 @@
       "to": "Шарлеруа",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-sharlerua",
+      "slug": "ads/kyiv-sharlerua",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4080,7 +4080,7 @@
       "to": "Штутгарт",
       "price": null,
       "old_price": null,
-      "slug": "ads/kyyiv-shtuthart",
+      "slug": "ads/kyiv-shtuthart",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4404,7 +4404,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/leyptsyh-kamyanske",
+      "slug": "ads/leyptsyh-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4413,7 +4413,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/leyptsyh-kyyiv",
+      "slug": "ads/leyptsyh-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4458,7 +4458,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/loven-kyyiv",
+      "slug": "ads/loven-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4467,7 +4467,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/lyezh-kyyiv",
+      "slug": "ads/lyezh-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4476,7 +4476,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/mons-kyyiv",
+      "slug": "ads/mons-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4512,7 +4512,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/myunster-kamyanske",
+      "slug": "ads/myunster-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4521,7 +4521,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/myunster-kyyiv",
+      "slug": "ads/myunster-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4593,7 +4593,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/myunkhen-kamyanske",
+      "slug": "ads/myunkhen-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4602,7 +4602,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/myankhen-kyyiv",
+      "slug": "ads/myunkhen-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4647,7 +4647,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/namyur-kyyiv",
+      "slug": "ads/namyur-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4656,7 +4656,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/neymehen-kyyiv",
+      "slug": "ads/neymehen-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4692,7 +4692,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/nyurnberh-kamyanske",
+      "slug": "ads/nyurnberh-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4701,7 +4701,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/nyurnberh-kyyiv",
+      "slug": "ads/nyurnberh-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4782,7 +4782,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/olomouts-kamyanske",
+      "slug": "ads/olomouts-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4791,7 +4791,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/olomouts-kyyiv",
+      "slug": "ads/olomouts-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4872,7 +4872,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/ostrava-kamyanske",
+      "slug": "ads/ostrava-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4881,7 +4881,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/ostrava-kyyiv",
+      "slug": "ads/ostrava-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4962,7 +4962,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/pardubytse-kamyanske",
+      "slug": "ads/pardubytse-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -4971,7 +4971,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/pardubytse-kyyiv",
+      "slug": "ads/pardubytse-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -5043,7 +5043,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/passau-kamyanske",
+      "slug": "ads/passau-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -5052,7 +5052,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/passau-kyyiv",
+      "slug": "ads/passau-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -5133,7 +5133,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/plzen-kamyanske",
+      "slug": "ads/plzen-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -5142,7 +5142,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/plzen-kyyiv",
+      "slug": "ads/plzen-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -5511,7 +5511,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/praha-kamyanske",
+      "slug": "ads/praha-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -5556,7 +5556,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/rotterdam-kyyiv",
+      "slug": "ads/rotterdam-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -5889,7 +5889,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/teplytsi-kamyanske",
+      "slug": "ads/teplytsi-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -5898,7 +5898,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/teplytsi-kyyiv",
+      "slug": "ads/teplytsi-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -5943,7 +5943,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/tilburh-kyyiv",
+      "slug": "ads/tilburh-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -5979,7 +5979,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/ulm-kamyanske",
+      "slug": "ads/ulm-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -5988,7 +5988,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/ulyum-kyyiv",
+      "slug": "ads/ulm-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -6033,7 +6033,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/utrekht-kyyiv",
+      "slug": "ads/utrekht-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -6069,7 +6069,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/frankfurt-na-mayni-kamyanske",
+      "slug": "ads/frankfurt-na-mayni-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -6078,7 +6078,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/frankfurt-na-mayni-kyyiv",
+      "slug": "ads/frankfurt-na-mayni-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -6150,7 +6150,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/khemnits-kamyanske",
+      "slug": "ads/khemnits-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -6159,7 +6159,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/khemnits-kyyiv",
+      "slug": "ads/khemnits-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -6528,7 +6528,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/cheske-budeyovitse-kamyanske",
+      "slug": "ads/cheske-budeyovitse-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -6537,7 +6537,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/cheske-budeyovitse-kyyiv",
+      "slug": "ads/cheske-budeyovitse-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -6582,7 +6582,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/sharlerua-kyyiv",
+      "slug": "ads/sharlerua-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -6618,7 +6618,7 @@
       "to": "Кам'янське",
       "price": null,
       "old_price": null,
-      "slug": "ads/shtuthart-kamyanske",
+      "slug": "ads/shtuthart-kam-yanske",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -6627,7 +6627,7 @@
       "to": "Київ",
       "price": null,
       "old_price": null,
-      "slug": "ads/shtuthart-kyyiv",
+      "slug": "ads/shtuthart-kyiv",
       "visible": true,
       "source": "bez-mezh"
     },
@@ -6748,7 +6748,7 @@
       "a": "Так, формат “адреса → адреса” доступний для більшості напрямків. Адресу посадки та висадки краще повідомити під час бронювання."
     }
   ],
-  "updated_at": "2026-09-23T16:00:00Z",
+  "updated_at": "2026-09-24T00:00:00Z",
   "bridge": {
     "frontend_only": true,
     "note": "Бронювання обробляється менеджером після звернення пасажира."
@@ -8628,7 +8628,7 @@
     },
     "Київ|Мюнхен": {
       "hours": 23.4,
-      "km": 1729,
+      "km": 1713,
       "src": "osrm"
     },
     "Київ|Мілан": {
@@ -9228,7 +9228,7 @@
     },
     "Мюнхен|Київ": {
       "hours": 23.4,
-      "km": 1697,
+      "km": 1713,
       "src": "osrm"
     },
     "Мюнхен|Кременчук": {
@@ -10511,12 +10511,6 @@
       ],
       [
         16,
-        18,
-        160,
-        200
-      ],
-      [
-        18,
         20,
         160,
         200
@@ -10547,12 +10541,6 @@
       ],
       [
         30,
-        33,
-        210,
-        250
-      ],
-      [
-        33,
         36,
         210,
         250

@@ -95,14 +95,17 @@ def osrm(a, b):
             time.sleep(2)
     return None, None
 
-_TR_SRC = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя'’ "
-_TR_DST = ["a","b","v","h","g","d","e","ye","zh","z","y","i","yi","y",
-           "k","l","m","n","o","p","r","s","t","u","f","kh","ts","ch",
-           "sh","shch","yu","ya","-","-","-"]
-TR = {ord(s): t for s, t in zip(_TR_SRC, _TR_DST)}
+_TR = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'h', 'ґ': 'g', 'д': 'd', 'е': 'e',
+        'є': 'ye', 'ж': 'zh', 'з': 'z', 'и': 'y', 'і': 'i', 'ї': 'i', 'й': 'y',
+        'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r',
+        'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts', 'ч': 'ch',
+        'ш': 'sh', 'щ': 'shch', 'ь': '', 'ъ': '', 'ю': 'yu', 'я': 'ya',
+        "'": '-', '’': '-', ' ': '-'}
+TR = {ord(k): v for k, v in _TR.items()}
 
 def slug(city):
-    return city.lower().translate(TR).replace("--", "-").strip("-")
+    import re as _re
+    return _re.sub(r'-+', '-', city.lower().translate(TR)).strip('-')
 
 def main():
     all_cities = {**UA, **EU}

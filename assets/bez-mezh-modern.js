@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260923e';
+  var VERSION = '20260924a';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
@@ -55,6 +55,14 @@
     return formatNumber(value) + ' грн';
   }
 
+  function plural(n, one, few, many) {
+    n = Math.abs(Math.round(Number(n))) || 0;
+    var m10 = n % 10, m100 = n % 100;
+    if (m10 === 1 && m100 !== 11) return one;
+    if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few;
+    return many;
+  }
+
   function roundUah(value) {
     return Math.round((Number(value) || 0) / 50) * 50;
   }
@@ -79,8 +87,10 @@
   function tierFor(hours) {
     var tiers = state.data.pricing && state.data.pricing.tiers || [];
     if (!tiers.length) return null;
+    var h = Number(hours);
+    if (h < Number(tiers[0][0])) return tiers[0];
     for (var i = 0; i < tiers.length; i += 1) {
-      if (hours >= Number(tiers[i][0]) && hours < Number(tiers[i][1])) return tiers[i];
+      if (h >= Number(tiers[i][0]) && h < Number(tiers[i][1])) return tiers[i];
     }
     return tiers[tiers.length - 1];
   }
@@ -223,12 +233,30 @@
     host.innerHTML = '<span>' + esc(q.classLabel) + ' за 1 пасажира</span><strong>' + money(q.amount) + '</strong><small>' + esc(q.from) + ' → ' + esc(q.to) + ' · приблизно ' + formatHours(q.hours) + '</small>';
   }
 
+  var SEARCH_ALIASES = {
+    'киев': 'київ', 'львов': 'львів', 'одесса': 'одеса', 'харьков': 'харків',
+    'днепр': 'дніпро', 'днепропетровск': 'дніпро', 'запорожье': 'запоріжжя',
+    'ровно': 'рівне', 'кишинев': 'кишинів', 'берлин': 'берлін',
+    'краков': 'краків', 'кременчуг': 'кременчук', 'винница': 'вінниця',
+    'чернигов': 'чернігів', 'суммы': 'суми'
+  };
+
+  function searchTokens(value) {
+    return lower(value).replace(/[\u2013\u2014\u2015\u2022,.;:!?()«»""''/\\|-]+/g, ' ').split(/\s+/)
+      .map(function (t) { return SEARCH_ALIASES[t] || t; })
+      .filter(function (t) { return t.length > 1; });
+  }
+
+  function routeMatches(route, tokens) {
+    if (!tokens.length) return true;
+    var hay = lower(route.from + ' ' + route.to);
+    return tokens.every(function (t) { return hay.indexOf(t) !== -1; });
+  }
+
   function filteredRoutes() {
-    var query = lower(state.query);
-    if (!query) return state.routes.slice();
-    return state.routes.filter(function (route) {
-      return lower(route.from + ' ' + route.to).indexOf(query) !== -1;
-    });
+    var tokens = searchTokens(state.query);
+    if (!tokens.length) return state.routes.slice();
+    return state.routes.filter(function (route) { return routeMatches(route, tokens); });
   }
 
   function routeCard(route, index) {
@@ -240,7 +268,7 @@
       '<h3>' + esc(route.from) + ' → ' + esc(route.to) + '</h3>' +
       '<p>Адресна посадка та висадка за погодженням з менеджером.</p>' +
       '<div class="bm-route-meta"><span class="bm-tag">' + esc(state.currentClass === 'lux' ? 'Lux' : 'Comfort') + '</span><span class="bm-tag">' + esc(duration) + '</span><span class="bm-tag">' + esc(km) + '</span></div>' +
-      '<div class="bm-route-price"><span>ціна від</span><strong>' + esc(price) + '</strong></div>' +
+      '<div class="bm-route-price"><span>ціна</span><strong>' + esc(price) + '</strong></div>' +
       '<div class="bm-route-actions"><button type="button" class="bm-btn bm-btn--gold" data-card-book>Забронювати</button><button type="button" class="bm-btn bm-btn--outline" data-card-calc>Розрахувати</button></div>' +
       '</article>';
   }
@@ -266,6 +294,42 @@
     host.innerHTML = items.slice(0, 10).map(function (item, index) {
       return '<details' + (index === 0 ? ' open' : '') + '><summary>' + esc(item.q || '') + '</summary><div class="bm-faq__answer">' + esc(item.a || '') + '</div></details>';
     }).join('');
+  }
+
+  function renderReviews() {
+    var host = document.querySelector('[data-reviews]');
+    if (!host) return;
+    var items = state.data.reviews || [];
+    if (!items.length) {
+      var section = host.closest('section');
+      if (section) section.hidden = true;
+      return;
+    }
+    host.innerHTML = items.slice(0, 6).map(function (r) {
+      var n = Math.max(1, Math.min(5, parseInt(r.stars, 10) || 5));
+      var star = String.fromCharCode(9733);
+      var stars = '';
+      for (var i = 0; i < n; i += 1) stars += star;
+      return '<article class="bm-review"><div class="bm-review__stars" aria-label="Оцінка ' + n + ' з 5">' +
+        esc(stars) + '</div><p>' + esc(r.text || '') + '</p>' +
+        '<footer><b>' + esc(r.name || '') + '</b><span>' + esc(r.date || '') + '</span></footer></article>';
+    }).join('');
+  }
+
+  function renderAdvantages() {
+    var host = document.querySelector('[data-advantages]');
+    if (!host) return;
+    var items = state.data.advantages || [];
+    host.innerHTML = items.slice(0, 12).map(function (a) { return '<span>' + esc(a) + '</span>'; }).join('');
+  }
+
+  function renderAnnouncement() {
+    var host = document.querySelector('[data-announce]');
+    if (!host) return;
+    var a = state.data.site && state.data.site.announcement;
+    if (!a || !a.enabled || !a.text) { host.hidden = true; return; }
+    host.hidden = false;
+    host.innerHTML = '<a href="' + esc(a.link || '#routes') + '">' + esc(a.text) + ' &#8594;</a>';
   }
 
   function normalizePassengers(changed) {
@@ -302,9 +366,16 @@
     });
   }
 
+  function pad2(n) { return ('0' + n).slice(-2); }
+
+  function todayLocal() {
+    var d = new Date();
+    return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+  }
+
   function defaultDate() {
     var d = new Date(Date.now() + 24 * 60 * 60 * 1000);
-    return d.toISOString().slice(0, 10);
+    return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
   }
 
   function setBookingClass(cls) {
@@ -314,7 +385,6 @@
       button.classList.toggle('is-active', button.getAttribute(attr) === state.currentClass);
     });
     document.querySelectorAll('[data-field="class"]').forEach(function (select) { select.value = state.currentClass; });
-    document.querySelectorAll('[data-booking="time"]').forEach(function (select) { select.value = state.currentClass === 'lux' ? '18:00' : '08:00'; });
     renderRoutes();
     renderQuickPrice();
     renderBookingPrice();
@@ -332,12 +402,38 @@
       host.innerHTML = '<span>Ціну уточнить менеджер</span><strong>—</strong><small>' + esc(route.from) + ' → ' + esc(route.to) + '</small>';
       return;
     }
-    host.innerHTML = '<span>Разом за ' + total.seats + ' пасажира</span><strong>' + money(total.total) + '</strong><small>' + esc(q.classLabel) + ' · ' + money(total.base) + ' за 1 дорослого · знижка ' + money(total.discount) + ' · приблизно ' + formatHours(q.hours) + '</small>';
+    host.innerHTML = '<span>Разом: ' + total.seats + ' ' + plural(total.seats, 'пасажир', 'пасажири', 'пасажирів') + '</span><strong>' + money(total.total) + '</strong><small>' + esc(q.classLabel) + ' · ' + money(total.base) + ' за 1 дорослого · знижка ' + money(total.discount) + ' · приблизно ' + formatHours(q.hours) + '</small>';
+  }
+
+  var lastFocused = null;
+
+  function focusables(container) {
+    if (!container) return [];
+    return Array.prototype.slice.call(container.querySelectorAll(
+      'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )).filter(function (el) { return el.offsetParent !== null; });
+  }
+
+  function trapTab(event, container) {
+    if (event.key !== 'Tab' || !container) return;
+    var items = focusables(container);
+    if (!items.length) return;
+    var first = items[0], last = items[items.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  }
+
+  function restoreFocus() {
+    if (lastFocused && lastFocused.focus) {
+      try { lastFocused.focus({ preventScroll: true }); } catch (error) {}
+    }
+    lastFocused = null;
   }
 
   function openBooking(route) {
     var modal = document.querySelector('[data-modal]');
     if (!modal) return;
+    lastFocused = document.activeElement;
     state.selectedRoute = route || state.selectedRoute || preferredRoute();
     setRouteInScope(modal, state.selectedRoute);
     var date = modal.querySelector('[data-booking="date"]');
@@ -355,23 +451,38 @@
   function closeBooking() {
     var modal = document.querySelector('[data-modal]');
     if (!modal) return;
+    if (!modal.classList.contains('is-open')) return;
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('modal-open');
+    restoreFocus();
   }
 
   function formatPhone(value) {
     var d = digits(value);
-    if (d.indexOf('380') === 0) d = d.slice(3);
-    else if (d.indexOf('80') === 0) d = d.slice(2);
-    else if (d.indexOf('0') === 0) d = d.slice(1);
-    d = d.slice(0, 9);
+    if (!d) return '';
+    var u = null;
+    if (d.indexOf('380') === 0 && d.length <= 12) u = d.slice(3);
+    else if (d.charAt(0) === '0' && d.length <= 10) u = d.slice(1);
+    else if (d.indexOf('80') === 0 && d.length <= 11) u = d.slice(2);
+    if (u === null) {
+      return '+' + d.slice(0, 15).replace(/(\d{3})(?=\d)/g, '$1 ').trim();
+    }
+    u = u.slice(0, 9);
     var parts = [];
     if (d.slice(0, 2)) parts.push(d.slice(0, 2));
     if (d.slice(2, 5)) parts.push(d.slice(2, 5));
     if (d.slice(5, 7)) parts.push(d.slice(5, 7));
     if (d.slice(7, 9)) parts.push(d.slice(7, 9));
     return '+380' + (parts.length ? ' ' + parts.join(' ') : '');
+  }
+
+  function displayPhone(phone) {
+    var d = digits(phone);
+    if (d.indexOf('380') === 0 && d.length === 12) {
+      return '+380 ' + d.slice(3, 5) + ' ' + d.slice(5, 8) + ' ' + d.slice(8, 10) + ' ' + d.slice(10);
+    }
+    return '+' + d;
   }
 
   function showToast(text) {
@@ -409,9 +520,12 @@
   function validateBooking(lead) {
     var errors = [];
     if (!lead.name || lead.name.length < 2) errors.push('Вкажіть ПІБ пасажира.');
-    if (!lead.phone || digits(lead.phone).length < 12) errors.push('Вкажіть номер телефону у форматі +380 XX XXX XX XX.');
+    var phoneDigits = digits(lead.phone).length;
+    if (!lead.phone || phoneDigits < 9 || phoneDigits > 15) errors.push('Вкажіть номер телефону у міжнародному форматі, наприклад +380 XX XXX XX XX.');
     if (!lead.route || lead.route.indexOf('→') === -1) errors.push('Оберіть напрямок.');
     if (!lead.date) errors.push('Оберіть дату.');
+    else if (!/^\d{4}-\d{2}-\d{2}$/.test(lead.date)) errors.push('Невірний формат дати.');
+    else if (lead.date < todayLocal()) errors.push('Ця дата вже минула. Оберіть актуальну дату виїзду.');
     if (!lead.time) errors.push('Оберіть час.');
     return errors;
   }
@@ -438,21 +552,53 @@
     ].join('\n');
   }
 
-  function messengerUrl(lead) {
-    var c = contacts();
-    var base = c.whatsapp || 'https://wa.me/380971030454';
+  function waUrl(phone, message) {
+    var base = 'https://wa.me/' + digits(phone);
     try {
-      var url = new URL(base, location.href);
-      url.searchParams.set('text', bookingMessage(lead));
+      var url = new URL(base);
+      url.searchParams.set('text', message);
       return url.toString();
     } catch (error) {
-      return 'https://wa.me/380971030454?text=' + encodeURIComponent(bookingMessage(lead));
+      return base + '?text=' + encodeURIComponent(message);
     }
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () {});
+      return;
+    }
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'absolute';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    } catch (error) {}
+  }
+
+  var PENDING_KEY = 'bez_mezh_pending_lead';
+
+  function savePending(message) {
+    try { localStorage.setItem(PENDING_KEY, message); } catch (error) {}
+  }
+
+  function readPending() {
+    try { return localStorage.getItem(PENDING_KEY) || ''; } catch (error) { return ''; }
+  }
+
+  function clearPending() {
+    try { localStorage.removeItem(PENDING_KEY); } catch (error) {}
   }
 
   function openManagerSheet(channel, message) {
     var sheet = document.querySelector('[data-manager-sheet]');
     if (!sheet) return;
+    if (!sheet.classList.contains('is-open')) lastFocused = document.activeElement;
     var preferred = channel || 'whatsapp';
     sheet.setAttribute('data-preferred', preferred);
     sheet.querySelectorAll('[data-channel]').forEach(function (link) {
@@ -472,8 +618,10 @@
   function closeManagerSheet() {
     var sheet = document.querySelector('[data-manager-sheet]');
     if (!sheet) return;
+    if (!sheet.classList.contains('is-open')) return;
     sheet.classList.remove('is-open');
     sheet.setAttribute('aria-hidden', 'true');
+    restoreFocus();
   }
 
   function bindEvents() {
@@ -483,6 +631,20 @@
         var nav = document.querySelector('[data-nav]');
         var open = nav && nav.classList.toggle('is-open');
         menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        return;
+      }
+
+      var navLink = event.target.closest('[data-nav] a');
+      if (navLink) {
+        var navEl = document.querySelector('[data-nav]');
+        var menuButton = document.querySelector('[data-menu-toggle]');
+        if (navEl) navEl.classList.remove('is-open');
+        if (menuButton) menuButton.setAttribute('aria-expanded', 'false');
+      }
+
+      var sheetLink = event.target.closest('[data-manager-sheet] a[data-channel]');
+      if (sheetLink) {
+        clearPending();
         return;
       }
 
@@ -633,8 +795,11 @@
         box.classList.remove('is-visible');
         saveLead(lead);
         closeBooking();
-        openManagerSheet('whatsapp', bookingMessage(lead));
-        showToast('Оберіть менеджера для підтвердження поїздки.');
+        var msg = bookingMessage(lead);
+        savePending(msg);
+        copyText(msg);
+        openManagerSheet('whatsapp', msg);
+        showToast('Оберіть менеджера, щоб надіслати заявку. Текст скопійовано.');
       }
     }, true);
 
@@ -642,6 +807,13 @@
       if (event.key === 'Escape') {
         closeBooking();
         closeManagerSheet();
+        return;
+      }
+      if (event.key === 'Tab') {
+        var modal = document.querySelector('[data-modal].is-open .bm-modal__panel');
+        if (modal) trapTab(event, modal);
+        var sheet = document.querySelector('[data-manager-sheet].is-open .bm-manager-choice__panel');
+        if (sheet) trapTab(event, sheet);
       }
     }, true);
 
@@ -653,16 +825,27 @@
     });
   }
 
-  function updateContactLinks() {
+  function bookingManagers() {
     var c = contacts();
-    document.querySelectorAll('a[href^="tel:"]').forEach(function (link) {
-      if ((link.textContent || '').indexOf('+380 96') !== -1) link.href = 'tel:' + (c.phone || '+380966973130');
-    });
-    document.querySelectorAll('a[href*="t.me"]').forEach(function (link) {
-      if (c.telegram && link.href.indexOf('pereviznyk001') !== -1) link.href = c.telegram;
-    });
-    document.querySelectorAll('a[href*="wa.me"]').forEach(function (link) {
-      if (c.whatsapp && link.href.indexOf('380966973130') !== -1) link.href = c.whatsapp;
+    var list = c.booking_managers || [];
+    if (!list.length && c.phone) list = [{ name: '', phone: c.phone }];
+    return list;
+  }
+
+  function updateContactLinks() {
+    var list = bookingManagers();
+    if (!list.length) return;
+    document.querySelectorAll('[data-mgr]').forEach(function (el) {
+      var idx = parseInt(el.getAttribute('data-mgr'), 10) || 0;
+      var m = list[Math.min(idx, list.length - 1)];
+      if (!m || !m.phone) return;
+      var ch = el.getAttribute('data-ch') || 'tel';
+      if (ch === 'wa') el.setAttribute('href', 'https://wa.me/' + digits(m.phone));
+      else if (ch === 'tg') el.setAttribute('href', 'https://t.me/+' + digits(m.phone));
+      else el.setAttribute('href', 'tel:+' + digits(m.phone));
+      if (el.hasAttribute('data-mgr-label') && m.name) el.textContent = m.name + ': ' + displayPhone(m.phone);
+      else if (el.hasAttribute('data-mgr-num')) el.textContent = displayPhone(m.phone);
+      else if (el.hasAttribute('data-mgr-name') && m.name) el.textContent = m.name;
     });
   }
 
@@ -670,7 +853,7 @@
     var selectors = [
       '.bm-benefits article', '.bm-story__grid', '.bm-road-strip__card',
       '.bm-section-head', '.bm-route-card', '.bm-booking-cta__card',
-      '.bm-fleet-grid figure', '.bm-faq details', '.bm-contact-main', '.bm-managers article'
+      '.bm-fleet-grid figure', '.bm-faq details', '.bm-contact-main', '.bm-managers article', '.bm-review'
     ];
     var items = Array.prototype.slice.call(document.querySelectorAll(selectors.join(',')));
     if (!items.length) return;
@@ -695,13 +878,26 @@
     state.routes = (state.data.routes || []).filter(function (route) { return route && route.from && route.to; });
     state.selectedRoute = preferredRoute();
     fillAllSelects(state.selectedRoute);
-    document.querySelectorAll('[data-booking="date"]').forEach(function (input) { input.value = defaultDate(); });
+    document.querySelectorAll('[data-booking="date"]').forEach(function (input) {
+      input.min = todayLocal();
+      if (!input.value) input.value = defaultDate();
+    });
     setBookingClass('comfort');
     renderFaq();
+    renderReviews();
+    renderAdvantages();
+    renderAnnouncement();
     renderQuickPrice();
     updateContactLinks();
     initRevealAnimations();
     bindEvents();
+    var pending = readPending();
+    if (pending) {
+      setTimeout(function () {
+        openManagerSheet('whatsapp', pending);
+        showToast('У вас є невідправлена заявка. Оберіть менеджера.');
+      }, 600);
+    }
     window.__bezMezh = {
       version: VERSION,
       routes: function () { return state.routes.slice(); },
@@ -712,7 +908,7 @@
     };
   }
 
-  fetch(dataUrl(), { cache: 'no-store' })
+  fetch(dataUrl())
     .then(function (response) {
       if (!response.ok) throw new Error('data load ' + response.status);
       return response.json();
