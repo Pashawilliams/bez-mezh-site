@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260923d';
+  var VERSION = '20260923e';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
@@ -467,7 +467,6 @@
     });
     sheet.classList.add('is-open');
     sheet.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('manager-sheet-open');
   }
 
   function closeManagerSheet() {
@@ -475,7 +474,6 @@
     if (!sheet) return;
     sheet.classList.remove('is-open');
     sheet.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('manager-sheet-open');
   }
 
   function bindEvents() {
@@ -499,6 +497,11 @@
         event.preventDefault();
         closeManagerSheet();
         return;
+      }
+
+      var openSheet = document.querySelector('[data-manager-sheet].is-open');
+      if (openSheet && !event.target.closest('[data-manager-sheet]') && !event.target.closest('[data-manager-choice]')) {
+        closeManagerSheet();
       }
 
       if (event.target.closest('[data-open-booking]')) {
