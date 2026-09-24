@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260923b';
+  var VERSION = '20260923d';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
@@ -450,12 +450,19 @@
     }
   }
 
-  function openManagerSheet(channel) {
+  function openManagerSheet(channel, message) {
     var sheet = document.querySelector('[data-manager-sheet]');
     if (!sheet) return;
     var preferred = channel || 'whatsapp';
     sheet.setAttribute('data-preferred', preferred);
     sheet.querySelectorAll('[data-channel]').forEach(function (link) {
+      var base = link.getAttribute('data-base-href') || link.getAttribute('href') || '#';
+      if (!link.getAttribute('data-base-href')) link.setAttribute('data-base-href', base);
+      if (message && link.getAttribute('data-channel') === 'whatsapp') {
+        link.setAttribute('href', base.split('?')[0] + '?text=' + encodeURIComponent(message));
+      } else {
+        link.setAttribute('href', base);
+      }
       link.classList.toggle('is-preferred', link.getAttribute('data-channel') === preferred);
     });
     sheet.classList.add('is-open');
@@ -622,9 +629,9 @@
         box.textContent = '';
         box.classList.remove('is-visible');
         saveLead(lead);
-        try { window.open(messengerUrl(lead), '_blank', 'noopener'); } catch (error) {}
         closeBooking();
-        showToast('Дякуємо. Деталі бронювання підготовлено для менеджера.');
+        openManagerSheet('whatsapp', bookingMessage(lead));
+        showToast('Оберіть менеджера для підтвердження поїздки.');
       }
     }, true);
 
