@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260925f';
+  var VERSION = '20260925g';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
@@ -502,12 +502,19 @@
     }
   }
 
+  function resetScrollTops(root) {
+    if (!root) return;
+    var nodes = [root].concat(Array.prototype.slice.call(
+      root.querySelectorAll('.bm-modal__panel, [data-booking-form], [data-booking-success], .bm-manager-choice__panel')
+    ));
+    nodes.forEach(function (el) { try { el.scrollTop = 0; } catch (error) {} });
+  }
+
   function showBookingSuccess(lead) {
     var modal = document.querySelector('[data-modal]');
     if (!modal) return;
     setBookingSuccessVisible(true, lead);
-    var success = modal.querySelector('[data-booking-success]');
-    if (success) success.scrollTop = 0;
+    resetScrollTops(modal);
     setTimeout(function () {
       var btn = modal.querySelector('[data-booking-success] [data-close-modal]');
       if (btn) btn.focus({ preventScroll: true });
@@ -533,7 +540,9 @@
     renderBookingPrice();
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
+    resetScrollTops(modal);
     setTimeout(function () {
+      resetScrollTops(modal);
       var name = modal.querySelector('[data-booking="name"]');
       if (name) name.focus({ preventScroll: true });
     }, 80);
@@ -543,6 +552,7 @@
     var modal = document.querySelector('[data-modal]');
     if (!modal) return;
     if (!modal.classList.contains('is-open')) return;
+    resetScrollTops(modal);
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
     unlockBodyScroll();
@@ -662,6 +672,7 @@
     });
     sheet.classList.add('is-open');
     sheet.setAttribute('aria-hidden', 'false');
+    resetScrollTops(sheet);
     var sheetClose = sheet.querySelector('[data-close-manager-sheet]');
     if (sheetClose) sheetClose.focus({ preventScroll: true });
   }
@@ -670,6 +681,7 @@
     var sheet = document.querySelector('[data-manager-sheet]');
     if (!sheet) return;
     if (!sheet.classList.contains('is-open')) return;
+    resetScrollTops(sheet);
     sheet.classList.remove('is-open');
     sheet.setAttribute('aria-hidden', 'true');
     restoreFocus();
