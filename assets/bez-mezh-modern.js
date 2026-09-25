@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260925g';
+  var VERSION = '20260925h';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
@@ -543,8 +543,8 @@
     resetScrollTops(modal);
     setTimeout(function () {
       resetScrollTops(modal);
-      var name = modal.querySelector('[data-booking="name"]');
-      if (name) name.focus({ preventScroll: true });
+      var first = modal.querySelector('[data-booking="from"]');
+      if (first) first.focus({ preventScroll: true });
     }, 80);
   }
 
@@ -900,7 +900,12 @@
       if (!event.target.matches('input, select, textarea')) return;
       var field = event.target;
       setTimeout(function () {
-        try { field.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch (err) {}
+        try {
+          if (document.activeElement !== field) return;
+          var stillOpen = field.closest ? field.closest('[data-modal].is-open, [data-manager-sheet].is-open') : null;
+          if (!stillOpen) return;
+          field.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+        } catch (err) {}
       }, 250);
     });
 
