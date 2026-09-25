@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260924a';
+  var VERSION = '20260924c';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
@@ -138,10 +138,10 @@
 
   function contacts() {
     return state.data.contacts || {
-      phone: '+380966973130',
-      phone_display: '+380 96 697 31 30',
-      telegram: 'https://t.me/pereviznyk001',
-      whatsapp: 'https://wa.me/380966973130'
+      phone: '+380971030454',
+      phone_display: '+380 97 103 04 54',
+      telegram: 'https://t.me/+380971030454',
+      whatsapp: 'https://wa.me/380971030454'
     };
   }
 
@@ -430,10 +430,47 @@
     lastFocused = null;
   }
 
+  function setBookingSuccessVisible(show, lead) {
+    var modal = document.querySelector('[data-modal]');
+    if (!modal) return;
+    var form = modal.querySelector('[data-booking-form]');
+    var success = modal.querySelector('[data-booking-success]');
+    if (!form || !success) return;
+    form.hidden = !!show;
+    success.hidden = !show;
+    if (show) {
+      var routeEl = success.querySelector('[data-success-route]');
+      var totalEl = success.querySelector('[data-success-total]');
+      if (routeEl) routeEl.textContent = lead && lead.route ? String(lead.route) : 'Маршрут обрано';
+      var totalText = 'Сума розрахована';
+      if (lead) {
+        var bits = [];
+        if (lead.date) bits.push(String(lead.date));
+        if (lead.class) bits.push(String(lead.class));
+        if (lead.total_price) bits.push(String(lead.total_price));
+        if (bits.length) totalText = bits.join(' · ');
+      }
+      if (totalEl) totalEl.textContent = totalText;
+    }
+  }
+
+  function showBookingSuccess(lead) {
+    var modal = document.querySelector('[data-modal]');
+    if (!modal) return;
+    setBookingSuccessVisible(true, lead);
+    var success = modal.querySelector('[data-booking-success]');
+    if (success) success.scrollTop = 0;
+    setTimeout(function () {
+      var btn = modal.querySelector('[data-booking-success] [data-close-modal]');
+      if (btn) btn.focus({ preventScroll: true });
+    }, 80);
+  }
+
   function openBooking(route) {
     var modal = document.querySelector('[data-modal]');
     if (!modal) return;
     lastFocused = document.activeElement;
+    setBookingSuccessVisible(false);
     state.selectedRoute = route || state.selectedRoute || preferredRoute();
     setRouteInScope(modal, state.selectedRoute);
     var date = modal.querySelector('[data-booking="date"]');
@@ -461,14 +498,10 @@
   function formatPhone(value) {
     var d = digits(value);
     if (!d) return '';
-    var u = null;
-    if (d.indexOf('380') === 0 && d.length <= 12) u = d.slice(3);
-    else if (d.charAt(0) === '0' && d.length <= 10) u = d.slice(1);
-    else if (d.indexOf('80') === 0 && d.length <= 11) u = d.slice(2);
-    if (u === null) {
-      return '+' + d.slice(0, 15).replace(/(\d{3})(?=\d)/g, '$1 ').trim();
-    }
-    u = u.slice(0, 9);
+    if (d.indexOf('380') === 0) d = d.slice(3);
+    else if (d.indexOf('80') === 0) d = d.slice(2);
+    else if (d.charAt(0) === '0') d = d.slice(1);
+    d = d.slice(0, 9);
     var parts = [];
     if (d.slice(0, 2)) parts.push(d.slice(0, 2));
     if (d.slice(2, 5)) parts.push(d.slice(2, 5));
@@ -500,7 +533,7 @@
     var total = passengerTotal(q);
     return {
       created_at: new Date().toISOString(),
-      mode: 'frontend_only',
+      mode: 'site_booking',
       name: normalize((form.querySelector('[data-booking="name"]') || {}).value),
       phone: normalize((form.querySelector('[data-booking="phone"]') || {}).value),
       route: route.from + ' → ' + route.to,
@@ -520,8 +553,8 @@
   function validateBooking(lead) {
     var errors = [];
     if (!lead.name || lead.name.length < 2) errors.push('Вкажіть ПІБ пасажира.');
-    var phoneDigits = digits(lead.phone).length;
-    if (!lead.phone || phoneDigits < 9 || phoneDigits > 15) errors.push('Вкажіть номер телефону у міжнародному форматі, наприклад +380 XX XXX XX XX.');
+    var phoneDigits = digits(lead.phone);
+    if (!/^380\d{9}$/.test(phoneDigits)) errors.push('Вкажіть номер телефону у форматі +380 XX XXX XX XX.');
     if (!lead.route || lead.route.indexOf('→') === -1) errors.push('Оберіть напрямок.');
     if (!lead.date) errors.push('Оберіть дату.');
     else if (!/^\d{4}-\d{2}-\d{2}$/.test(lead.date)) errors.push('Невірний формат дати.');
@@ -599,8 +632,14 @@
     var sheet = document.querySelector('[data-manager-sheet]');
     if (!sheet) return;
     if (!sheet.classList.contains('is-open')) lastFocused = document.activeElement;
-    var preferred = channel || 'whatsapp';
+    var preferred = channel === 'telegram' || channel === 'phone' ? channel : 'whatsapp';
     sheet.setAttribute('data-preferred', preferred);
+    var title = sheet.querySelector('#manager-choice-title');
+    if (title) {
+      var writeT = title.getAttribute('data-title-write') || 'Кому написати?';
+      var callT = title.getAttribute('data-title-call') || 'Кому зателефонувати?';
+      title.textContent = preferred === 'phone' ? callT : writeT;
+    }
     sheet.querySelectorAll('[data-channel]').forEach(function (link) {
       var base = link.getAttribute('data-base-href') || link.getAttribute('href') || '#';
       if (!link.getAttribute('data-base-href')) link.setAttribute('data-base-href', base);
@@ -794,12 +833,9 @@
         box.textContent = '';
         box.classList.remove('is-visible');
         saveLead(lead);
-        closeBooking();
-        var msg = bookingMessage(lead);
-        savePending(msg);
-        copyText(msg);
-        openManagerSheet('whatsapp', msg);
-        showToast('Оберіть менеджера, щоб надіслати заявку. Текст скопійовано.');
+        clearPending();
+        showBookingSuccess(lead);
+        showToast('Заявка відправлена.');
       }
     }, true);
 
@@ -891,13 +927,7 @@
     updateContactLinks();
     initRevealAnimations();
     bindEvents();
-    var pending = readPending();
-    if (pending) {
-      setTimeout(function () {
-        openManagerSheet('whatsapp', pending);
-        showToast('У вас є невідправлена заявка. Оберіть менеджера.');
-      }, 600);
-    }
+    clearPending();
     window.__bezMezh = {
       version: VERSION,
       routes: function () { return state.routes.slice(); },
