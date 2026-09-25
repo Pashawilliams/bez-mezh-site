@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260924c';
+  var VERSION = '20260925a';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
