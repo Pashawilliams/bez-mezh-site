@@ -4274,3 +4274,34 @@ body.modal-open {
 .bm-manager-choice[data-preferred="whatsapp"] .bm-manager-choice__phone {
   display: block !important;
 }
+
+/* ============ 20260925f: hidden always wins, premium success transition ============ */
+
+/* Any [hidden] element stays hidden no matter the component display rules */
+[hidden] {
+  display: none !important;
+}
+
+/* Success state entrance: soft rise + springy checkmark pop */
+.bm-booking-success:not([hidden]) {
+  animation: successIn .38s cubic-bezier(.2,.75,.22,1) both;
+}
+
+.bm-booking-success:not([hidden]) .bm-success-mark {
+  animation: markPop .5s cubic-bezier(.2,1.5,.4,1) both .08s;
+}
+
+.bm-booking-success:not([hidden]) .bm-success-summary {
+  animation: successIn .38s cubic-bezier(.2,.75,.22,1) both .14s;
+}
+
+@keyframes successIn {
+  from { opacity: 0; transform: translateY(16px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes markPop {
+  0% { opacity: 0; transform: scale(.4); }
+  60% { opacity: 1; transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1); }
+}
