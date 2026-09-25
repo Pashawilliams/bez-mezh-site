@@ -4187,3 +4187,44 @@ body {
     border-radius: 0 0 28px 28px;
   }
 }
+
+/* ============ 20260925d: stable modal, single card button, reserved price area ============ */
+
+/* No layout jump when the modal opens/closes (scrollbar gutter stays) */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Bulletproof scroll lock (incl. iOS): page can't drift behind the modal */
+body.modal-open {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Route cards: one full-width booking button */
+.bm-route-actions {
+  grid-template-columns: 1fr;
+}
+
+/* Reserve price area so the form never jumps when totals re-render */
+.bm-booking-form .bm-price-card {
+  min-height: 148px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Stable inner scrollbars: no content shift when they appear */
+.bm-booking-form,
+.bm-manager-choice__grid {
+  scrollbar-gutter: stable;
+}
+
+@media (max-width: 820px) {
+  .bm-booking-form .bm-price-card {
+    min-height: 170px;
+  }
+}

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pashawilliams.github.io/bez-mezh-site/sitemap.xml
+Sitemap: https://bez-mezh.pp.ua/sitemap.xml

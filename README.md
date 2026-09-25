@@ -1,6 +1,6 @@
 # bez-mezh-site — статична копія bez-mezh.com.ua (UK)
 
-Живий сайт: https://pashawilliams.github.io/bez-mezh-site/
+Живий сайт: https://bez-mezh.pp.ua/
 
 Статична копія української версії https://bez-mezh.com.ua/:
 дизайн, тексти, зображення, стилі та скрипти збережено 1-в-1,

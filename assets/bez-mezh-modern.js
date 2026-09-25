@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260925c';
+  var VERSION = '20260925d';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
@@ -192,9 +192,24 @@
     fillSelect(to, destinationsFor(from.value), selectedTo);
   }
 
+  function fillSelectPlaceholder(select, list, selected) {
+    if (!select) return;
+    var current = selected && list.indexOf(selected) !== -1 ? selected : '';
+    select.innerHTML = '<option value="">Оберіть місто</option>' + list.map(function (name) {
+      return '<option value="' + esc(name) + '"' + (name === current ? ' selected' : '') + '>' + esc(name) + '</option>';
+    }).join('');
+    select.value = current;
+  }
+
   function fillAllSelects(route) {
     route = route || preferredRoute();
-    document.querySelectorAll('[data-field="from"], [data-booking="from"]').forEach(function (select) {
+    document.querySelectorAll('[data-field="from"]').forEach(function (select) {
+      fillSelectPlaceholder(select, origins(), '');
+      var scope = select.closest('form') || document;
+      var to = scope.querySelector('[data-field="to"]');
+      fillSelectPlaceholder(to, destinationsFor(''), '');
+    });
+    document.querySelectorAll('[data-booking="from"]').forEach(function (select) {
       fillSelect(select, origins(), route.from);
       syncDestinationSelect(select.closest('form') || document, route.to);
     });
@@ -202,10 +217,18 @@
 
   function setRouteInScope(scope, route) {
     if (!scope || !route) return;
+    var isQuick = !!scope.querySelector('[data-field="from"]');
     var from = scope.querySelector('[data-field="from"], [data-booking="from"]');
     var to = scope.querySelector('[data-field="to"], [data-booking="to"]');
-    if (from) fillSelect(from, origins(), route.from);
-    syncDestinationSelect(scope, route.to);
+    if (from) {
+      if (isQuick) fillSelectPlaceholder(from, origins(), route.from);
+      else fillSelect(from, origins(), route.from);
+    }
+    if (isQuick) {
+      if (to) fillSelectPlaceholder(to, destinationsFor(route.from), route.to);
+    } else {
+      syncDestinationSelect(scope, route.to);
+    }
     if (to) to.value = route.to;
   }
 
@@ -222,7 +245,15 @@
     var form = document.querySelector('[data-quick-form]');
     var host = document.querySelector('[data-quick-price]');
     if (!form || !host) return;
-    var route = selectedFromScope(form, false);
+    var fromEl = form.querySelector('[data-field="from"]');
+    var toEl = form.querySelector('[data-field="to"]');
+    var pickedFrom = fromEl && fromEl.value || '';
+    var pickedTo = toEl && toEl.value || '';
+    if (!pickedFrom || !pickedTo) {
+      host.innerHTML = '<span>Ціна після вибору напрямку</span><strong>—</strong><small>Оберіть міста «Звідки» та «Куди»</small>';
+      return;
+    }
+    var route = { from: pickedFrom, to: pickedTo };
     var cls = form.querySelector('[data-field="class"]') && form.querySelector('[data-field="class"]').value || state.currentClass;
     var q = quote(route.from, route.to, cls);
     state.selectedRoute = route;
@@ -269,7 +300,7 @@
       '<p>Адресна посадка та висадка за погодженням з менеджером.</p>' +
       '<div class="bm-route-meta"><span class="bm-tag">' + esc(state.currentClass === 'lux' ? 'Lux' : 'Comfort') + '</span><span class="bm-tag">' + esc(duration) + '</span><span class="bm-tag">' + esc(km) + '</span></div>' +
       '<div class="bm-route-price"><span>ціна</span><strong>' + esc(price) + '</strong></div>' +
-      '<div class="bm-route-actions"><button type="button" class="bm-btn bm-btn--gold" data-card-book>Забронювати</button><button type="button" class="bm-btn bm-btn--outline" data-card-calc>Розрахувати</button></div>' +
+      '<div class="bm-route-actions"><button type="button" class="bm-btn bm-btn--gold" data-card-book>Забронювати</button></div>' +
       '</article>';
   }
 
@@ -406,6 +437,20 @@
   }
 
   var lastFocused = null;
+  var savedScrollY = 0;
+
+  function lockBodyScroll() {
+    savedScrollY = window.scrollY || window.pageYOffset || 0;
+    document.body.style.top = (-savedScrollY) + 'px';
+    document.body.classList.add('modal-open');
+  }
+
+  function unlockBodyScroll() {
+    if (!document.body.classList.contains('modal-open')) return;
+    document.body.classList.remove('modal-open');
+    document.body.style.top = '';
+    window.scrollTo(0, savedScrollY);
+  }
 
   function focusables(container) {
     if (!container) return [];
@@ -469,7 +514,11 @@
   function openBooking(route) {
     var modal = document.querySelector('[data-modal]');
     if (!modal) return;
-    lastFocused = document.activeElement;
+    var alreadyOpen = modal.classList.contains('is-open');
+    if (!alreadyOpen) {
+      lastFocused = document.activeElement;
+      lockBodyScroll();
+    }
     setBookingSuccessVisible(false);
     state.selectedRoute = route || state.selectedRoute || preferredRoute();
     setRouteInScope(modal, state.selectedRoute);
@@ -478,7 +527,6 @@
     renderBookingPrice();
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('modal-open');
     setTimeout(function () {
       var name = modal.querySelector('[data-booking="name"]');
       if (name) name.focus({ preventScroll: true });
@@ -491,7 +539,7 @@
     if (!modal.classList.contains('is-open')) return;
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('modal-open');
+    unlockBodyScroll();
     restoreFocus();
   }
 
@@ -703,7 +751,7 @@
         return;
       }
 
-      var cardAction = event.target.closest('[data-card-book], [data-card-calc]');
+      var cardAction = event.target.closest('[data-card-book]');
       if (cardAction) {
         event.preventDefault();
         var card = cardAction.closest('[data-route-card]');
@@ -712,8 +760,7 @@
         var quick = document.querySelector('[data-quick-form]');
         if (quick) setRouteInScope(quick, route);
         renderQuickPrice();
-        if (cardAction.hasAttribute('data-card-book')) openBooking(route);
-        else document.querySelector('.bm-hero__panel').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        openBooking(route);
         return;
       }
 
@@ -767,8 +814,12 @@
     document.addEventListener('change', function (event) {
       var quickScope = event.target.closest('[data-quick-form]');
       var bookingScope = event.target.closest('[data-booking-form]');
-      if (event.target.matches('[data-field="from"], [data-booking="from"]')) {
-        syncDestinationSelect(quickScope || bookingScope || document);
+      if (event.target.matches('[data-field="from"]')) {
+        var qScope = event.target.closest('[data-quick-form]') || document;
+        var qFrom = qScope.querySelector('[data-field="from"]');
+        fillSelectPlaceholder(qScope.querySelector('[data-field="to"]'), destinationsFor(qFrom && qFrom.value), '');
+      } else if (event.target.matches('[data-booking="from"]')) {
+        syncDestinationSelect(bookingScope || document);
       }
       if (quickScope && event.target.matches('[data-field]')) {
         if (event.target.matches('[data-field="class"]')) setBookingClass(event.target.value);
@@ -784,7 +835,19 @@
       var quick = event.target.closest('[data-quick-form]');
       if (quick) {
         event.preventDefault();
-        var route = selectedFromScope(quick, false);
+        var qFromEl = quick.querySelector('[data-field="from"]');
+        var qToEl = quick.querySelector('[data-field="to"]');
+        if (!qFromEl || !qFromEl.value) {
+          showToast('Оберіть місто відправлення.');
+          if (qFromEl) qFromEl.focus();
+          return;
+        }
+        if (!qToEl || !qToEl.value) {
+          showToast('Оберіть місто прибуття.');
+          if (qToEl) qToEl.focus();
+          return;
+        }
+        var route = { from: qFromEl.value, to: qToEl.value };
         state.selectedRoute = route;
         renderQuickPrice();
         openBooking(route);
