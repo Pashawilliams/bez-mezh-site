@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260925d';
+  var VERSION = '20260925e';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
@@ -490,7 +490,10 @@
       var totalText = 'Сума розрахована';
       if (lead) {
         var bits = [];
-        if (lead.date) bits.push(String(lead.date));
+        if (lead.date) {
+          var dp = String(lead.date).split('-');
+          bits.push(dp.length === 3 ? dp[2] + '.' + dp[1] + '.' + dp[0] : String(lead.date));
+        }
         if (lead.class) bits.push(String(lead.class));
         if (lead.total_price) bits.push(String(lead.total_price));
         if (bits.length) totalText = bits.join(' · ');
@@ -523,7 +526,10 @@
     state.selectedRoute = route || state.selectedRoute || preferredRoute();
     setRouteInScope(modal, state.selectedRoute);
     var date = modal.querySelector('[data-booking="date"]');
-    if (date && !date.value) date.value = defaultDate();
+    if (date) {
+      date.min = todayLocal();
+      if (!date.value) date.value = defaultDate();
+    }
     renderBookingPrice();
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
@@ -584,6 +590,8 @@
       mode: 'site_booking',
       name: normalize((form.querySelector('[data-booking="name"]') || {}).value),
       phone: normalize((form.querySelector('[data-booking="phone"]') || {}).value),
+      from: route.from,
+      to: route.to,
       route: route.from + ' → ' + route.to,
       date: normalize((form.querySelector('[data-booking="date"]') || {}).value),
       time: normalize((form.querySelector('[data-booking="time"]') || {}).value),
@@ -603,7 +611,7 @@
     if (!lead.name || lead.name.length < 2) errors.push('Вкажіть ПІБ пасажира.');
     var phoneDigits = digits(lead.phone);
     if (!/^380\d{9}$/.test(phoneDigits)) errors.push('Вкажіть номер телефону у форматі +380 XX XXX XX XX.');
-    if (!lead.route || lead.route.indexOf('→') === -1) errors.push('Оберіть напрямок.');
+    if (!lead.from || !lead.to) errors.push('Оберіть напрямок.');
     if (!lead.date) errors.push('Оберіть дату.');
     else if (!/^\d{4}-\d{2}-\d{2}$/.test(lead.date)) errors.push('Невірний формат дати.');
     else if (lead.date < todayLocal()) errors.push('Ця дата вже минула. Оберіть актуальну дату виїзду.');
@@ -873,6 +881,16 @@
         showToast('Заявка відправлена.');
       }
     }, true);
+
+    document.addEventListener('focusin', function (event) {
+      var scope = event.target && event.target.closest ? event.target.closest('[data-modal].is-open, [data-manager-sheet].is-open') : null;
+      if (!scope) return;
+      if (!event.target.matches('input, select, textarea')) return;
+      var field = event.target;
+      setTimeout(function () {
+        try { field.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch (err) {}
+      }, 250);
+    });
 
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape') {

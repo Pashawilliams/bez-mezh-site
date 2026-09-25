@@ -4228,3 +4228,49 @@ body.modal-open {
     min-height: 170px;
   }
 }
+
+/* ============ 20260925e: forms locked against sideways swipe, manager phones shown ============ */
+
+/* Forms accept ONLY vertical touch panning (+pinch zoom): sideways swipes can't move them */
+.bm-modal,
+.bm-manager-choice,
+.bm-modal__panel,
+.bm-manager-choice__panel,
+.bm-booking-form,
+.bm-booking-success,
+.bm-manager-choice__grid,
+.bm-quick-form {
+  touch-action: pan-y pinch-zoom;
+  overscroll-behavior-x: none;
+}
+
+/* Inner scrollers can never scroll sideways, even by 1px */
+.bm-booking-form,
+.bm-booking-success,
+.bm-manager-choice__grid {
+  overflow-x: clip;
+}
+
+@supports not (overflow: clip) {
+  .bm-booking-form,
+  .bm-booking-success,
+  .bm-manager-choice__grid {
+    overflow-x: hidden;
+  }
+}
+
+/* Nothing inside the forms may exceed their width */
+.bm-booking-form > *,
+.bm-booking-form input,
+.bm-booking-form select,
+.bm-quick-form select,
+.bm-booking-success > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Manager cards ALWAYS show the phone number, whatever the channel */
+.bm-manager-choice[data-preferred="telegram"] .bm-manager-choice__phone,
+.bm-manager-choice[data-preferred="whatsapp"] .bm-manager-choice__phone {
+  display: block !important;
+}
