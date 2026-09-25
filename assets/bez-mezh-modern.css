@@ -1483,7 +1483,7 @@ button {
 .bm-hero::before {
   background:
     linear-gradient(105deg, rgba(11, 20, 56, .96) 0%, rgba(11, 20, 56, .90) 45%, rgba(11, 20, 56, .66) 100%),
-    url('media/bez-mezh-road.jpeg') center / cover no-repeat;
+    url('media/bez-mezh-hero.jpeg') center / cover no-repeat;
   box-shadow: 0 34px 110px rgba(11, 20, 56, .28);
 }
 
@@ -1863,7 +1863,7 @@ body {
   background-color: var(--bg);
   background-image:
     linear-gradient(180deg, rgba(247, 244, 237, .88), rgba(247, 244, 237, .94) 45%, rgba(247, 244, 237, .98)),
-    url('media/bez-mezh-road.jpeg');
+    url('media/bez-mezh-hero.jpeg');
   background-position: center top;
   background-size: cover;
   background-attachment: fixed;
@@ -2106,7 +2106,7 @@ body::before {
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(5, 7, 13, .70), rgba(5, 7, 13, .58) 42%, rgba(5, 7, 13, .76)),
-    url('media/bez-mezh-road.jpeg') center center / cover no-repeat;
+    url('media/bez-mezh-hero.jpeg') center center / cover no-repeat;
   transform: translateZ(0);
 }
 
@@ -2199,7 +2199,7 @@ body::after {
 
 /* Direction and booking cards texture */
 :root {
-  --bm-card-texture: url('media/bez-mezh-card-texture.jpeg');
+  --bm-card-texture: url("data:image/gif;base64,R0lGODlhAQABAAAAACw=");
 }
 
 .bm-route-card,
@@ -2898,7 +2898,7 @@ html {
 body::before {
   background:
     linear-gradient(180deg, rgba(2,18,15,.84), rgba(3,33,29,.74) 42%, rgba(2,18,15,.90)),
-    url('media/bez-mezh-road.jpeg') center center / cover no-repeat;
+    url('media/bez-mezh-hero.jpeg') center center / cover no-repeat;
 }
 
 body::after {
@@ -3592,7 +3592,7 @@ body::after {
   background:
     linear-gradient(115deg, rgba(46,16,101,.86) 0%, rgba(76,29,149,.62) 46%, rgba(124,58,237,.30) 100%),
     radial-gradient(circle at 85% 12%, rgba(196,181,253,.45), transparent 42%),
-    url('media/bez-mezh-road.jpeg') center / cover no-repeat !important;
+    url('media/bez-mezh-hero.jpeg') center / cover no-repeat !important;
   border: 1px solid rgba(196, 181, 253, .35);
   box-shadow: 0 34px 110px rgba(46, 16, 101, .35);
 }
@@ -4088,5 +4088,102 @@ body::after {
   .bm-nav {
     background: rgba(255, 255, 255, .96);
     border: 1px solid rgba(124, 58, 237, .20);
+  }
+}
+
+/* ============ 20260925c: full-bleed hero photo, no horizontal scroll, small fixes ============ */
+
+/* ---- Strictly no horizontal scrolling (clip keeps sticky working) ---- */
+html, body {
+  overflow-x: clip;
+}
+
+@supports not (overflow: clip) {
+  html, body {
+    overflow-x: hidden;
+  }
+}
+
+body {
+  min-width: 0;
+}
+
+/* Long names and totals must wrap, never push the page sideways */
+.bm-route-card,
+.bm-booking-cta__card,
+.bm-hero__panel,
+.bm-contact-main,
+.bm-modal__panel,
+.bm-manager-choice__panel,
+.bm-review,
+.bm-route-price {
+  min-width: 0;
+}
+
+.bm-route-card h3,
+.bm-success-summary b,
+.bm-success-summary span,
+.bm-manager-choice__phone,
+.bm-managers > article > a,
+.bm-toast,
+.bm-review footer b {
+  overflow-wrap: break-word;
+}
+
+.bm-review footer b {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- HERO: beautiful photo as the full background of the top block ---- */
+.bm-hero {
+  padding-top: clamp(40px, 5vw, 70px);
+}
+
+.bm-hero::before {
+  inset: 0 0 0 0 !important;
+  border-radius: 0 0 44px 44px !important;
+  background:
+    linear-gradient(100deg, rgba(30,10,60,.84) 0%, rgba(46,16,101,.58) 44%, rgba(46,16,101,.20) 74%, rgba(46,16,101,.34) 100%),
+    url('media/bez-mezh-hero.jpeg') center 38% / cover no-repeat !important;
+  border: none;
+  border-bottom: 1px solid rgba(196, 181, 253, .30);
+  box-shadow: 0 34px 110px rgba(46, 16, 101, .35);
+}
+
+.bm-hero::after {
+  inset: 0 0 0 0;
+  border-radius: 0 0 44px 44px;
+}
+
+.bm-hero__grid {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+}
+
+.bm-hero__side {
+  align-content: center;
+}
+
+@media (max-width: 1060px) {
+  .bm-hero__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 820px) {
+  .bm-hero {
+    padding-top: 26px;
+  }
+
+  .bm-hero::before {
+    inset: 0 0 0 0 !important;
+    border-radius: 0 0 28px 28px !important;
+  }
+
+  .bm-hero::after {
+    inset: 0 0 0 0;
+    border-radius: 0 0 28px 28px;
   }
 }

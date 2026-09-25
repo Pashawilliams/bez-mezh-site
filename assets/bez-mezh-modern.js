@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260925b';
+  var VERSION = '20260925c';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
@@ -571,58 +571,12 @@
     } catch (error) {}
   }
 
-  function bookingMessage(lead) {
-    return [
-      'Бронювання БЕЗ МЕЖ',
-      'ПІБ: ' + lead.name,
-      'Телефон: ' + lead.phone,
-      'Маршрут: ' + lead.route,
-      'Дата: ' + lead.date,
-      'Час: ' + lead.time,
-      'Клас: ' + lead.class,
-      'Пасажири: ' + lead.passengers_total + ' (дорослі ' + lead.adults + ', діти ' + lead.children_under_16 + ', пенсіонери ' + lead.pensioners + ')',
-      'Орієнтовна сума: ' + (lead.total_price || 'уточнити')
-    ].join('\n');
-  }
 
-  function waUrl(phone, message) {
-    var base = 'https://wa.me/' + digits(phone);
-    try {
-      var url = new URL(base);
-      url.searchParams.set('text', message);
-      return url.toString();
-    } catch (error) {
-      return base + '?text=' + encodeURIComponent(message);
-    }
-  }
 
-  function copyText(text) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).catch(function () {});
-      return;
-    }
-    try {
-      var ta = document.createElement('textarea');
-      ta.value = text;
-      ta.setAttribute('readonly', '');
-      ta.style.position = 'absolute';
-      ta.style.left = '-9999px';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-    } catch (error) {}
-  }
 
   var PENDING_KEY = 'bez_mezh_pending_lead';
 
-  function savePending(message) {
-    try { localStorage.setItem(PENDING_KEY, message); } catch (error) {}
-  }
 
-  function readPending() {
-    try { return localStorage.getItem(PENDING_KEY) || ''; } catch (error) { return ''; }
-  }
 
   function clearPending() {
     try { localStorage.removeItem(PENDING_KEY); } catch (error) {}
@@ -652,6 +606,8 @@
     });
     sheet.classList.add('is-open');
     sheet.setAttribute('aria-hidden', 'false');
+    var sheetClose = sheet.querySelector('[data-close-manager-sheet]');
+    if (sheetClose) sheetClose.focus({ preventScroll: true });
   }
 
   function closeManagerSheet() {
@@ -788,7 +744,23 @@
       }
 
       if (event.target.matches('[data-booking="phone"]')) {
-        event.target.value = formatPhone(event.target.value);
+        var phoneEl = event.target;
+        var rawBefore = phoneEl.value;
+        var caretPos = null;
+        try { caretPos = phoneEl.selectionStart; } catch (e) { caretPos = null; }
+        var digitsBefore = caretPos == null ? -1 : digits(rawBefore.slice(0, caretPos)).length;
+        var formatted = formatPhone(rawBefore);
+        phoneEl.value = formatted;
+        var caretTo = formatted.length;
+        if (digitsBefore >= 0 && digits(rawBefore).length === digits(formatted).length) {
+          var pos = 0, seen = 0;
+          while (pos < formatted.length && seen < digitsBefore) {
+            if (/\d/.test(formatted.charAt(pos))) seen += 1;
+            pos += 1;
+          }
+          caretTo = pos;
+        }
+        try { phoneEl.setSelectionRange(caretTo, caretTo); } catch (e2) {}
       }
     }, true);
 
