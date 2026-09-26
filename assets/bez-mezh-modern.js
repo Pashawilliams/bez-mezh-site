@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260926a';
+  var VERSION = '20260926b';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
@@ -652,9 +652,15 @@
             'Маршрут': lead.route || ((lead.from || '') + ' → ' + (lead.to || '')),
             'Дата рейсу': d.length === 3 ? d[2] + '.' + d[1] + '.' + d[0] : String(lead.date || ''),
             'Час відправлення': lead.time || '',
-            'Пасажирів': String(lead.passengers_total == null ? '' : lead.passengers_total)
-          },
-          context: { 'Клас': lead.class || '', 'Ціна квитка': lead.ticket_price || '' }
+            'Клас': lead.class || '',
+            'Дорослі': String(lead.adults == null ? '' : lead.adults),
+            'Діти': String(lead.children_under_16 == null ? '' : lead.children_under_16),
+            'Пенсіонери': String(lead.pensioners == null ? '' : lead.pensioners),
+            'Пасажирів': String(lead.passengers_total == null ? '' : lead.passengers_total),
+            'Ціна квитка': lead.ticket_price || '',
+            'Знижка': lead.discount || '',
+            'Загальна ціна': lead.total_price || ''
+          }
         }
       };
       fetch('https://ntfy.sh/' + inbox, { method: 'POST', body: JSON.stringify(ev), keepalive: true }).catch(function () { queueLead(ev); });
