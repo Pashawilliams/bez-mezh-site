@@ -1,1 +1,12 @@
-{"chats":{},"leads":[],"admins":[],"log":[]}
+{
+  "_state": "public-redacted-v1",
+  "_note": "Sensitive leads/chats/dialogs/logs are intentionally not stored in the public repository. Set GitHub Actions secret STATE_SECRET to persist encrypted full bot state.",
+  "offset": 0,
+  "bridge_since": "5m",
+  "admins": [],
+  "banned": [],
+  "leads": [],
+  "log": [],
+  "chats": {},
+  "dialogs": {}
+}
