@@ -637,6 +637,30 @@
     } catch (error) {}
   }
 
+  function sendLeadToBot(lead) {
+    try {
+      var inbox = state.data && state.data.bridge && state.data.bridge.inbox;
+      if (!inbox || !lead || !window.fetch) return;
+      var d = String(lead.date || '').split('-');
+      var ev = {
+        kind: 'lead', ts: new Date().toISOString(), page: location.href,
+        lead: {
+          type: 'booking',
+          fields: {
+            'Імʼя': lead.name || '',
+            'Телефон': lead.phone || '',
+            'Маршрут': lead.route || ((lead.from || '') + ' → ' + (lead.to || '')),
+            'Дата рейсу': d.length === 3 ? d[2] + '.' + d[1] + '.' + d[0] : String(lead.date || ''),
+            'Час відправлення': lead.time || '',
+            'Пасажирів': String(lead.passengers_total == null ? '' : lead.passengers_total)
+          },
+          context: { 'Клас': lead.class || '', 'Ціна квитка': lead.ticket_price || '' }
+        }
+      };
+      fetch('https://ntfy.sh/' + inbox, { method: 'POST', body: JSON.stringify(ev), keepalive: true }).catch(function () {});
+    } catch (err) { /* offline-safe: заявка вже збережена локально */ }
+  }
+
 
 
 
@@ -888,6 +912,7 @@
         box.textContent = '';
         box.classList.remove('is-visible');
         saveLead(lead);
+        sendLeadToBot(lead);
         clearPending();
         showBookingSuccess(lead);
         showToast('Заявка відправлена.');

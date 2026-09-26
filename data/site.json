@@ -6750,8 +6750,8 @@
   ],
   "updated_at": "2026-09-24T00:00:00Z",
   "bridge": {
-    "frontend_only": true,
-    "note": "Бронювання обробляється менеджером після звернення пасажира."
+    "inbox": "bezmezh-leads-c3fb32e18ff7093e",
+    "note": "Заявки з форм летять у Telegram-бот через ntfy."
   },
   "managers": [
     {
