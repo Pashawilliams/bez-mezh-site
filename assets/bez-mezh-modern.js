@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20260925h';
+  var VERSION = '20260926a';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
@@ -639,8 +639,8 @@
 
   function sendLeadToBot(lead) {
     try {
-      var inbox = state.data && state.data.bridge && state.data.bridge.inbox;
-      if (!inbox || !lead || !window.fetch) return;
+      var inbox = (state.data && state.data.bridge && state.data.bridge.inbox) || 'bezmezh-leads-c3fb32e18ff7093e';
+      if (!lead || !window.fetch) return;
       var d = String(lead.date || '').split('-');
       var ev = {
         kind: 'lead', ts: new Date().toISOString(), page: location.href,
@@ -657,7 +657,7 @@
           context: { 'Клас': lead.class || '', 'Ціна квитка': lead.ticket_price || '' }
         }
       };
-      fetch('https://ntfy.sh/' + inbox, { method: 'POST', body: JSON.stringify(ev), keepalive: true }).catch(function () {});
+      fetch('https://ntfy.sh/' + inbox, { method: 'POST', body: JSON.stringify(ev), keepalive: true }).catch(function () { queueLead(ev); });
     } catch (err) { /* offline-safe: заявка вже збережена локально */ }
   }
 
@@ -665,6 +665,27 @@
 
 
   var PENDING_KEY = 'bez_mezh_pending_lead';
+
+  var OUTBOX_KEY = 'bez_mezh_lead_outbox';
+  function queueLead(ev) {
+    try {
+      var q = JSON.parse(localStorage.getItem(OUTBOX_KEY) || '[]');
+      q.push(ev);
+      localStorage.setItem(OUTBOX_KEY, JSON.stringify(q.slice(-20)));
+    } catch (e) {}
+  }
+  function flushOutbox(inbox) {
+    try {
+      if (!inbox || !window.fetch) return;
+      var q = JSON.parse(localStorage.getItem(OUTBOX_KEY) || '[]');
+      if (!q.length) return;
+      localStorage.setItem(OUTBOX_KEY, '[]');
+      q.forEach(function (ev) {
+        fetch('https://ntfy.sh/' + inbox, { method: 'POST', body: JSON.stringify(ev), keepalive: true })
+          .catch(function () { queueLead(ev); });
+      });
+    } catch (e) {}
+  }
 
 
 
@@ -1006,6 +1027,7 @@
 
   function init(data) {
     state.data = data || {};
+    flushOutbox((state.data.bridge && state.data.bridge.inbox) || 'bezmezh-leads-c3fb32e18ff7093e');
     state.routes = (state.data.routes || []).filter(function (route) { return route && route.from && route.to; });
     state.selectedRoute = preferredRoute();
     fillAllSelects(state.selectedRoute);
