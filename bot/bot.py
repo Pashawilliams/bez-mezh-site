@@ -24,7 +24,7 @@ import urllib.error
 import threading
 
 BOT_TOKEN = os.environ["BOT_TOKEN"]
-OWNER_ID = int(os.environ.get("ADMIN_ID", "7906546417"))
+OWNER_ID = int(os.environ.get("ADMIN_ID") or "7906546417")
 ADMIN_ID = OWNER_ID  # kept for backwards compat (owner chat)
 NTFY = "https://ntfy.sh/"
 GH_TOKEN = os.environ["GH_TOKEN"]
@@ -33,7 +33,7 @@ GH_BRANCH = os.environ.get("GH_BRANCH", "main")
 DATA_PATH = "data/site.json"
 STATE_PATH = "bot/state.json"
 SITE_URL = os.environ.get("SITE_URL", "https://pashawilliams.github.io/bez-mezh-site/")
-MAX_RUNTIME = int(os.environ.get("MAX_RUNTIME", str(5 * 3600 + 20 * 60)))  # 5h20m
+MAX_RUNTIME = int(os.environ.get("MAX_RUNTIME") or str(5 * 3600 + 20 * 60))  # 5h20m
 STATE_SECRET = os.environ.get("STATE_SECRET", "").strip()
 START = time.time()
 
