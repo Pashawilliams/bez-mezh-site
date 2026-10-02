@@ -494,6 +494,7 @@
           var dp = String(lead.date).split('-');
           bits.push(dp.length === 3 ? dp[2] + '.' + dp[1] + '.' + dp[0] : String(lead.date));
         }
+        if (lead.time) bits.push(String(lead.time));
         if (lead.class) bits.push(String(lead.class));
         if (lead.total_price) bits.push(String(lead.total_price));
         if (bits.length) totalText = bits.join(' · ');
@@ -921,6 +922,11 @@
         var route = { from: qFromEl.value, to: qToEl.value };
         state.selectedRoute = route;
         renderQuickPrice();
+        var qTimeEl = quick.querySelector('[data-field="time"]');
+        if (qTimeEl && qTimeEl.value) {
+          var modalTime = document.querySelector('[data-booking="time"]');
+          if (modalTime) modalTime.value = qTimeEl.value;
+        }
         openBooking(route);
         return;
       }

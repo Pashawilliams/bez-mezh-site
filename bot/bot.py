@@ -367,7 +367,7 @@ def routes_view(page, msg_id=None):
 def route_view(i, msg_id=None):
     _r = store.data["routes"][i]
     _pc = price_for(_r["from"], _r["to"], "comfort"); _pl = price_for(_r["from"], _r["to"], "lux")
-    _auto = (f"\n🕒 У дорозі ~{_pc['hours']} год · Comfort (08:00) €{_pc['eur']} ≈ {_pc['uah']} ₴ · Lux (18:00) €{_pl['eur']} ≈ {_pl['uah']} ₴" if _pc else "\n⚠️ Час у дорозі ще не розраховано (💶 Ціни → Перерахувати)")
+    _auto = (f"\n🕒 У дорозі ~{_pc['hours']} год · Comfort (10:00) €{_pc['eur']} ≈ {_pc['uah']} ₴ · Lux (20:00) €{_pl['eur']} ≈ {_pl['uah']} ₴" if _pc else "\n⚠️ Час у дорозі ще не розраховано (💶 Ціни → Перерахувати)")
     r = store.data["routes"][i]
     vis = "🚫 Сховати" if r.get("visible", True) else "✅ Показати"
     txt = (f"<b>{esc(r['from'])} → {esc(r['to'])}</b>\n"
@@ -951,7 +951,7 @@ def fmt_lead(ev):
             if lead.get(k):
                 fields[label] = lead[k]
     lines = [f"📥 <b>Нова заявка · {esc(KINDS.get(lead.get('type'), lead.get('type') or 'форма'))}</b>", ""]
-    order = ["Імʼя", "Телефон", "Маршрут", "Звідки", "Куди", "Дата рейсу", "Дата", "Дата відправлення", "Час відправлення", "Пасажирів", "Тип посилки", "Email", "Відгук", "Крок"]
+    order = ["Імʼя", "Телефон", "Маршрут", "Звідки", "Куди", "Дата рейсу", "Дата", "Дата відправлення", "Час відправлення", "Час", "Клас", "Пасажирів", "Дорослі", "Діти", "Пенсіонери", "Ціна квитка", "Знижка", "Загальна ціна", "Тип посилки", "Email", "Відгук", "Крок"]
     seen = set()
     for k in order + [k for k in fields if k not in order]:
         if k in fields and k not in seen and fields[k]:
