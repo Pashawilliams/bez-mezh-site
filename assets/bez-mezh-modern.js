@@ -138,10 +138,10 @@
 
   function contacts() {
     return state.data.contacts || {
-      phone: '+380971030454',
-      phone_display: '+380 97 103 04 54',
-      telegram: 'https://t.me/+380971030454',
-      whatsapp: 'https://wa.me/380971030454'
+      phone: '+380685609199',
+      phone_display: '+380 68 560 91 99',
+      telegram: 'https://t.me/+380685609199',
+      whatsapp: 'https://wa.me/380685609199'
     };
   }
 
