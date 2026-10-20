@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = '20261011a';
+  var VERSION = '20261020a';
   var MAX_PASSENGERS = 7;
   var CHILD_DISCOUNT = 0.15;
   var PENSIONER_DISCOUNT = 0.10;
@@ -664,7 +664,7 @@
           }
         }
       };
-      fetch('https://ntfy.sh/' + inbox, { method: 'POST', body: JSON.stringify(ev), keepalive: true }).catch(function () { queueLead(ev); });
+      fetch('https://ntfy.sh/' + inbox, { method: 'POST', body: JSON.stringify(ev), keepalive: true }).then(function (r) { if (!r || !r.ok) queueLead(ev); }).catch(function () { queueLead(ev); });
     } catch (err) { /* offline-safe: заявка вже збережена локально */ }
   }
 
@@ -689,6 +689,7 @@
       localStorage.setItem(OUTBOX_KEY, '[]');
       q.forEach(function (ev) {
         fetch('https://ntfy.sh/' + inbox, { method: 'POST', body: JSON.stringify(ev), keepalive: true })
+          .then(function (r) { if (!r || !r.ok) queueLead(ev); })
           .catch(function () { queueLead(ev); });
       });
     } catch (e) {}
